@@ -2,14 +2,26 @@
     to your site with Javascript */
 
 var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
-
 var progress = 0;
-
 var gamePlaying = false;
-
 var tonePlaying = false;
-
 var volume = 0.051;
+
+// TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
+
+var AudioContext = window.AudioContext || window.webkitAudioContext
+var context = new AudioContext()
+var o = context.createOscillator()
+var g = context.createGain()
+g.connect(context.destination)
+g.gain.setValueAtTime(0, context.currentTime)
+o.connect(g)
+o.start(0)
+
+const clueHoldTime = 1000; //how long each clue is played for
+const cluePauseTime = 333; //how long to pause between clues
+const nextClueWaitTime = 1000; //how long to wait before next clue starts
+
 
 function startGame(){
   progress = 0;
@@ -58,13 +70,28 @@ function stopTone(){
   tonePlaying = false
 }
 
-//glitch dragging mouse away from screen causes sounds to continue until any button is pressed
+function lightButton(btn){
+  document.getElementById("button"+btn).classList.add("lit")
+}
 
-var AudioContext = window.AudioContext || window.webkitAudioContext
-var context = new AudioContext()
-var o = context.createOscillator()
-var g = context.createGain()
-g.connect(context.destination)
-g.gain.setValueAtTime(0, context.currentTime)
-o.connect(g)
-o.start(0)
+function clearButton(btn){
+  document.getElementById("button"+btn).classList.remove("lit")
+}
+
+function playingSingleClue(btn){
+  if(gamePlaying){
+    lightButton(btn);
+    playTone(btn,clueHoldTime);
+    setTimeout(clearButton,clueHoldTime,btn);
+  }
+}
+
+function playClueSequence(){
+  context.resume()
+  let delay = nextClueWaitTime
+  for(let i=0; i<=progress; i++){
+    console.log("Plau single clue: " + pattern[i] + " in "+ delay + "ms")
+    setTimeout(playSingleClue,delay,pattern[i])
+    delay +=
+  }
+}
