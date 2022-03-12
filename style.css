@@ -12,9 +12,15 @@ html {
 
 /* adjust typography defaults */
 body {
-  margin: 1rem;
   font-family: sans-serif;
   line-height: 1.5;
+  background-color: slategrey;
+  color: white; 
+
+}
+
+h1{
+  font-family: verdana, arial, sans-serif;
 }
 
 /* images and videos max out at full width */
