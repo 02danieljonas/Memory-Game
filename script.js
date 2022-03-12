@@ -6,6 +6,7 @@ var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.051;
+var guessCounter = 0;
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 
@@ -28,7 +29,7 @@ function startGame(){
   gamePlaying = true;
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
-  
+  playClueSequence(); 
 }
 
 function stopGame(){
@@ -78,7 +79,7 @@ function clearButton(btn){
   document.getElementById("button"+btn).classList.remove("lit")
 }
 
-function playingSingleClue(btn){
+function playSingleClue(btn){
   if(gamePlaying){
     lightButton(btn);
     playTone(btn,clueHoldTime);
@@ -87,11 +88,31 @@ function playingSingleClue(btn){
 }
 
 function playClueSequence(){
-  context.resume()
+  guessCounter = 0;
+  context.resume() //This code disappeared after I was told to write it
   let delay = nextClueWaitTime
   for(let i=0; i<=progress; i++){
-    console.log("Plau single clue: " + pattern[i] + " in "+ delay + "ms")
+    console.log("Play single clue: " + pattern[i] + " in "+ delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i])
-    delay +=
+    delay += clueHoldTime
+    delay += cluePauseTime
   }
+}
+
+function loseGame(){
+  stopGame()
+  alert("Game Over. You lost! \n Progress: "+progress)
+}
+
+function  winGame(){
+  stopGame()
+  alert("Game Over. You Won!")
+}
+
+function guess(btn){
+  console.log("User guessed: "+btn)
+  if(!gamePlaying){
+    return;
+  }
+  //game logic
 }
