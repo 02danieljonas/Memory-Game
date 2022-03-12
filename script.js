@@ -111,8 +111,25 @@ function  winGame(){
 
 function guess(btn){
   console.log("User guessed: "+btn)
+  
   if(!gamePlaying){
     return;
   }
-  //game logic
+  
+  if (!(pattern[guessCounter] == btn)){
+    loseGame()
+    return;
+  }
+  
+  if (!(guessCounter < progress)){
+    guessCounter+=1;
+    return;
+  }
+  
+  if (!(guessCounter == progress)){
+    guessCounter+=1;
+    playClueSequence();
+    return;
+  }
+  winGame()
 }
