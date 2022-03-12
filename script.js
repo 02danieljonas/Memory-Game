@@ -9,6 +9,7 @@ var volume = 0.051;
 var guessCounter = 0;
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
+//TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
 var AudioContext = window.AudioContext || window.webkitAudioContext
 var context = new AudioContext()
@@ -140,7 +141,7 @@ function guess(btn){
     return;
   }
   
-  if (!(guessCounter < progress)){
+  if (!(guessCounter == progress)){
     console.log("return 2")
     guessCounter++;
     return;
