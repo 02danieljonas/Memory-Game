@@ -116,27 +116,16 @@ function guess(btn){
     return;
   }
   
-  if correct guess
-    (
-    if !turn over => 
-      if last turn => win
-      else NEC
-    else GC++
-  else lose
-  
-  if(pattern[guessCounter] == btn){
-    if(guessCounter < progress){
-      
-      if guessCounter == pattern.length{
+/*  if(pattern[guessCounter] == btn){
+    if(guessCounter == progress){
+      if (guessCounter == pattern.length){
         winGame()
       }
       else{
         guessCounter++;
         playClueSequence();
-
       }
     }
-    
     else {
       guessCounter++;
     }
@@ -144,21 +133,23 @@ function guess(btn){
   else{
     loseGame()
   }
-  
-  
-  
+ */ 
   if (!(pattern[guessCounter] == btn)){
+    console.log("return 1")
     loseGame()
     return;
   }
   
   if (!(guessCounter < progress)){
+    console.log("return 2")
     guessCounter++;
     return;
   }
   
   if (!(progress == pattern.length - 1)){
-    guessCounter++;
+    console.log("return 3")
+
+    progress++;
     playClueSequence();
     return;
   }
