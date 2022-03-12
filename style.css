@@ -23,17 +23,17 @@ button{
   margin:2px;
 }
 
-#button1:active{
+#button1:active, #button1.lit{
   background: lightgreen;
 }
-#button2:active{
+#button2:active, #button1.lit{
   background: lightblue;
 }
 
-#button3:active{
+#button3:active, #button1.lit{
   background: pink;
 }
-#button4:active{
+#button4:active, #button1.lit{
   background: lightyellow;
 }
 

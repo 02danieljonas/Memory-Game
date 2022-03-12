@@ -9,7 +9,7 @@ var gamePlaying = false;
 
 var tonePlaying = false;
 
-var volume = 0.5;
+var volume = 0.051;
 
 function startGame(){
   progress = 0;
@@ -54,5 +54,17 @@ function startTone(btn){
 }
 
 function stopTone(){
-  g.gain.setTargetAtTime(0, context.current)
+  g.gain.setTargetAtTime(0, context.currentTime+0.05, 0.025)
+  tonePlaying = false
 }
+
+//glitch dragging mouse away from screen causes sounds to continue until any button is pressed
+
+var AudioContext = window.AudioContext || window.webkitAudioContext
+var context = new AudioContext()
+var o = context.createOscillator()
+var g = context.createGain()
+g.connect(context.destination)
+g.gain.setValueAtTime(0, context.currentTime)
+o.connect(g)
+o.start(0)
