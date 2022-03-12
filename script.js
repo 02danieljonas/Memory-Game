@@ -111,10 +111,41 @@ function  winGame(){
 
 function guess(btn){
   console.log("User guessed: "+btn)
-  
+    
   if(!gamePlaying){
     return;
   }
+  
+  if correct guess
+    (
+    if !turn over => 
+      if last turn => win
+      else NEC
+    else GC++
+  else lose
+  
+  if(pattern[guessCounter] == btn){
+    if(guessCounter < progress){
+      
+      if guessCounter == pattern.length{
+        winGame()
+      }
+      else{
+        guessCounter++;
+        playClueSequence();
+
+      }
+    }
+    
+    else {
+      guessCounter++;
+    }
+  }
+  else{
+    loseGame()
+  }
+  
+  
   
   if (!(pattern[guessCounter] == btn)){
     loseGame()
@@ -122,12 +153,12 @@ function guess(btn){
   }
   
   if (!(guessCounter < progress)){
-    guessCounter+=1;
+    guessCounter++;
     return;
   }
   
-  if (!(guessCounter == progress)){
-    guessCounter+=1;
+  if (!(progress == pattern.length - 1)){
+    guessCounter++;
     playClueSequence();
     return;
   }
