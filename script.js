@@ -1,13 +1,13 @@
 /* If you're feeling fancy you can add interactivity 
     to your site with Javascript */
 
-//https://www.w3schools.com/js/js_random.asp
-patternLength = 10
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript
+var patternLength = 10
+var pattern = []
 for (let i = 0; i < patternLength; i++) {
-  Math.floor(Math.random() * 4) + 1;
+  pattern.push(Math.floor(Math.random() * 4) + 1);
 }
-
-var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
+var clueInProgress = false;
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
@@ -43,6 +43,10 @@ function stopGame() {
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
 }
+
+
+
+
 
 const freqMap = {
   1: 261.6,
@@ -102,7 +106,22 @@ function playClueSequence() {
     delay += clueHoldTime;
     delay += cluePauseTime;
   }
+    console.log("Your Turn")
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function loseGame() {
   stopGame();
