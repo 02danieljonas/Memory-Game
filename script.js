@@ -17,6 +17,10 @@ var guessCounter = 0;
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
+function print(q){
+  console.log(q)
+}
+
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 var o = context.createOscillator();
@@ -44,10 +48,6 @@ function stopGame() {
   document.getElementById("stopBtn").classList.add("hidden");
 }
 
-
-
-
-
 const freqMap = {
   1: 261.6,
   2: 329.6,
@@ -66,7 +66,9 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
+  console.log(tonePlaying)
   if (!tonePlaying) {
+    console.log("User Sound Played")
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
@@ -78,6 +80,7 @@ function startTone(btn) {
 function stopTone() {
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
+
 }
 
 function lightButton(btn) {
@@ -106,7 +109,6 @@ function playClueSequence() {
     delay += clueHoldTime;
     delay += cluePauseTime;
   }
-    console.log("Your Turn")
 
 }
 
@@ -136,7 +138,7 @@ function winGame() {
 function guess(btn) {
   console.log("User guessed: " + btn);
 
-  if (!gamePlaying) {
+  if (!gamePlaying || tonePlaying) {
     return;
   }
   if (!(pattern[guessCounter] == btn)) {
