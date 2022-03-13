@@ -137,27 +137,33 @@ function playClueSequence() {
 
 
 function loseGame() {
+  
+  
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
 
 function winGame() {
-  
-    stopGame();
-    alert("Game Over. You Won!");
+  stopGame();
+  alert("Game Over. You Won!");
 }
 
 function guess(btn) {
   console.log("User guessed: " + btn);
 
-  if (!gamePlaying || tonePlaying) {
+  if (!gamePlaying || tonePlaying) {//toneplaying does nothing rn
     return;
   }
-  if (!(pattern[guessCounter] == btn)) {
-    loseGame();
-    return;
+  while (!(pattern[guessCounter] == btn)) {//else ++ and replayies clue keeping player in this loop until l or win
+    if (strikes == 3){
+      loseGame();
+      return;
+    }
+    else{
+      strikes++
+      //sound replayies
+    }
   }
-
   if (!(guessCounter == progress)) {
     guessCounter++;
     return;
