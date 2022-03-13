@@ -8,11 +8,14 @@ for (let i = 0; i < patternLength; i++) {
   pattern.push(Math.floor(Math.random() * 4) + 1);
 }
 var clueInProgress = false;
+var strikes = 0;
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;
 var guessCounter = 0;
+
+var userGuessTime;
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -32,9 +35,10 @@ o.start(0);
 
 const clueHoldTime = 1000; //how long each clue is played for
 const cluePauseTime = 333; //how long to pause between clues
-const nextClueWaitTime = 10000; //how long to wait before next clue starts
+const nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 function startGame() {
+  strikes = 0;
   progress = 0;
   gamePlaying = true;
   document.getElementById("startBtn").classList.add("hidden");
@@ -57,7 +61,7 @@ const freqMap = {
 
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
-  console.log(context.currentTime)
+  //console.log(context.currentTime)
   
   
   g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
@@ -69,7 +73,7 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
-  console.log(tonePlaying)
+  //console.log(tonePlaying)
   if (!tonePlaying) {
     console.log("User Sound Played")
     context.resume();
@@ -111,6 +115,10 @@ function playClueSequence() {
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
+    userGuessTime = delay;
+    // console.log("The user can play audio at " + userGuessTime);
+    //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
+    //can't fix now, good luck future me :)
   }
 
 }
@@ -134,8 +142,9 @@ function loseGame() {
 }
 
 function winGame() {
-  stopGame();
-  alert("Game Over. You Won!");
+  
+    stopGame();
+    alert("Game Over. You Won!");
 }
 
 function guess(btn) {
