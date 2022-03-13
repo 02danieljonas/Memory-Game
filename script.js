@@ -11,7 +11,7 @@ var clueInProgress = false;
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
-var volume = 0.051;
+var volume = 0.5;
 var guessCounter = 0;
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
@@ -32,7 +32,7 @@ o.start(0);
 
 const clueHoldTime = 1000; //how long each clue is played for
 const cluePauseTime = 333; //how long to pause between clues
-const nextClueWaitTime = 1000; //how long to wait before next clue starts
+const nextClueWaitTime = 10000; //how long to wait before next clue starts
 
 function startGame() {
   progress = 0;
@@ -57,6 +57,9 @@ const freqMap = {
 
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
+  console.log(context.currentTime)
+  
+  
   g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
   context.resume();
   tonePlaying = true;
