@@ -14,8 +14,11 @@ var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;
 var guessCounter = 0;
+var countDownTimer = 3;
+var countDownTimerIncrement = 1.5;
 
 var userGuessTime;
+
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
