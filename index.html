@@ -13,9 +13,19 @@
     <!-- import the webpage's javascript file -->
     <script src="/script.js" defer></script>
   </head>
+  
+  
   <body>
     <!-- this is the start of content -->
     <h1>Simons Says!</h1>
+    
+    <button id="settings" onclick="" onmousedown="" onmouseup="">Settings</button>
+
+    <div class="slidecontainer">
+      <input type="range" min="1" max="10" value="5" class="hidden" id="myRange">
+    </div>
+    
+    
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
 
     <button id="startBtn" onclick="startGame()">start</button>
