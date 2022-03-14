@@ -28,6 +28,10 @@ function print(q) {
   console.log(q);
 }
 
+function showSettingsContainer(){
+  document.getElementById("settingsContainer").classList.remove("hidden");
+}
+
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 var o = context.createOscillator();
