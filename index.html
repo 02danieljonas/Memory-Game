@@ -24,7 +24,7 @@
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
     <div id="timer">
-      Lives: <span id="placeHolder">3</span>
+      Lives: <span id="placeholder">3</span>
     </div>
 
     <div id="gameButtonArea">
@@ -38,21 +38,23 @@
     <button id="settings" onclick="showSettingsContainer()">Settings</button>
 
     <div class="" id="settingsContainer">
-      Volume
+      Volume - <span id="placeholderVolume">5</span>
       <input type="range" min="1" max="10" value="5" class="SETTINGS">
       <br>
-      How much lives
-      <input type="range" min="1" max="10" value="5">
+      
+      How much lives - <span id="placeholderLives">0</span>
+      <input type="range" min="1" max="10" value="0">
       <br>
-      Amount of Buttons
-      <input type="range" min="1" max="10" value="5">
+      
+      Amount of Buttons - <span id="placeholderButtons">4</span>
+      <input type="range" min="2" max="10" value="4">
       <br>
-      Speed of Sequence
-      <input type="range" min="1" max="10" value="5">
-            <br>
-
-      <button id="apply" onclick="applySettings"></button>
-
+      
+      Speed of Sequence - <span id="placeholderSequencee">3</span>
+      <input type="range" min="1" max="10" value="3">
+      <br>
+      
+      <button id="apply" onclick="applySettings()">Apply</button>
     </div>
     
   </body>

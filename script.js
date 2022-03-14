@@ -28,10 +28,6 @@ function print(q) {
   console.log(q);
 }
 
-function showSettingsContainer(){
-  document.getElementById("settingsContainer").classList.remove("hidden");
-}
-
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 var o = context.createOscillator();
@@ -150,7 +146,7 @@ function guess(btn) {
       return;
     } else {
       strikes++;
-      document.getElementById("placeHolder").innerText = 3-strikes
+      document.getElementById("placeholder").innerText = 3-strikes
       playClueSequence();
       return;
     }
@@ -165,4 +161,14 @@ function guess(btn) {
     return;
   }
   winGame();
+}
+
+
+function showSettingsContainer(){
+  document.getElementById("settingsContainer").classList.remove("hidden");
+}
+
+function applySettings(){
+  console.log("Hello: ")
+  console.log(document.getElementById("settingsContainer"))
 }
