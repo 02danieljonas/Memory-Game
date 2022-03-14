@@ -2,8 +2,8 @@
     to your site with Javascript */
 
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript
-var patternLength = 10
-var pattern = []
+var patternLength = 10;
+var pattern = [];
 for (let i = 0; i < patternLength; i++) {
   pattern.push(Math.floor(Math.random() * 4) + 1);
 }
@@ -19,12 +19,11 @@ var countDownTimerIncrement = 1.5;
 
 var userGuessTime;
 
-
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
-function print(q){
-  console.log(q)
+function print(q) {
+  console.log(q);
 }
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -65,8 +64,7 @@ const freqMap = {
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
   //console.log(context.currentTime)
-  
-  
+
   g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
   context.resume();
   tonePlaying = true;
@@ -78,7 +76,7 @@ function playTone(btn, len) {
 function startTone(btn) {
   //console.log(tonePlaying)
   if (!tonePlaying) {
-    console.log("User Sound Played")
+    console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
@@ -90,7 +88,6 @@ function startTone(btn) {
 function stopTone() {
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
-
 }
 
 function lightButton(btn) {
@@ -123,25 +120,9 @@ function playClueSequence() {
     //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
     //can't fix now, good luck future me :)
   }
-
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function loseGame() {
-  
-  
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
@@ -154,17 +135,22 @@ function winGame() {
 function guess(btn) {
   console.log("User guessed: " + btn);
 
-  if (!gamePlaying || tonePlaying) {//toneplaying does nothing rn
+  if (!gamePlaying) {
+    //toneplaying does nothing rn
     return;
   }
-  while (!(pattern[guessCounter] == btn)) {//else ++ and replayies clue keeping player in this loop until l or win
-    if (strikes == 3){
+  if (!(pattern[guessCounter] == btn)) {
+    strikes++;
+    document.getElementById("placeHolder").innerText = 3-strikes;
+    if (strikes >= 2) {
+      document.getElementById("placeHolder").innerText = 0;
       loseGame();
       return;
-    }
-    else{
-      strikes++
-      //sound replayies
+    } else {
+      // strikes++;
+      // document.getElementById("placeHolder").innerText = 3-strikes
+      playClueSequence();
+      return;
     }
   }
   if (!(guessCounter == progress)) {
