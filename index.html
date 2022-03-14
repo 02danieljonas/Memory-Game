@@ -19,17 +19,6 @@
     <!-- this is the start of content -->
     <h1>Simons Says!</h1>
     
-    <button id="settings" onclick="showSettingsContainer()">Settings</button>
-
-    <div class="" id="settingsContainer">
-      <input type="range" min="1" max="10" value="5" class="">
-      <br>
-      <input type="range" min="1" max="10" value="5">
-      <br>
-      <input type="range" min="1" max="10" value="5">
-    </div>
-    
-    
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
 
     <button id="startBtn" onclick="startGame()">start</button>
@@ -44,5 +33,27 @@
       <button id="button3" onclick="guess(3)" onmousedown="startTone(3)" onmouseup="stopTone()"></button>
       <button id="button4" onclick="guess(4)" onmousedown="startTone(4)" onmouseup="stopTone()"></button>
     </div>
+    
+    
+    <button id="settings" onclick="showSettingsContainer()">Settings</button>
+
+    <div class="" id="settingsContainer">
+      Volume
+      <input type="range" min="1" max="10" value="5" class="SETTINGS">
+      <br>
+      How much lives
+      <input type="range" min="1" max="10" value="5">
+      <br>
+      Amount of Buttons
+      <input type="range" min="1" max="10" value="5">
+      <br>
+      Speed of Sequence
+      <input type="range" min="1" max="10" value="5">
+            <br>
+
+      <button id="apply" onclick="applySettings"></button>
+
+    </div>
+    
   </body>
 </html>

@@ -74,13 +74,9 @@ button {
 }
 
 #settingsContainer{
+  text-align: right;
   background:darkgreen;
   position: absolute;
   top: 60px;
   right:10px;
-}
-
-#settingsContainer input::before{
-  content='hello';
-  background:purple;
 }
