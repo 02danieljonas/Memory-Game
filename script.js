@@ -6,9 +6,6 @@
 // TODO: add a configure button that allows you to configure the app with sliders
 var patternLength = 10;
 var pattern = [];
-for (let i = 0; i < patternLength; i++) {
-  pattern.push(Math.floor(Math.random() * 4) + 1);
-}
 var clueInProgress = false;
 var strikes = 0;
 var progress = 0;
@@ -42,7 +39,11 @@ const cluePauseTime = 333; //how long to pause between clues
 const nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 function startGame() {
-  strikes = 0;
+  pattern = [];
+  for (let i = 0; i < patternLength; i++) {
+    pattern.push(Math.floor(Math.random() * 4) + 1);
+  };
+  strikes = 3;
   progress = 0;
   gamePlaying = true;
   document.getElementById("startBtn").classList.add("hidden");
