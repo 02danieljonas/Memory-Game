@@ -123,6 +123,7 @@ function playClueSequence() {
 }
 
 function loseGame() {
+  document.getElementById("placeHolder").innerText = 0
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
@@ -134,21 +135,16 @@ function winGame() {
 
 function guess(btn) {
   console.log("User guessed: " + btn);
-
   if (!gamePlaying) {
-    //toneplaying does nothing rn
     return;
   }
   if (!(pattern[guessCounter] == btn)) {
-    strikes++;
-    document.getElementById("placeHolder").innerText = 3-strikes;
     if (strikes >= 2) {
-      document.getElementById("placeHolder").innerText = 0;
       loseGame();
       return;
     } else {
-      // strikes++;
-      // document.getElementById("placeHolder").innerText = 3-strikes
+      strikes++;
+      document.getElementById("placeHolder").innerText = 3-strikes
       playClueSequence();
       return;
     }
@@ -157,7 +153,6 @@ function guess(btn) {
     guessCounter++;
     return;
   }
-
   if (!(progress == pattern.length - 1)) {
     progress++;
     playClueSequence();
