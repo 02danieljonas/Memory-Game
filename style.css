@@ -75,7 +75,7 @@ button {
 
 #settingsContainer{
   text-align: right;
-  background:darkgreen;
+  background:rgba(250,0,0,.85);
   padding:10px;
   position: absolute;
   top: 60px;
