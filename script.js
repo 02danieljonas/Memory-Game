@@ -4,20 +4,31 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 
 // TODO: add a configure button that allows you to configure the app with sliders
-var patternLength = 10;
 var pattern = [];
 var clueInProgress = false;
-var lives = 3;
-var buttonAmount = 4;
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
-var volume = 0.5;
 var guessCounter = 0;
+var userGuessTime;
+
+
+var patternLength = 10;
 var countDownTimer = 3;
 var countDownTimerIncrement = 1.5;
+var volume = 0.5;
+var lives = 3;
+var buttonAmount = 4;
 
-var userGuessTime;
+var gameSettings = {
+  patternLength: 10,
+  countDownTimer: 3,
+  countDownTimerIncrement: 1.5,
+  volume: 0.5,
+  lives: 3,
+  buttonAmount: 4,
+  
+};
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -46,7 +57,7 @@ const nextClueWaitTime = 1000; //how long to wait before next list of clues star
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden"){
     pattern = [];
-    for (let i = 0; i < patternLength; i++) {
+    for (let i = 0; i < gameSettings[patternLength]; i++) {
       pattern.push(Math.floor(Math.random() * 4) + 1);
     };
     lives = 3;
@@ -205,7 +216,7 @@ var settingsOriginalValue = [-patternLength, -volume, -lives, -buttonAmount, -co
 
 var settingsValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
 
-if(Math.abs()
+// if(Math.abs()
 
 
 
