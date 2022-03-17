@@ -1,7 +1,7 @@
 /* If you're feeling fancy you can add interactivity 
     to your site with Javascript */
 
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, 
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript
 
 // TODO: add a configure button that allows you to configure the app with sliders
 var patternLength = 10;
@@ -22,11 +22,11 @@ var userGuessTime;
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
 var settingsValue = {
-  placeholderGameLen: "Chris",
-  placeholderVolume: 1,
-  placeholderLives: 1,
-  placeholderButtons: 1,
-  placeholderSequencee: 1,
+//   placeholderGameLen: 1,
+//   placeholderVolume: 1,
+//   placeholderLives: 1,
+//   placeholderButtons: 1,
+//   placeholderSequencee: 1,
 };
 
 function print(q) {
@@ -179,29 +179,29 @@ function showSettingContainer(){
   if(document.getElementById("settingsContainer").classList == "hidden"){
     document.getElementById("settingsContainer").classList.remove("hidden");
     document.getElementById("settings").innerText = "Cancel";
-    //change settings to cancel
   }
   else{
+    //change the values of the sliders back to OG
     close()
-    //change cancel to settings
-    
   }
 }
+
 
 function close(){
   document.getElementById("settingsContainer").classList.add("hidden");
   document.getElementById("settings").innerText = "Settings";
 }
 
+
 function applySettings(){
-  console.log("Hello: ")
-  console.log(document.getElementById("settingsContainer"))
+  console.log(settingsValue)
   close() 
 }
 
-function updateSliderPlaceholder(slider, placeholder){
+
+function updateSliderPlaceholder(slider, placeholder){  
   var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
-  placeholderElem.innerHTML = sliderElem.value;
-  placeholder.innerHTML = sliderElem.value;
+  settingsValue[placeholder] = sliderElem.value;
+  placeholderElem.innerHTML = settingsValue[placeholder];
 }
