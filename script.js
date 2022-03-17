@@ -12,30 +12,10 @@ var tonePlaying = false;
 var guessCounter = 0;
 var userGuessTime;
 
-
-var patternLength = 10;
-// var countDownTimer = 3;
-// var countDownTimerIncrement = 1.5;
-var volume = 0.5;
-var lives = 3;
-var buttonAmount = 4;
-
-var gameSettings = {
-  patternLength: 10,
-  countDownTimer: 3,
-  countDownTimerIncrement: 1.5,
-  volume: 0.5,
-  lives: 3,
-  buttonAmount: 4,
-  
-};
+// var patternLength = 10;
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
-
-
-
-
 
 function print(q) {
   console.log(q);
@@ -50,26 +30,33 @@ g.gain.setValueAtTime(0, context.currentTime);
 o.connect(g);
 o.start(0);
 
-const clueHoldTime = 1000; //how long each clue is played for
-const cluePauseTime = 333; //how long to pause between clues
-const nextClueWaitTime = 1000; //how long to wait before next list of clues starts
+var clueHoldTime = 1000; //how long each clue is played for
+var cluePauseTime = 333; //how long to pause between clues
+var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
+
+var gameSettings = {
+  patternLength: 10,
+  // countDownTimer: 3,
+  // countDownTimerIncrement: 1.5,
+  volume: 0.5,
+  lives: 3,
+  buttonAmount: 4,
+};
 
 function startGame() {
-  if (document.getElementById("settingsContainer").classList == "hidden"){
+  if (document.getElementById("settingsContainer").classList == "hidden") {
     pattern = [];
     for (let i = 0; i < gameSettings["patternLength"]; i++) {
       pattern.push(Math.floor(Math.random() * 3) + 0);
-    };
-    console.log(pattern)
-    lives = 3;
-    
-    
-    document.getElementById("placeholder").innerText = lives;
+    }
+    console.log(pattern);
+
+    document.getElementById("placeholder").innerText = gameSettings["lives"];
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("stopBtn").classList.remove("hidden");
-    
+
     playClueSequence();
   }
 }
@@ -81,20 +68,24 @@ function stopGame() {
 }
 
 var freqMap = [];
-populatFreqMap()
-function populatFreqMap(){
-  let temp=((500-260)/(buttonAmount-1))
-  for (let i = 0; i < buttonAmount; i++) {
-    freqMap[i]=Math.round(260+(temp*i))
+populatFreqMap();
+function populatFreqMap() {
+  let temp = (500 - 260) / (gameSettings["buttonAmount"] - 1);
+  for (let i = 0; i < gameSettings["buttonAmount"]; i++) {
+    freqMap[i] = Math.round(260 + temp * i);
   }
-  console.log(freqMap)
+  console.log(freqMap);
 }
 
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
   //console.log(context.currentTime)
 
-  g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
+  g.gain.setTargetAtTime(
+    gameSettings["volume"],
+    context.currentTime + 0.05,
+    0.025
+  );
   context.resume();
   tonePlaying = true;
   setTimeout(function () {
@@ -104,12 +95,16 @@ function playTone(btn, len) {
 
 function startTone(btn) {
   //console.log(tonePlaying)
-  stopTone()
+  stopTone();
   if (!tonePlaying) {
     console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
-    g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
+    g.gain.setTargetAtTime(
+      gameSettings["volume"],
+      context.currentTime + 0.05,
+      0.025
+    );
     context.resume();
     tonePlaying = true;
   }
@@ -169,14 +164,13 @@ function guess(btn) {
     return;
   }
   if (!(pattern[guessCounter] == btn)) {
-    lives--;
-    if (lives == 0) {
+    gameSettings["lives"]--;
+    if (gameSettings["lives"] == 0) {
       loseGame();
       return;
-    }
-    else {
-      console.log(lives)
-      document.getElementById("placeholder").innerText = lives
+    } else {
+      console.log(gameSettings["lives"]);
+      document.getElementById("placeholder").innerText = gameSettings["lives"];
       playClueSequence();
       return;
     }
@@ -193,39 +187,27 @@ function guess(btn) {
   winGame();
 }
 
-
-function showSettingContainer(){
-  if(document.getElementById("settingsContainer").classList == "hidden"){
+function showSettingContainer() {
+  if (document.getElementById("settingsContainer").classList == "hidden") {
     document.getElementById("settingsContainer").classList.remove("hidden");
     document.getElementById("settings").innerText = "Cancel";
-  }
-  else{
+  } else {
     //change the values of the sliders back to OG
-    close()
+    close();
   }
 }
 
-
-function close(){
+function close() {
   document.getElementById("settingsContainer").classList.add("hidden");
   document.getElementById("settings").innerText = "Settings";
 }
 
-function applySettings(){
-  console.log(gameSettings)
-  close() 
+function applySettings() {
+  console.log(gameSettings);
+  close();
 }
 
-//TODO: take the value of the button slider and connect it to actual buttons
-// var settingsOriginalValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
-
-// var settingsValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
-
-// if(Math.abs()
-
-
-
-function updateSliderPlaceholder(slider, placeholder){  
+function updateSliderPlaceholder(slider, placeholder) {
   var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
   gameSettings[placeholder] = sliderElem.value;

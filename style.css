@@ -110,8 +110,7 @@ button {
 
 #button5:active,
 #button5.lit {
-  background: rgb(100, 70, 36)
-;
+  background: rgb(100, 70, 36);
 }
 
 #button6 {
@@ -129,23 +128,23 @@ button {
 
 #button7:active,
 #button7.lit {
-  background: rgb(238,118,0);
+  background: rgb(238, 118, 0);
 }
 
 #button8 {
-  background: #FE90CB;
+  background: #fe90cb;
 }
 
 #button8:active,
 #button8.lit {
-  background: #FD0287;
+  background: #fd0287;
 }
 
 #button9 {
-  background: rgb(248,248,255);
+  background: rgb(248, 248, 255);
 }
 
 #button9:active,
 #button9.lit {
-  background: rgb(196,174,173);
+  background: rgb(196, 174, 173);
 }
