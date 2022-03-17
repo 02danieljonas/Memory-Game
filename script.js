@@ -53,6 +53,7 @@ function startGame() {
       pattern.push(Math.floor(Math.random() * 4) + 1);
     };
     lives = 3;
+    document.getElementById("placeholder").innerText = lives;
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -88,6 +89,7 @@ function playTone(btn, len) {
 
 function startTone(btn) {
   //console.log(tonePlaying)
+  stopTone()
   if (!tonePlaying) {
     console.log("User Sound Played");
     context.resume();
@@ -152,13 +154,13 @@ function guess(btn) {
     return;
   }
   if (!(pattern[guessCounter] == btn)) {
+    lives--;
     if (lives == 0) {
       loseGame();
       return;
     }
     else {
       console.log(lives)
-      lives--;
       document.getElementById("placeholder").innerText = lives
       playClueSequence();
       return;

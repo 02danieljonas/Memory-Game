@@ -95,3 +95,56 @@ button {
   background:darkblue;
   transition:50s;
 }
+
+
+
+#button5 {
+  background: lightyellow;
+}
+
+#button5:active,
+#button5.lit {
+  background: yellow;
+}
+
+#button6 {
+  background: lightyellow;
+}
+
+#button6:active,
+#button6.lit {
+  background: yellow;
+}
+
+#button7 {
+  background: lightyellow;
+}
+
+#button7:active,
+#button7.lit {
+  background: yellow;
+}
+
+#button8:active,
+#button8.lit {
+  background: yellow;
+}
+
+#button9 {
+  background: lightyellow;
+}
+
+#button9:active,
+#button9.lit {
+  background: yellow;
+}
+
+#button0 {
+  background: lightyellow;
+}
+
+#button0:active,
+#button0.lit {
+  background: yellow;
+}
+
