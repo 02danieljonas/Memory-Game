@@ -63,71 +63,73 @@ button {
 
 #settings {
   background: black;
-  color:white;
+  color: white;
   position: absolute;
   top: 10px;
-  right:10px;
+  right: 10px;
 }
-#settings:hover{
+#settings:hover {
   background: white;
-  color:black;
+  color: black;
 }
-#apply:hover{
+#apply:hover {
   background: black;
-  color:white;
+  color: white;
 }
 
-#settingsContainer{
+#settingsContainer {
   text-align: right;
-  background:rgba(250,0,0,.85);
-  padding:10px;
+  background: rgba(250, 0, 0, 0.85);
+  padding: 10px;
   position: absolute;
   top: 60px;
-  right:10px;
+  right: 10px;
 }
 
-#startBtn{
-  transition:0s;
+#startBtn {
+  transition: 0s;
 }
 
-
-#startBtn:hover{
-  background:darkblue;
-  transition:50s;
+#startBtn:hover {
+  background: darkblue;
+  transition: 50s;
 }
-
-
 
 #button5 {
-  background: lightyellow;
+  background: plum;
 }
 
 #button5:active,
 #button5.lit {
-  background: yellow;
+  background: purple;
 }
 
 #button6 {
-  background: lightyellow;
+  background: rgb(196, 164, 132);
 }
 
 #button6:active,
 #button6.lit {
-  background: yellow;
+  background: rgb(100, 70, 36)
+;
 }
 
 #button7 {
-  background: lightyellow;
+  background: grey;
 }
 
 #button7:active,
 #button7.lit {
-  background: yellow;
+  background: black;
+}
+
+#button8 {
+  background: rgb(255, 213, 128);
 }
 
 #button8:active,
 #button8.lit {
-  background: yellow;
+  background: rgb(238,118,0);
 }
 
 #button9 {
@@ -147,4 +149,3 @@ button {
 #button0.lit {
   background: yellow;
 }
-
