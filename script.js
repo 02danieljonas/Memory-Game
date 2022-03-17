@@ -7,7 +7,7 @@
 var patternLength = 10;
 var pattern = [];
 var clueInProgress = false;
-var strikes = 0;
+var lives = 3;
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
@@ -52,7 +52,7 @@ function startGame() {
     for (let i = 0; i < patternLength; i++) {
       pattern.push(Math.floor(Math.random() * 4) + 1);
     };
-    strikes = 3;
+    lives = 3;
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -136,7 +136,7 @@ function playClueSequence() {
 }
 
 function loseGame() {
-  document.getElementById("placeHolder").innerText = 0
+  // document.getElementById("placeHolder").innerText = 0
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
@@ -152,12 +152,14 @@ function guess(btn) {
     return;
   }
   if (!(pattern[guessCounter] == btn)) {
-    if (strikes >= 2) {
+    if (lives == 0) {
       loseGame();
       return;
-    } else {
-      strikes++;
-      document.getElementById("placeholder").innerText = 3-strikes
+    }
+    else {
+      console.log(lives)
+      lives--;
+      document.getElementById("placeholder").innerText = lives
       playClueSequence();
       return;
     }
