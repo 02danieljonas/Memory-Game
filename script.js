@@ -174,3 +174,9 @@ function applySettings(){
   console.log(document.getElementById("settingsContainer"))
 }
 
+function updateSliderPlaceholder(slider, placeholder){
+  var sliderElem = document.getElementById(slider);
+  var placeholderElem = document.getElementById(placeholder);
+  placeholderElem.innerHTML = sliderElem.value;
+  placeholder.innerHTML = sliderElem.value;
+}

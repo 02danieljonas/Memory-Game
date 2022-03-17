@@ -50,7 +50,7 @@ maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if u
     <div class="" id="settingsContainer">
       
       Game Length - <span id="placeholderGameLen">5</span>
-      <input type="range" min="1" max="20" value="10" id="length" oninput="updateSliderPlaceholder(length, placeholderGameLen)">
+      <input type="range" min="1" max="20" value="10" id="length" oninput="updateSliderPlaceholder(this.id, &quot;placeholderGameLen&quot;)">
       <br>
     
       Volume - <span id="placeholderVolume">5</span>
@@ -74,22 +74,11 @@ maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if u
     
   </body>
 </html>
-<script>
-    function updateSliderPlaceholder(slider, placeholder){
-      var sliderElem = document.getElementById(slider);
-      var placeholderElem = document.getElementById(placeholder);
-        placeholderElem.innerHTML = sliderElem.value;
-
+<!-- <script>
+  function updateSliderPlaceholder(slider, placeholder){
+    var sliderElem = document.getElementById(slider);
+    var placeholderElem = document.getElementById(placeholder);
+    placeholderElem.innerHTML = sliderElem.value;
+    placeholder.innerHTML = sliderElem.value;
     }
-  
-    var sliderLength = document.getElementById("length");
-    var placeholder = document.getElementById("placeholderGameLen");
-
-    placeholder.innerHTML = sliderLength.value;
-
-    sliderLength.oninput = function() {
-    placeholder.innerHTML = this.value;
-    }
-  
-  
-</script>
+</script> -->
