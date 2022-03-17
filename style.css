@@ -87,10 +87,11 @@ button {
 }
 
 #startBtn{
-  transition:5s;
+  transition:0s;
 }
 
 
 #startBtn:hover{
   background:darkblue;
+  transition:50s;
 }
