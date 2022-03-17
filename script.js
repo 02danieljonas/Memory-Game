@@ -14,8 +14,8 @@ var userGuessTime;
 
 
 var patternLength = 10;
-var countDownTimer = 3;
-var countDownTimerIncrement = 1.5;
+// var countDownTimer = 3;
+// var countDownTimerIncrement = 1.5;
 var volume = 0.5;
 var lives = 3;
 var buttonAmount = 4;
@@ -58,14 +58,18 @@ function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden"){
     pattern = [];
     for (let i = 0; i < gameSettings["patternLength"]; i++) {
-      pattern.push(Math.floor(Math.random() * 4) + 1);
+      pattern.push(Math.floor(Math.random() * 3) + 0);
     };
+    console.log(pattern)
     lives = 3;
+    
+    
     document.getElementById("placeholder").innerText = lives;
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("stopBtn").classList.remove("hidden");
+    
     playClueSequence();
   }
 }
@@ -83,6 +87,7 @@ function populatFreqMap(){
   for (let i = 0; i < buttonAmount; i++) {
     freqMap[i]=Math.round(260+(temp*i))
   }
+  console.log(freqMap)
 }
 
 function playTone(btn, len) {
@@ -207,14 +212,14 @@ function close(){
 }
 
 function applySettings(){
-  console.log(settingsValue)
+  console.log(gameSettings)
   close() 
 }
 
 //TODO: take the value of the button slider and connect it to actual buttons
-var settingsOriginalValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
+// var settingsOriginalValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
 
-var settingsValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
+// var settingsValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
 
 // if(Math.abs()
 
@@ -223,6 +228,6 @@ var settingsValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownT
 function updateSliderPlaceholder(slider, placeholder){  
   var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
-  settingsValue[placeholder] = sliderElem.value;
-  placeholderElem.innerHTML = settingsValue[placeholder];
+  gameSettings[placeholder] = sliderElem.value;
+  placeholderElem.innerHTML = gameSettings[placeholder];
 }
