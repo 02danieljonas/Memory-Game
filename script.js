@@ -18,11 +18,16 @@ var countDownTimerIncrement = 1.5;
 
 var userGuessTime;
 
-console.log(document.getElementById("settingsContainer").classList)
-
-
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
+
+var settingsValue = {
+  placeholderGameLen: "Chris",
+  placeholderVolume: 1,
+  placeholderLives: 1,
+  placeholderButtons: 1,
+  placeholderSequencee: 1,
+};
 
 function print(q) {
   console.log(q);
@@ -177,15 +182,21 @@ function showSettingContainer(){
     //change settings to cancel
   }
   else{
-    document.getElementById("settingsContainer").classList.add("hidden");
-    document.getElementById("settings").innerText = "Settings";
+    close()
     //change cancel to settings
+    
   }
+}
+
+function close(){
+  document.getElementById("settingsContainer").classList.add("hidden");
+  document.getElementById("settings").innerText = "Settings";
 }
 
 function applySettings(){
   console.log("Hello: ")
   console.log(document.getElementById("settingsContainer"))
+  close() 
 }
 
 function updateSliderPlaceholder(slider, placeholder){
