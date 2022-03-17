@@ -13,63 +13,144 @@
     <!-- import the webpage's javascript file -->
     <script src="/script.js" defer></script>
   </head>
-  
-  
+
   <body>
     <!-- this is the start of content -->
     <h1>Simons Says!</h1>
-    
+
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
 
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
-    <div id="timer">
-      Lives: <span id="placeholder">3</span>
-    </div>
+    <div id="timer">Lives: <span id="placeholder">3</span></div>
 
     <div id="gameButtonArea">
-      <button id="button1" onclick="guess(1)" onmousedown="startTone(1)" onmouseup="stopTone()"></button>
-      <button id="button2" onclick="guess(2)" onmousedown="startTone(2)" onmouseup="stopTone()"></button>
-      <button id="button3" onclick="guess(3)" onmousedown="startTone(3)" onmouseup="stopTone()"></button>
-      <button id="button4" onclick="guess(4)" onmousedown="startTone(4)" onmouseup="stopTone()"></button>
-      
-      <button id="button5" onclick="guess(5)" onmousedown="startTone(5)" onmouseup="stopTone()"></button>
-      <button id="button6" onclick="guess(6)" onmousedown="startTone(6)" onmouseup="stopTone()"></button>
-      <button id="button7" onclick="guess(7)" onmousedown="startTone(7)" onmouseup="stopTone()"></button>
-      <button id="button8" onclick="guess(8)" onmousedown="startTone(8)" onmouseup="stopTone()"></button>
-      <button id="button9" onclick="guess(9)" onmousedown="startTone(9)" onmouseup="stopTone()"></button>
-      <button id="button10" onclick="guess(10)" onmousedown="startTone(10)" onmouseup="stopTone()"></button>
+      <button
+        id="button1"
+        onclick="guess(1)"
+        onmousedown="startTone(1)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button2"
+        onclick="guess(2)"
+        onmousedown="startTone(2)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button3"
+        onclick="guess(3)"
+        onmousedown="startTone(3)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button4"
+        onclick="guess(4)"
+        onmousedown="startTone(4)"
+        onmouseup="stopTone()"
+      ></button>
+
+      <button
+        id="button5"
+        onclick="guess(5)"
+        onmousedown="startTone(5)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button6"
+        onclick="guess(6)"
+        onmousedown="startTone(6)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button7"
+        onclick="guess(7)"
+        onmousedown="startTone(7)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button8"
+        onclick="guess(8)"
+        onmousedown="startTone(8)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button9"
+        onclick="guess(9)"
+        onmousedown="startTone(9)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
+        id="button10"
+        onclick="guess(10)"
+        onmousedown="startTone(10)"
+        onmouseup="stopTone()"
+      ></button>
     </div>
-    
-<!--TODO: Figure out how to extract data from the sliders check out "valueAsNumber" - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range and if I used cite it
+
+    <!--TODO: Figure out how to extract data from the sliders check out "valueAsNumber" - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range and if I used cite it
 maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if used, good luck :)
     TODO: Finish the sliders
 &quot;placeholderGameLen&quot;)">-->
-    
-    <button id="settings" onclick="showSettingsContainer()">Settings</button>
-    
-    <div class="" id="settingsContainer">
-      
+
+    <button id="settings" onclick="showSettingContainer()">Settings</button>
+
+    <div class="hidden" id="settingsContainer">
       Game Length - <span id="placeholderGameLen" for="length">5</span>
-      <input type="range" min="1" max="20" value="10" id="length" oninput="updateSliderPlaceholder(this.id, &quot;placeholderGameLen&quot;)">
-      <br>
-    
+      <input
+        type="range"
+        min="1"
+        max="20"
+        value="10"
+        id="length"
+        oninput='updateSliderPlaceholder(this.id, "placeholderGameLen")'
+      />
+      <br />
+
       Volume - <span id="placeholderVolume">5</span>
-      <input type="range" min="0" max="10" value="5" id="volume" oninput="updateSliderPlaceholder(this.id, &quot;placeholderVolume&quot;)">
-      <br>
-      
+      <input
+        type="range"
+        min="0"
+        max="10"
+        value="5"
+        id="volume"
+        oninput='updateSliderPlaceholder(this.id, "placeholderVolume")'
+      />
+      <br />
+
       How much lives - <span id="placeholderLives">3</span>
-      <input type="range" min="0" max="10" value="3" id="lives" oninput="updateSliderPlaceholder(this.id, &quot;placeholderLives&quot;)"> 
-      <br>
-      
+      <input
+        type="range"
+        min="0"
+        max="10"
+        value="3"
+        id="lives"
+        oninput='updateSliderPlaceholder(this.id, "placeholderLives")'
+      />
+      <br />
+
       Amount of Buttons - <span id="placeholderButtons">4</span>
-      <input type="range" min="2" max="10" value="4" id="button" oninput="updateSliderPlaceholder(this.id, &quot;placeholderButtons&quot;)">
-      <br>
-      
+      <input
+        type="range"
+        min="2"
+        max="10"
+        value="4"
+        id="button"
+        oninput='updateSliderPlaceholder(this.id, "placeholderButtons")'
+      />
+      <br />
+
       Speed of Sequence - <span id="placeholderSequencee">3</span>
-      <input type="range" min="1" max="10" value="3" id="sequence" oninput="updateSliderPlaceholder(this.id, &quot;placeholderSequencee&quot;)">
-      <br>
-      <button id="apply" onclick="applySettings()">Apply</button>
+      <input
+        type="range"
+        min="1"
+        max="10"
+        value="3"
+        id="sequence"
+        oninput='updateSliderPlaceholder(this.id, "placeholderSequencee")'
+      />
+      <br />
+      <!--       <button id="apply" onclick="applySettings()">Apply</button> -->
     </div>
   </body>
 </html>

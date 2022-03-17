@@ -18,6 +18,9 @@ var countDownTimerIncrement = 1.5;
 
 var userGuessTime;
 
+console.log(document.getElementById("settingsContainer").classList)
+
+
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
@@ -165,8 +168,13 @@ function guess(btn) {
 }
 
 
-function showSettingsContainer(){
-  document.getElementById("settingsContainer").classList.remove("hidden");
+function showSettingContainer(){
+  if(document.getElementById("settingsContainer").classList == "hidden"){
+    document.getElementById("settingsContainer").classList.remove("hidden");
+  }
+  else{
+    document.getElementById("settingsContainer").classList.add("hidden");
+  }
 }
 
 function applySettings(){
