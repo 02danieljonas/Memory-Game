@@ -173,3 +173,4 @@ function applySettings(){
   console.log("Hello: ")
   console.log(document.getElementById("settingsContainer"))
 }
+
