@@ -26,6 +26,12 @@
 
     <div id="gameButtonArea">
       <button
+        id="button0"
+        onclick="guess(0)"
+        onmousedown="startTone(0)"
+        onmouseup="stopTone()"
+      ></button>
+      <button
         id="button1"
         onclick="guess(1)"
         onmousedown="startTone(1)"
@@ -78,12 +84,6 @@
         id="button9"
         onclick="guess(9)"
         onmousedown="startTone(9)"
-        onmouseup="stopTone()"
-      ></button>
-      <button
-        id="button0"
-        onclick="guess(0)"
-        onmousedown="startTone(0)"
         onmouseup="stopTone()"
       ></button>
     </div>

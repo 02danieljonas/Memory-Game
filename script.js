@@ -68,21 +68,20 @@ function stopGame() {
   document.getElementById("stopBtn").classList.add("hidden");
 }
 
-const freqMap = [
-  0,
-  261.6,
-  329.6,
-  392,
-  466.2,
+var freqMap = [
 ];
+freqMap[1]=80
+console.log(freqMap)
+// 260-500
+// (500-260)/(4-1)==80
+// (260, 340, 420, 500)
 
-260-500
-(500-260)/(4-1)==80
-(260, 340, 420, 500)
-
-for (let i = 0; i < cars.length; i++) {
-  text += cars[i] + "<br>";
+length=10
+let temp=((500-260)/(length-1))
+for (let i = 0; i < length; i++) {
+  freqMap[i]=260+(temp*i)
 }
+console.log(freqMap)
 
 
 
