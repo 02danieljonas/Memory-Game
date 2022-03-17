@@ -1,13 +1,14 @@
 /* If you're feeling fancy you can add interactivity 
     to your site with Javascript */
 
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
 
 // TODO: add a configure button that allows you to configure the app with sliders
 var patternLength = 10;
 var pattern = [];
 var clueInProgress = false;
 var lives = 3;
+var buttonAmount = 4;
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
@@ -20,6 +21,10 @@ var userGuessTime;
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
+
+
+
+//TODO: take the value of the button slider and connect it to actual buttons
 
 var settingsValue = {
 //   placeholderGameLen: 1,
@@ -70,19 +75,11 @@ function stopGame() {
 
 var freqMap = [
 ];
-freqMap[1]=80
-console.log(freqMap)
-// 260-500
-// (500-260)/(4-1)==80
-// (260, 340, 420, 500)
 
-length=10
-let temp=((500-260)/(length-1))
-for (let i = 0; i < length; i++) {
-  freqMap[i]=260+(temp*i)
+let temp=((500-260)/(buttonAmount-1))
+for (let i = 0; i < buttonAmount; i++) {
+  freqMap[i]=Math.round(260+(temp*i))
 }
-console.log(freqMap)
-
 
 
 
