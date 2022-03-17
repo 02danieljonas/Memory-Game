@@ -201,6 +201,7 @@ function applySettings(){
 }
 
 //TODO: take the value of the button slider and connect it to actual buttons
+var settingsOriginalValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
 
 var settingsValue = [-patternLength, -volume, -lives, -buttonAmount, -countDownTimer];
 
