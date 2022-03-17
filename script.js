@@ -57,7 +57,7 @@ const nextClueWaitTime = 1000; //how long to wait before next list of clues star
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden"){
     pattern = [];
-    for (let i = 0; i < gameSettings[patternLength]; i++) {
+    for (let i = 0; i < gameSettings["patternLength"]; i++) {
       pattern.push(Math.floor(Math.random() * 4) + 1);
     };
     lives = 3;
