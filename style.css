@@ -40,7 +40,7 @@ button {
 }
 
 #button3 {
-  background: pink;
+  background: #feb6b3;
 }
 
 #button3:active,
@@ -133,19 +133,19 @@ button {
 }
 
 #button9 {
-  background: lightyellow;
+  background: #FE90CB;
 }
 
 #button9:active,
 #button9.lit {
-  background: yellow;
+  background: #FD0287;
 }
 
 #button0 {
-  background: lightyellow;
+  background: rgb(248,248,255);
 }
 
 #button0:active,
 #button0.lit {
-  background: yellow;
+  background: rgb(196,174,173);
 }
