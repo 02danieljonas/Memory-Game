@@ -72,6 +72,10 @@ button {
   background: white;
   color:black;
 }
+#apply:hover{
+  background: black;
+  color:white;
+}
 
 #settingsContainer{
   text-align: right;
@@ -80,4 +84,13 @@ button {
   position: absolute;
   top: 60px;
   right:10px;
+}
+
+#startBtn{
+  transition:5s;
+}
+
+
+#startBtn:hover{
+  background:darkblue;
 }

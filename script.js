@@ -42,16 +42,18 @@ const cluePauseTime = 333; //how long to pause between clues
 const nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 function startGame() {
-  pattern = [];
-  for (let i = 0; i < patternLength; i++) {
-    pattern.push(Math.floor(Math.random() * 4) + 1);
-  };
-  strikes = 3;
-  progress = 0;
-  gamePlaying = true;
-  document.getElementById("startBtn").classList.add("hidden");
-  document.getElementById("stopBtn").classList.remove("hidden");
-  playClueSequence();
+  if (document.getElementById("settingsContainer").classList == "hidden"){
+    pattern = [];
+    for (let i = 0; i < patternLength; i++) {
+      pattern.push(Math.floor(Math.random() * 4) + 1);
+    };
+    strikes = 3;
+    progress = 0;
+    gamePlaying = true;
+    document.getElementById("startBtn").classList.add("hidden");
+    document.getElementById("stopBtn").classList.remove("hidden");
+    playClueSequence();
+  }
 }
 
 function stopGame() {
@@ -171,9 +173,13 @@ function guess(btn) {
 function showSettingContainer(){
   if(document.getElementById("settingsContainer").classList == "hidden"){
     document.getElementById("settingsContainer").classList.remove("hidden");
+    document.getElementById("settings").innerText = "Cancel";
+    //change settings to cancel
   }
   else{
     document.getElementById("settingsContainer").classList.add("hidden");
+    document.getElementById("settings").innerText = "Settings";
+    //change cancel to settings
   }
 }
 
