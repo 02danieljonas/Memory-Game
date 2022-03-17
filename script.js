@@ -76,6 +76,17 @@ const freqMap = [
   466.2,
 ];
 
+260-500
+(500-260)/(4-1)==80
+(260, 340, 420, 500)
+
+for (let i = 0; i < cars.length; i++) {
+  text += cars[i] + "<br>";
+}
+
+
+
+
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
   //console.log(context.currentTime)
