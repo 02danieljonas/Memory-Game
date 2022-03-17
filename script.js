@@ -68,12 +68,13 @@ function stopGame() {
   document.getElementById("stopBtn").classList.add("hidden");
 }
 
-const freqMap = {
-  1: 261.6,
-  2: 329.6,
-  3: 392,
-  4: 466.2,
-};
+const freqMap = [
+  0,
+  261.6,
+  329.6,
+  392,
+  466.2,
+];
 
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
