@@ -1,4 +1,4 @@
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, 
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,
 
 var pattern = [];
 var clueInProgress = false;
@@ -21,7 +21,7 @@ var gameSettings = {
 
 var userGameSettings = Object.assign({}, gameSettings);
 
-console.log(userGameSettings)
+console.log(userGameSettings);
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -83,7 +83,7 @@ function playTone(btn, len) {
   //console.log(context.currentTime)
 
   g.gain.setTargetAtTime(
-    gameSettings["volume"]/10,
+    gameSettings["volume"] / 10,
     context.currentTime + 0.05,
     0.025
   );
@@ -102,7 +102,7 @@ function startTone(btn) {
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(
-      gameSettings["volume"]/10,
+      gameSettings["volume"] / 10,
       context.currentTime + 0.05,
       0.025
     );
@@ -194,34 +194,21 @@ function showSettingContainer() {
     document.getElementById("settingsContainer").classList.remove("hidden");
     document.getElementById("settings").innerText = "Cancel";
   } else {
-    cancel()
+    cancel();
   }
 }
 
-function cancel(){
+function cancel() {
   for (const property in userGameSettings) {
-    if (userGameSettings[property] != gameSettings[property]){
-      document.getElementById(property).innerHTML = gameSettings[property];
-      document.getElementById(property).innerHTML = document.getElementById(property+"Slider").value = userGameSettings[property] = gameSettings[property];
-      // sliderElem.value ;
-      //change sliderinfo
-      //userGameSettings[placeholder] = Number(sliderElem.value);
-      console.log("User: ", userGameSettings)
-      console.log(gameSettings)
-      // userGameSettings[property] = gameSettings[property]
+    if (userGameSettings[property] != gameSettings[property]) {
+      document.getElementById(property).innerHTML =
+        document.getElementById(property + "Slider").value =
+        userGameSettings[property] =
+          gameSettings[property];
     }
   }
-
-//   for everything in UGS thats different in GS:
-//   change slider info to GS
-//   change UGS info to copy GS
-  
-//   userGameSettings = Object.assign({}, gameSettings);
   close();
-
 }
-
-
 
 function close() {
   document.getElementById("settingsContainer").classList.add("hidden");
@@ -230,10 +217,6 @@ function close() {
 
 function applySettings() {
   gameSettings = Object.assign({}, userGameSettings);
-
-  console.log(gameSettings);
-  console.log("User", userGameSettings);
-
   close();
 }
 

@@ -57,9 +57,9 @@ button {
   background: yellow;
 }
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 #settings {
   background: black;
@@ -68,16 +68,20 @@ button {
   top: 10px;
   right: 10px;
 }
+
 #settings:hover {
   background: white;
   color: black;
 }
+
 #apply:hover {
   background: black;
   color: white;
 }
 
 #settingsContainer {
+  border: groove;
+  
   text-align: right;
   background: rgba(250, 0, 0, 0.85);
   padding: 10px;

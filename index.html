@@ -22,7 +22,10 @@
 
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
-    <div id="timer">Lives: <span id="placeholder">3</span></div>
+    <div id="info">
+      Lives: <span id="placeholder">3</span> <br>
+      Time Left: <span id="timerPlaceholder">100</span> 
+    </div>
 
     <div id="gameButtonArea">
       <button
@@ -144,8 +147,19 @@ maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if u
         oninput='updateSliderPlaceholder(this.id, "buttonAmount")'
       />
       <br />
+      
+      Time Per Button - <span id="timePerButton">4</span>
+      <input
+        type="range"
+        min="2"
+        max="10"
+        value="4"
+        id="timePerButtonSlider"
+        oninput='updateSliderPlaceholder(this.id, "timePerButton")'
+      />
+      <br />
 
-<!--       Speed of Sequence - <span id="placeholderSequence">3</span>
+      <!--       Speed of Sequence - <span id="placeholderSequence">3</span>
       <input
         type="range"
         min="1"
