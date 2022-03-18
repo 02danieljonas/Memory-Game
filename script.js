@@ -171,8 +171,7 @@ function guess(btn) {
 
   if (!gamePlaying) {
     return;
-  }
-  elif (!(pattern[guessCounter] == btn)) {
+  } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
     if (strikes >= gameSettings["lives"]) {
       loseGame();
@@ -184,17 +183,16 @@ function guess(btn) {
       playClueSequence();
       return;
     }
-  }
-  if (!(guessCounter == progress)) {
+  } else if (!(guessCounter == progress)) {
     guessCounter++;
     return;
-  }
-  if (!(progress == pattern.length - 1)) {
+  } else if (!(progress == pattern.length - 1)) {
     progress++;
     playClueSequence();
     return;
+  } else {
+    winGame();
   }
-  winGame();
 }
 
 function showSettingContainer() {
