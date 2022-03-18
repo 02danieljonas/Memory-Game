@@ -208,18 +208,9 @@ function showSettingContainer() {
   } else {
     error("Please stop the game to change settings");
     
-    //       if (document.getElementById("settingsContainer").classList == "hidden") {
-    //         for (const property in userGameSettings) {
-    //           document.getElementById(property + "Slider").classList.add("hidden");
-    //         }
-    //         document.getElementById("settingsContainer").classList.remove("hidden");
-    //         document.getElementById("volumeSlider").classList.remove("hidden");
-    //       } else {
-    //         for (const property in userGameSettings) {
-    //           document.getElementById(property + "Slider").classList.remove("hidden");
-    //       }
-    //       // showVolume only
-    //     }
+    //error
+    
+    
   }
 }
 
