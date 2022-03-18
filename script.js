@@ -6,8 +6,19 @@ var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var guessCounter = 0;
-var userGuessTime;
+
+// var userGuessTime;
 var strikes;
+
+var gameSettings = {
+  patternLength: 10,
+  // countDownTimer: 3,
+  // countDownTimerIncrement: 1.5,
+  volume: 0.5,
+  lives: 3,
+  buttonAmount: 4,
+};
+
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
@@ -27,15 +38,6 @@ o.start(0);
 var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
-
-var gameSettings = {
-  patternLength: 10,
-  // countDownTimer: 3,
-  // countDownTimerIncrement: 1.5,
-  volume: 0.5,
-  lives: 3,
-  buttonAmount: 4,
-};
 
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
@@ -135,7 +137,7 @@ function playClueSequence() {
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
-    userGuessTime = delay;
+    // userGuessTime = delay;
     // console.log("The user can play audio at " + userGuessTime);
     //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
     //can't fix now, good luck future me :)
