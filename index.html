@@ -23,8 +23,8 @@
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
     <div id="info">
-      Lives: <span id="livesPlaceholder">3</span> <br>
-      Time Left: <span id="timerPlaceholder">100</span> 
+      Lives: <span id="livesPlaceholder">3</span> <br />
+      Time Left: <span id="timerPlaceholder">100</span>
     </div>
 
     <div id="gameButtonArea">
@@ -97,12 +97,9 @@
       ></button>
     </div>
 
-    <!--TODO: Figure out how to extract data from the sliders check out "valueAsNumber" - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range and if I used cite it
-maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if used, good luck :)
-    TODO: Finish the sliders
-&quot;placeholderGameLen&quot;)">-->
-
-    <button id="settings" class="clicked" onclick="showSettingContainer()">Settings</button>
+    <button id="settings" class="clicked" onclick="showSettingContainer()">
+      Settings
+    </button>
 
     <div class="hidden" id="settingsContainer">
       Game Length - <span id="patternLength">5</span>
@@ -147,7 +144,7 @@ maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if u
         oninput='updateSliderPlaceholder(this.id, "buttonAmount")'
       />
       <br />
-      
+
       Time Per Button - <span id="timePerButton">4</span>
       <input
         type="range"

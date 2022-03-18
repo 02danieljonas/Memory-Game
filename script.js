@@ -45,8 +45,8 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
-    document.getElementById("settings").classList.add("hidden") //or make it so clicking settings only shows vol
-    
+    // document.getElementById("settings").classList.add("hidden"); //or make it so clicking settings only shows vol
+
     strikes = 0;
     pattern = [];
     for (let i = 0; i < gameSettings["patternLength"]; i++) {
@@ -54,7 +54,8 @@ function startGame() {
     }
     console.log(pattern);
 
-    document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
+    document.getElementById("livesPlaceholder").innerText =
+      gameSettings["lives"];
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -147,11 +148,12 @@ function playClueSequence() {
     // console.log("The user can play audio at " + userGuessTime);
     //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
     //can't fix now, good luck future me :)
+    //maybe I can take data from the volume timeline and figure out a way to talk to it
   }
 }
 
 function loseGame() {
-  document.getElementById("livesPlaceholder").innerText = 0
+  document.getElementById("livesPlaceholder").innerText = 0;
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
@@ -192,22 +194,26 @@ function guess(btn) {
 }
 
 function showSettingContainer() {
-  if (gamePlaying == false){
+  if (gamePlaying == false) {
     if (document.getElementById("settingsContainer").classList == "hidden") {
       document.getElementById("settingsContainer").classList.remove("hidden");
       document.getElementById("settings").innerText = "Cancel";
     } else {
       cancel();
     }
-  }
-  else{
-    if (document.getElementById("settingsContainer").classList == "hidden") {
-      for (const property in userGameSettings) {
-        document.getElementById(property + "Slider").classList.add("hidden")
-      }
-      volume un hide
-    
-    showVolume only
+  } else {
+    //       if (document.getElementById("settingsContainer").classList == "hidden") {
+    //         for (const property in userGameSettings) {
+    //           document.getElementById(property + "Slider").classList.add("hidden");
+    //         }
+    //         document.getElementById("settingsContainer").classList.remove("hidden");
+    //         document.getElementById("volumeSlider").classList.remove("hidden");
+    //       } else {
+    //         for (const property in userGameSettings) {
+    //           document.getElementById(property + "Slider").classList.remove("hidden");
+    //       }
+    //       // showVolume only
+    //     }
   }
 }
 
