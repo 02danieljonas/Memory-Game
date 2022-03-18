@@ -45,12 +45,12 @@ var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;
 
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
-    // document.getElementById("settings").classList.add("hidden"); //or make it so clicking settings only shows vol
-
     strikes = 0;
     pattern = [];
     for (let i = 0; i < gameSettings["patternLength"]; i++) {
-      pattern.push(Math.floor(Math.random() * 3) + 0);
+      pattern.push(
+        Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
+      );
     }
     console.log(pattern);
 
@@ -172,7 +172,7 @@ function guess(btn) {
   if (!gamePlaying) {
     return;
   }
-  if (!(pattern[guessCounter] == btn)) {
+  elif (!(pattern[guessCounter] == btn)) {
     strikes++;
     if (strikes >= gameSettings["lives"]) {
       loseGame();
@@ -207,8 +207,7 @@ function showSettingContainer() {
     }
   } else {
     error("Please stop the game to change settings");
-    console.log("Error")
-
+    console.log("Error");
     //error
   }
 }
@@ -222,7 +221,6 @@ function cancel() {
           gameSettings[property];
     }
   }
-
   close();
 }
 
@@ -231,22 +229,20 @@ function close() {
   document.getElementById("settings").innerText = "Settings";
 }
 
-function updateButtons(buttonAmount){
-  for(let i=buttonAmount;i==10;i++){
-    document.getElementById("button"+i).classList.add("hidden");
-    console.log("button"+ i, "is hidden")
+function updateButtons(buttonAmount) {
+  for (let i = buttonAmount; i < 10; i++) {
+    document.getElementById("button" + i).classList.add("hidden");
+    console.log("button" + i, "is hidden");
   }
-  for(let i=0;i<buttonAmount;i++){
-    document.getElementById("button"+i).classList.remove("hidden");
-    console.log("button", i, "is shown")
+  for (let i = 0; i < buttonAmount; i++) {
+    document.getElementById("button" + i).classList.remove("hidden");
+    console.log("button", i, "is shown");
   }
 }
 
-
 function applySettings() {
-  if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]){
-    console.log("Change in buttons")
-    userGameSettings["buttonAmount"]--
+  if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]) {
+    console.log("Change in buttons");
     updateButtons(userGameSettings["buttonAmount"]);
   }
 
