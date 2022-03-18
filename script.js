@@ -232,17 +232,21 @@ function close() {
 }
 
 function updateButtons(buttonAmount){
-  for(let i=0;i<buttonAmount;i++){
-    document.getElementById("button", i).classList.remove("hidden");
+  for(let i=buttonAmount;i==10;i++){
+    document.getElementById("button"+i).classList.add("hidden");
+    console.log("button"+ i, "is hidden")
   }
-  for(let i=buttonAmount;i<=9;i++){
-    document.getElementById("button", i).classList.remove("hidden");
+  for(let i=0;i<buttonAmount;i++){
+    document.getElementById("button"+i).classList.remove("hidden");
+    console.log("button", i, "is shown")
   }
 }
 
 
 function applySettings() {
   if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]){
+    console.log("Change in buttons")
+    userGameSettings["buttonAmount"]--
     updateButtons(userGameSettings["buttonAmount"]);
   }
 
