@@ -206,7 +206,8 @@ function showSettingContainer() {
       cancel();
     }
   } else {
-    error("Please stop the game to change settings")
+    error("Please stop the game to change settings");
+    
     //       if (document.getElementById("settingsContainer").classList == "hidden") {
     //         for (const property in userGameSettings) {
     //           document.getElementById(property + "Slider").classList.add("hidden");
@@ -253,5 +254,6 @@ function updateSliderPlaceholder(slider, placeholder) {
 }
 
 function error(info){
-  
+  document.getElementById("error").innerHTML = info;
+  document.getElementById("error").classList.add("hidden");
 }

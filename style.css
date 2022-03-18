@@ -15,6 +15,21 @@ button {
   border-radius: 10px;
 }
 
+#error{
+  position: absolute;
+  left:0px;
+  background: red;
+  bottom:10px;
+  text-align: center;
+  width: 100%;
+  transition:5s;
+}
+
+#error:hover{
+  background:green;
+}
+
+
 #gameButtonArea button {
   width: 200px;
   height: 200px;
@@ -153,10 +168,3 @@ button {
   background: rgb(196, 174, 173);
 }
 
-#error{
-  position: absolute;
-  background: red;
-  color:white;
-  bottom:10px;
-error  
-}
