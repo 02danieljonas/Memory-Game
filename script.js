@@ -231,7 +231,21 @@ function close() {
   document.getElementById("settings").innerText = "Settings";
 }
 
+function updateButtons(buttonAmount){
+  for(let i=0;i<buttonAmount;i++){
+    document.getElementById("button", i).classList.remove("hidden");
+  }
+  for(let i=buttonAmount;i<=9;i++){
+    document.getElementById("button", i).classList.remove("hidden");
+  }
+}
+
+
 function applySettings() {
+  if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]){
+    updateButtons(userGameSettings["buttonAmount"]);
+  }
+
   gameSettings = Object.assign({}, userGameSettings);
   close();
 }
