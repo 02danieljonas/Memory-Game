@@ -14,7 +14,7 @@ var gameSettings = {
   patternLength: 10,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
-  volume: 0.5,
+  volume: 5,
   lives: 3,
   buttonAmount: 4,
 };
@@ -83,7 +83,7 @@ function playTone(btn, len) {
   //console.log(context.currentTime)
 
   g.gain.setTargetAtTime(
-    gameSettings["volume"],
+    gameSettings["volume"]/10,
     context.currentTime + 0.05,
     0.025
   );
@@ -102,7 +102,7 @@ function startTone(btn) {
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(
-      gameSettings["volume"],
+      gameSettings["volume"]/10,
       context.currentTime + 0.05,
       0.025
     );
@@ -201,16 +201,22 @@ function showSettingContainer() {
 function cancel(){
   for (const property in userGameSettings) {
     if (userGameSettings[property] != gameSettings[property]){
-        document.getElementById(property).innerHTML = gameSettings[placeholder];
-        userGameSettings[property] == gameSettings[property])
+      document.getElementById(property).innerHTML = gameSettings[property];
+      document.getElementById(property).innerHTML = document.getElementById(property+"Slider").value = userGameSettings[property] = gameSettings[property];
+      // sliderElem.value ;
+      //change sliderinfo
+      //userGameSettings[placeholder] = Number(sliderElem.value);
+      console.log("User: ", userGameSettings)
+      console.log(gameSettings)
+      // userGameSettings[property] = gameSettings[property]
     }
   }
 
-  for everything in UGS thats different in GS:
-  change slider info to GS
-  change UGS info to copy GS
+//   for everything in UGS thats different in GS:
+//   change slider info to GS
+//   change UGS info to copy GS
   
-  userGameSettings = Object.assign({}, gameSettings);
+//   userGameSettings = Object.assign({}, gameSettings);
   close();
 
 }
@@ -226,7 +232,7 @@ function applySettings() {
   gameSettings = Object.assign({}, userGameSettings);
 
   console.log(gameSettings);
-  console.log(userGameSettings);
+  console.log("User", userGameSettings);
 
   close();
 }

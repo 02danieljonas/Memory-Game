@@ -108,7 +108,7 @@ maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if u
         min="1"
         max="20"
         value="10"
-        id="length"
+        id="patternLengthSlider"
         oninput='updateSliderPlaceholder(this.id, "patternLength")'
       />
       <br />
@@ -140,21 +140,21 @@ maybe this could help to: https://www.w3schools.com/tags/tag_label.asp cite if u
         min="2"
         max="10"
         value="4"
-        id="button"
+        id="buttonAmountSlider"
         oninput='updateSliderPlaceholder(this.id, "buttonAmount")'
       />
       <br />
 
-      Speed of Sequence - <span id="placeholderSequence">3</span>
+<!--       Speed of Sequence - <span id="placeholderSequence">3</span>
       <input
         type="range"
         min="1"
         max="10"
         value="3"
-        id="sequence"
+        id="placeholderSequenceSlider"
         oninput='updateSliderPlaceholder(this.id, "placeholderSequence")'
       />
-      <br />
+      <br /> -->
       <button id="apply" onclick="applySettings()">Apply</button>
     </div>
   </body>
