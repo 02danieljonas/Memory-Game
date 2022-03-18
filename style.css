@@ -57,9 +57,9 @@ button {
   background: yellow;
 }
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 #settings {
   background: black;
@@ -74,14 +74,26 @@ button {
   color: black;
 }
 
+.clicked {
+  background: cyan;
+  color: cyan;
+}
+
+.clicked:hover {
+  background: cyan;
+  color: cyan;
+}
+
+
+
 #apply:hover {
   background: black;
   color: white;
 }
 
 #settingsContainer {
-  border: groove;
-  
+  border: outset;
+
   text-align: right;
   background: rgba(250, 0, 0, 0.85);
   padding: 10px;

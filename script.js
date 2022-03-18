@@ -192,6 +192,7 @@ function guess(btn) {
 function showSettingContainer() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
     document.getElementById("settingsContainer").classList.remove("hidden");
+    document.getElementById("settings").classList.add("clicked")
     document.getElementById("settings").innerText = "Cancel";
   } else {
     cancel();
@@ -207,6 +208,8 @@ function cancel() {
           gameSettings[property];
     }
   }
+  document.getElementById("settings").classList.remove("clicked")
+
   close();
 }
 
