@@ -22,11 +22,13 @@ button {
   bottom:10px;
   text-align: center;
   width: 100%;
-  transition:5s;
+  transition:display 5s;
 }
 
 #error:hover{
-  background:green;
+/*   background:blue; */
+  display: none;
+
 }
 
 

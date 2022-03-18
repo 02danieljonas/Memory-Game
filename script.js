@@ -254,6 +254,7 @@ function updateSliderPlaceholder(slider, placeholder) {
 }
 
 function error(info){
+  document.getElementById("error").classList.remove("hidden");
   document.getElementById("error").innerHTML = info;
   document.getElementById("error").classList.add("hidden");
 }
