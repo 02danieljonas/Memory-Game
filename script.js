@@ -45,6 +45,8 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
+    document.getElementById("settings").classList.add("hidden") //or make it so clicking settings only shows vol
+    
     strikes = 0;
     pattern = [];
     for (let i = 0; i < gameSettings["patternLength"]; i++) {
@@ -52,7 +54,7 @@ function startGame() {
     }
     console.log(pattern);
 
-    document.getElementById("placeholder").innerText = gameSettings["lives"];
+    document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -149,7 +151,7 @@ function playClueSequence() {
 }
 
 function loseGame() {
-  // document.getElementById("placeHolder").innerText = 0
+  document.getElementById("livesPlaceholder").innerText = 0
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
@@ -171,7 +173,7 @@ function guess(btn) {
       return;
     } else {
       console.log(gameSettings["lives"]);
-      document.getElementById("placeholder").innerText =
+      document.getElementById("livesPlaceholder").innerText =
         gameSettings["lives"] - strikes;
       playClueSequence();
       return;
@@ -190,12 +192,22 @@ function guess(btn) {
 }
 
 function showSettingContainer() {
-  if (document.getElementById("settingsContainer").classList == "hidden") {
-    document.getElementById("settingsContainer").classList.remove("hidden");
-    document.getElementById("settings").classList.add("clicked")
-    document.getElementById("settings").innerText = "Cancel";
-  } else {
-    cancel();
+  if (gamePlaying == false){
+    if (document.getElementById("settingsContainer").classList == "hidden") {
+      document.getElementById("settingsContainer").classList.remove("hidden");
+      document.getElementById("settings").innerText = "Cancel";
+    } else {
+      cancel();
+    }
+  }
+  else{
+    if (document.getElementById("settingsContainer").classList == "hidden") {
+      for (const property in userGameSettings) {
+        document.getElementById(property + "Slider").classList.add("hidden")
+      }
+      volume un hide
+    
+    showVolume only
   }
 }
 
@@ -208,7 +220,6 @@ function cancel() {
           gameSettings[property];
     }
   }
-  document.getElementById("settings").classList.remove("clicked")
 
   close();
 }

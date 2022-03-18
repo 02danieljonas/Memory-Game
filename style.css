@@ -74,18 +74,6 @@ button {
   color: black;
 }
 
-.clicked {
-  background: cyan;
-  color: cyan;
-}
-
-.clicked:hover {
-  background: cyan;
-  color: cyan;
-}
-
-
-
 #apply:hover {
   background: black;
   color: white;
