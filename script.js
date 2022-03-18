@@ -1,4 +1,4 @@
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, 
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp,
 
 var pattern = [];
 var clueInProgress = false;
@@ -21,7 +21,6 @@ var gameSettings = {
 
 var userGameSettings = Object.assign({}, gameSettings);
 
-
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 
@@ -42,7 +41,7 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
-var timePerClue = clueHoldTime+cluePauseTime+nextClueWaitTime;
+var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;
 
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
@@ -135,11 +134,10 @@ function playSingleClue(btn) {
     setTimeout(clearButton, clueHoldTime, btn);
   }
 }
-user can play when the currentdate >= startdate+cluelength*howmuchclues<--- all of this is ms
-
+//TODO: user can play when the currentdate >= startdate+cluelength*howmuchclues<--- all of this is ms
 
 function playClueSequence() {
-  var started =Math.round(Date.now());
+  var started = Math.round(Date.now());
 
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
@@ -169,11 +167,8 @@ function winGame() {
 }
 
 function guess(btn) {
-  
   console.log("User guessed: " + btn);
-  
-  
-  
+
   if (!gamePlaying) {
     return;
   }
@@ -211,6 +206,7 @@ function showSettingContainer() {
       cancel();
     }
   } else {
+    error("Please stop the game to change settings")
     //       if (document.getElementById("settingsContainer").classList == "hidden") {
     //         for (const property in userGameSettings) {
     //           document.getElementById(property + "Slider").classList.add("hidden");
@@ -254,4 +250,8 @@ function updateSliderPlaceholder(slider, placeholder) {
   var placeholderElem = document.getElementById(placeholder);
   userGameSettings[placeholder] = Number(sliderElem.value);
   placeholderElem.innerHTML = userGameSettings[placeholder];
+}
+
+function error(info){
+  
 }

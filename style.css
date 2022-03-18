@@ -152,3 +152,11 @@ button {
 #button9.lit {
   background: rgb(196, 174, 173);
 }
+
+#error{
+  position: absolute;
+  background: red;
+  color:white;
+  bottom:10px;
+error  
+}
