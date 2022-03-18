@@ -207,10 +207,9 @@ function showSettingContainer() {
     }
   } else {
     error("Please stop the game to change settings");
-    
+    console.log("Error")
+
     //error
-    
-    
   }
 }
 
@@ -244,7 +243,7 @@ function updateSliderPlaceholder(slider, placeholder) {
   placeholderElem.innerHTML = userGameSettings[placeholder];
 }
 
-function error(info){
+function error(info) {
   document.getElementById("error").classList.remove("hidden");
   document.getElementById("error").innerHTML = info;
   document.getElementById("error").classList.add("hidden");
