@@ -21,7 +21,6 @@ var gameSettings = {
 
 var userGameSettings = Object.assign({}, gameSettings);
 
-console.log(Date.now());
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 //TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -42,6 +41,8 @@ o.start(0);
 var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
+
+var timePerClue = clueHoldTime+cluePauseTime+nextClueWaitTime;
 
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
@@ -134,8 +135,12 @@ function playSingleClue(btn) {
     setTimeout(clearButton, clueHoldTime, btn);
   }
 }
+user can play when the currentdate >= startdate+cluelength*howmuchclues<--- all of this is ms
+
 
 function playClueSequence() {
+  var started =Math.round(Date.now());
+
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
@@ -164,7 +169,11 @@ function winGame() {
 }
 
 function guess(btn) {
+  
   console.log("User guessed: " + btn);
+  
+  
+  
   if (!gamePlaying) {
     return;
   }
