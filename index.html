@@ -150,9 +150,20 @@
         type="range"
         min="2"
         max="10"
-        value="3"
+        value="4"
         id="timePerButtonSlider"
         oninput='updateSliderPlaceholder(this.id, "timePerButton")'
+      />
+      <br />
+
+      Percent Time Lost Per Round - <span id="timeLost">20</span>%
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value="20"
+        id="timeLostSlider"
+        oninput='updateSliderPlaceholder(this.id, "timeLost")'
       />
       <br />
 

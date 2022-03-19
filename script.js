@@ -22,6 +22,8 @@ var gameSettings = {
   volume: 5,
   lives: 3,
   buttonAmount: 4,
+  timePerButton:4,
+  timeLost: 20,
   // buttonSize: 4,
 };
 
