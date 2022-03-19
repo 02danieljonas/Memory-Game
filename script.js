@@ -1,29 +1,32 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp,
 
-var pattern = [];
-var clueInProgress = false;
-var progress = 0;
-var gamePlaying = false;
-var tonePlaying = false;
-var guessCounter = 0;
-var validGuessTime;
+var pattern = [];//array contain the pattern for that round
+var clueInProgress = false;//is a clue playing right now
+var progress = 0; //Score of the player
+var gamePlaying = false;//Has a game started
+var tonePlaying = false;//is a tone playing?
+var guessCounter = 0;//
+var validGuessTime;//contains the time the player should guess
 
 //arrray.forEach(myFunction);
 
-
 // var userGuessTime;
-var strikes;
 
-var gameSettings = {
+var strikes;//how much times the player guessed wrong
+
+var gameSettings = {//the configuration object
   patternLength: 5,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
   volume: 5,
   lives: 3,
   buttonAmount: 4,
+  // buttonSize: 4,
 };
 
-var userGameSettings = Object.assign({}, gameSettings);
+var userGameSettings = Object.assign({}, gameSettings);//clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
+
+
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 // TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -31,12 +34,11 @@ var userGameSettings = Object.assign({}, gameSettings);
 // TODO: allow user to change game speed
 // TODO: make game get faster every time
 // TODO: allow user to decide how fast
-// TODO: ADD infinity to game length and lives 
+// TODO: ADD infinity to game length and lives
 // TODO: chang button size
+// TODO: maybe ad DO RE MI FA SOL LA SI
 
-
-
-function print(q) {
+function print(q) {//if i accidentally put print it wont run an error
   console.log(q);
 }
 
@@ -45,7 +47,7 @@ var context = new AudioContext();
 var o = context.createOscillator();
 var g = context.createGain();
 g.connect(context.destination);
-g.gain.setValueAtTime(0, context.currentTime);
+g.gain.setValueAtTime(0, context.currentTime);//magic
 o.connect(g);
 o.start(0);
 
@@ -53,13 +55,14 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
-var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;
+// var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;//delete
 
-function timer(clueLength) {
-  let howLong = clueHoldTime;
-  howLong += (clueLength + 1) * (cluePauseTime + nextClueWaitTime);
-  validGuessTime = Date.now() + howLong;
-  console.log(`Player should press after ${validGuessTime} ms`);
+
+function timer(clueLength) {//takes how much clue should be played
+  let howLong = nextClueWaitTime;//
+  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime);//for every clue add cPT and cHT to find out how long the clue plays for
+  validGuessTime = Date.now() + howLong;//gives the time the user should press
+  console.log(`Player should press after ${validGuessTime} ms`);//logs it
   console.log(Date.now());
 }
 
@@ -190,15 +193,14 @@ function guess(btn) {
 
   //i have the two need values I just need to read them and only let the user guess after valid
   //if not now >= VGT > return
-  
 
   if (!gamePlaying) {
     return;
   } else if (!(Date.now() > validGuessTime)) {
-    error(`Please wait ${validGuessTime-Date.now()}ms to guess`)
-    console.log(`Please wait ${validGuessTime-Date.now()}ms to guess`)
+    error(`Please wait ${validGuessTime - Date.now()}ms to guess`);
+    console.log(`Please wait ${validGuessTime - Date.now()}ms to guess`);
     return;
-  }  else if (!(pattern[guessCounter] == btn)) {
+  } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
     if (strikes >= gameSettings["lives"]) {
       loseGame();
