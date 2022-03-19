@@ -23,7 +23,15 @@ var gameSettings = {
 var userGameSettings = Object.assign({}, gameSettings);
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
-//TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
+// TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
+// TODO: fix error
+// TODO: allow user to change game speed
+// TODO: make game get faster every time
+// TODO: allow user to decide how fast
+// TODO: ADD infinity to game length and lives 
+// TODO: chang button size
+
+
 
 function print(q) {
   console.log(q);
@@ -44,17 +52,6 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;
 
-/* 
-this function should take in how much clues
-it starts of by auto adding nCWT 
-it mutiplies cL by (cPT+cHT) to find out the last moment of the sound
-if this last moment is reached user can play audio
-I might want to add a few ms after its done to catch any missing time
-*/
-/*
-something should take this functions value 
-and only let the play guess (they can still play sound) if the allowed time is passed
-*/
 function timer(clueLength) {
   let howLong = clueHoldTime;
   howLong += (clueLength + 1) * (cluePauseTime + nextClueWaitTime);
@@ -156,7 +153,6 @@ function playSingleClue(btn) {
     setTimeout(clearButton, clueHoldTime, btn);
   }
 }
-//TODO: user can play when the currentdate >= startdate+cluelength*howmuchclues<--- all of this is ms
 
 function playClueSequence() {
   var started = Math.round(Date.now());
@@ -170,11 +166,6 @@ function playClueSequence() {
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
-    // userGuessTime = delay;
-    // console.log("The user can play audio at " + userGuessTime);
-    //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
-    //can't fix now, good luck future me :)
-    //maybe I can take data from the volume timeline and figure out a way to talk to it
   }
 }
 
