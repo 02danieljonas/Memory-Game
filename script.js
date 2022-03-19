@@ -11,7 +11,7 @@ var guessCounter = 0;
 var strikes;
 
 var gameSettings = {
-  patternLength: 10,
+  patternLength: 5,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
   volume: 5,
@@ -73,6 +73,7 @@ function stopGame() {
 
 var freqMap = [];
 updateFreqMap(gameSettings["buttonAmount"]);
+
 function updateFreqMap(buttonAmount) {
   let temp = (500 - 260) / (buttonAmount - 1);
   for (let i = 0; i < buttonAmount; i++) {
@@ -99,10 +100,10 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
-  //console.log(tonePlaying)
+  console.log(tonePlaying)
   stopTone();
   if (!tonePlaying) {
-    // console.log("User Sound Played");
+    console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(
@@ -144,10 +145,11 @@ function playClueSequence() {
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
   for (let i = 0; i <= progress; i++) {
-    // console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
+    console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
+    
     // userGuessTime = delay;
     // console.log("The user can play audio at " + userGuessTime);
     //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
@@ -168,7 +170,7 @@ function winGame() {
 }
 
 function guess(btn) {
-  // console.log("User guessed: " + btn);
+  console.log("User guessed: " + btn);
 
   if (!gamePlaying) {
     return;
