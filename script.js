@@ -1,4 +1,4 @@
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp,
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, 
 
 var pattern = [];
 var clueInProgress = false;
@@ -43,6 +43,12 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;
 
+//this function should take in how much clues
+
+function timer(clueLength){
+  Date.now()
+}
+
 function startGame() {
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
@@ -78,7 +84,7 @@ function updateFreqMap(buttonAmount) {
   let temp = (500 - 260) / (buttonAmount - 1);
   for (let i = 0; i < buttonAmount; i++) {
     freqMap[i] = Math.round(260 + temp * i);
-    console.log(i)
+    console.log(i);
   }
   console.log(freqMap);
 }
@@ -100,7 +106,7 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
-  console.log(tonePlaying)
+  console.log(tonePlaying);
   stopTone();
   if (!tonePlaying) {
     console.log("User Sound Played");
@@ -149,7 +155,7 @@ function playClueSequence() {
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
-    
+
     // userGuessTime = delay;
     // console.log("The user can play audio at " + userGuessTime);
     //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
@@ -180,7 +186,6 @@ function guess(btn) {
       loseGame();
       return;
     } else {
-      // console.log(gameSettings["lives"]);
       document.getElementById("livesPlaceholder").innerText =
         gameSettings["lives"] - strikes;
       playClueSequence();
@@ -209,7 +214,6 @@ function showSettingContainer() {
   } else {
     error("Please stop the game to change settings");
     // console.log("Error");
-    //error
   }
 }
 
@@ -240,7 +244,6 @@ function updateButtons(buttonAmount) {
     // console.log("button", i, "is shown");
   }
   updateFreqMap(buttonAmount);
-
 }
 
 function applySettings() {
