@@ -15,21 +15,34 @@ button {
   border-radius: 10px;
 }
 
-#error {
+#errorMessage{
+  display: inline;
+
   position: fixed;
+  
   left: 0px;
   bottom: 10px;
+  
   background: red;
+  
   text-align: center;
   width: 100%;
-  transition: 5s;
   opacity: 100;
+  
+  transition: 5s;
 }
 
-#error.hidden {
-  display: inline;
+#error .hidden {
   opacity: 0;
+  transition: 5s;
 }
+
+
+/* #error.shown {
+  opacity: 100;
+  transition: 5s;
+
+} */
 
 #gameButtonArea button {
   width: 200px;

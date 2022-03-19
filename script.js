@@ -41,6 +41,7 @@ updateFreqMap(gameSettings["buttonAmount"]);
 // TODO: ADD infinity to game length and lives
 // TODO: chang button size
 // TODO: maybe ad DO RE MI FA SOL LA SI
+// TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
 
 function print(q) {
   //if i accidentally put print it wont run an error
@@ -59,8 +60,6 @@ o.start(0);
 var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
-
-// var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;//delete
 
 function timer(clueLength) {
   //takes how much clue should be played
@@ -96,6 +95,8 @@ function startGame() {
 }
 
 function stopGame() {
+  error("Stopping Game")
+
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
@@ -288,7 +289,12 @@ function updateSliderPlaceholder(slider, placeholder) {
 }
 
 function error(info) {
-  document.getElementById("error").classList.remove("hidden");
-  document.getElementById("error").innerHTML = info;
-  document.getElementById("error").classList.add("hidden");
+  document.getElementById("errorMessage").classList.remove("hidden");
+  // document.getElementById("error").classList.add("shown");
+
+  document.getElementById("errorMessage").innerHTML = info;
+  
+  document.getElementById("errorMessage").classList.add("eHid");
+  // document.getElementById("error").classList.remove("shown");
+
 }
