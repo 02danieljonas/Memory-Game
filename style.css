@@ -23,6 +23,7 @@ button {
   text-align: center;
   width: 100%;
   transition: 5s;
+  opacity: 100;
 }
 
 #error.hidden {

@@ -71,6 +71,7 @@ function timer(clueLength) {
 }
 
 function startGame() {
+  error("Starting Game")
   if (document.getElementById("settingsContainer").classList == "hidden") {
     //if settings is closed
     strikes = 0;
