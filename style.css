@@ -180,7 +180,7 @@ button {
   transition: 0s;
 }
 
-#errorMessage.hidden #errorMessage:hover{
+#errorMessage.hidden, #errorMessage:hover{
   opacity: 0;
   transition: 2s;
 }
