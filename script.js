@@ -44,13 +44,14 @@ updateFreqMap(gameSettings["buttonAmount"]);
 /* 
 TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
+TODO: user should not be able to input anything while the game is playing hint
 TODO: fix error
 TODO: allow user to change game speed
 TODO: make game get faster every time
 TODO: allow user to decide how fast
 TODO: ADD infinity to game length and lives
 TODO: chang button size
-TODO: maybe ad DO RE MI FA SOL LA SI
+TODO: maybe add DO RE MI FA SOL LA SI
 TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
 TODO: use cookies, have a popup that askes the user do they want cookies, the pop up should ask if they want cookies, how long to keep cookies,  should it keep a cookie of these options (if the user says know cookies) and a slider of how long options cookies stay
 TODO: implement pression number keys to also press buttons
