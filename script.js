@@ -43,10 +43,21 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;
 
-//this function should take in how much clues
+/* 
+this function should take in how much clues
+it starts of by auto adding nCWT 
+it mutiplies cL by (cPT+cHT) to find out the last moment of the sound
+if this last moment is reached user can play audio
+I might want to add a few ms after its done to catch any missing time
+
+*/
+
 
 function timer(clueLength){
-  Date.now()
+  let howLong = clueHoldTime+100;
+  howLong += ((clueLength+1)*(cluePauseTime+nextClueWaitTime))
+  console.log(`Player should press in ${howLong} ms`)
+  // console.log(`It is now ${Date.now()}`)
 }
 
 function startGame() {
@@ -146,6 +157,7 @@ function playSingleClue(btn) {
 
 function playClueSequence() {
   var started = Math.round(Date.now());
+  timer(progress);
 
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
@@ -155,7 +167,6 @@ function playClueSequence() {
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
-
     // userGuessTime = delay;
     // console.log("The user can play audio at " + userGuessTime);
     //probably can fix the issue by finding our what time the delays are over and only letting the user press when no delay is active
