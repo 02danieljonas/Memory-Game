@@ -52,7 +52,7 @@ function startGame() {
         Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
       );
     }
-    console.log(pattern);
+    console.log("Pattern is " + pattern);
 
     document.getElementById("livesPlaceholder").innerText =
       gameSettings["lives"];
@@ -72,11 +72,12 @@ function stopGame() {
 }
 
 var freqMap = [];
-populatFreqMap();
-function populatFreqMap() {
-  let temp = (500 - 260) / (gameSettings["buttonAmount"] - 1);
-  for (let i = 0; i < gameSettings["buttonAmount"]; i++) {
+updateFreqMap(gameSettings["buttonAmount"]);
+function updateFreqMap(buttonAmount) {
+  let temp = (500 - 260) / (buttonAmount - 1);
+  for (let i = 0; i < buttonAmount; i++) {
     freqMap[i] = Math.round(260 + temp * i);
+    console.log(i)
   }
   console.log(freqMap);
 }
@@ -101,7 +102,7 @@ function startTone(btn) {
   //console.log(tonePlaying)
   stopTone();
   if (!tonePlaying) {
-    console.log("User Sound Played");
+    // console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(
@@ -167,7 +168,7 @@ function winGame() {
 }
 
 function guess(btn) {
-  console.log("User guessed: " + btn);
+  // console.log("User guessed: " + btn);
 
   if (!gamePlaying) {
     return;
@@ -177,7 +178,7 @@ function guess(btn) {
       loseGame();
       return;
     } else {
-      console.log(gameSettings["lives"]);
+      // console.log(gameSettings["lives"]);
       document.getElementById("livesPlaceholder").innerText =
         gameSettings["lives"] - strikes;
       playClueSequence();
@@ -205,7 +206,7 @@ function showSettingContainer() {
     }
   } else {
     error("Please stop the game to change settings");
-    console.log("Error");
+    // console.log("Error");
     //error
   }
 }
@@ -230,12 +231,14 @@ function close() {
 function updateButtons(buttonAmount) {
   for (let i = buttonAmount; i < 10; i++) {
     document.getElementById("button" + i).classList.add("hidden");
-    console.log("button" + i, "is hidden");
+    // console.log("button" + i, "is hidden");
   }
   for (let i = 0; i < buttonAmount; i++) {
     document.getElementById("button" + i).classList.remove("hidden");
-    console.log("button", i, "is shown");
+    // console.log("button", i, "is shown");
   }
+  updateFreqMap(buttonAmount);
+
 }
 
 function applySettings() {
@@ -243,7 +246,6 @@ function applySettings() {
     console.log("Change in buttons");
     updateButtons(userGameSettings["buttonAmount"]);
   }
-
   gameSettings = Object.assign({}, userGameSettings);
   close();
 }

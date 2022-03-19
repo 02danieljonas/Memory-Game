@@ -16,10 +16,10 @@ button {
 }
 
 #error {
-  position: absolute;
+  position: fixed;
   left: 0px;
-  background: red;
   bottom: 10px;
+  background: red;
   text-align: center;
   width: 100%;
   transition: 5s;
