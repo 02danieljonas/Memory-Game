@@ -1,4 +1,4 @@
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, 
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp,
 
 var pattern = [];
 var clueInProgress = false;
@@ -55,12 +55,12 @@ I might want to add a few ms after its done to catch any missing time
 something should take this functions value 
 and only let the play guess (they can still play sound) if the allowed time is passed
 */
-function timer(clueLength){
+function timer(clueLength) {
   let howLong = clueHoldTime;
-  howLong += ((clueLength+1)*(cluePauseTime+nextClueWaitTime))
-  validGuessTime =Date.now()+howLong
-  console.log(`Player should press after ${validGuessTime} ms`)
-  console.log(Date.now())
+  howLong += (clueLength + 1) * (cluePauseTime + nextClueWaitTime);
+  validGuessTime = Date.now() + howLong;
+  console.log(`Player should press after ${validGuessTime} ms`);
+  console.log(Date.now());
 }
 
 function startGame() {
@@ -191,8 +191,12 @@ function winGame() {
 
 function guess(btn) {
   console.log("User guessed: " + btn);
+  console.log(`Time1 is ${Date.now()/1000}\nTime is ${validGuessTime/1000}`)//lol make it readable by dividing to get minues, seconds and ms
 
   if (!gamePlaying) {
+    return;
+  } else if (!(Date.now() < validGuessTime)) {
+    console.log(`Time is ${Date.now() }\n Valid is ${validGuessTime}`)
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
