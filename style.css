@@ -183,7 +183,6 @@ button {
 
 #errorMessage:hover, .show{
   opacity: 0;
-
   background: red; 
   transition: 0s;
 }

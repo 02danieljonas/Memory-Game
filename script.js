@@ -300,20 +300,7 @@ function updateSliderPlaceholder(slider, placeholder) {
 
 function showErrorMessage(info) {
   // document.getElementById("errorMessage").style.setProperty('background', 'initial')
-
-  // console.log("1. should be hidden ", document.getElementById("errorMessage").classList)
-  // document.getElementById("errorMessage").classList.remove("hidden");
-  // console.log("2. should NOT be hidden ", document.getElementById("errorMessage").classList)
-  
-
   document.getElementById("errorMessage").classList.add("show");
-
-  
   document.getElementById("errorMessage").innerHTML = info;
-                      
-  console.log("message: ", document.getElementById("errorMessage").innerHTML)
-  
   document.getElementById("errorMessage").classList.remove("show");
-  // console.log("3. should be hidden ", document.getElementById("errorMessage").classList)
-
 }
