@@ -15,30 +15,11 @@ button {
   border-radius: 10px;
 }
 
-#errorMessage{
-  display: inline;
-
-  position: fixed;
-  
-  left: 0px;
-  bottom: 10px;
-  
-  background: red;
-  
-  text-align: center;
-  width: 100%;
-  opacity: 100;
-  
-  transition: 5s;
-}
-
-#error .hidden {
-  opacity: 0;
-  transition: 5s;
-}
 
 
-/* #error.shown {
+
+/* 
+#error.shown {
   opacity: 100;
   transition: 5s;
 
@@ -180,4 +161,26 @@ button {
 #button9:active,
 #button9.lit {
   background: rgb(196, 174, 173);
+}
+
+#errorMessage{
+  display: inline;
+
+  position: fixed;
+  
+  left: 0px;
+  bottom: 10px;
+  
+  background: red;
+  
+  text-align: center;
+  width: 100%;
+  opacity: 100;
+  
+  transition: 0s;
+}
+
+#errorMessage.hidden #errorMessage:hover{
+  opacity: 0;
+  transition: 2s;
 }

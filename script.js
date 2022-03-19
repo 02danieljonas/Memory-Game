@@ -290,11 +290,9 @@ function updateSliderPlaceholder(slider, placeholder) {
 
 function error(info) {
   document.getElementById("errorMessage").classList.remove("hidden");
-  // document.getElementById("error").classList.add("shown");
 
   document.getElementById("errorMessage").innerHTML = info;
   
-  document.getElementById("errorMessage").classList.add("eHid");
-  // document.getElementById("error").classList.remove("shown");
+  document.getElementById("errorMessage").classList.add("ehidden");
 
 }
