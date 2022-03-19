@@ -6,6 +6,7 @@ var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var guessCounter = 0;
+var validGuessTime;
 
 // var userGuessTime;
 var strikes;
@@ -49,15 +50,17 @@ it starts of by auto adding nCWT
 it mutiplies cL by (cPT+cHT) to find out the last moment of the sound
 if this last moment is reached user can play audio
 I might want to add a few ms after its done to catch any missing time
-
 */
-
-
+/*
+something should take this functions value 
+and only let the play guess (they can still play sound) if the allowed time is passed
+*/
 function timer(clueLength){
-  let howLong = clueHoldTime+100;
+  let howLong = clueHoldTime;
   howLong += ((clueLength+1)*(cluePauseTime+nextClueWaitTime))
-  console.log(`Player should press in ${howLong} ms`)
-  // console.log(`It is now ${Date.now()}`)
+  validGuessTime =Date.now()+howLong
+  console.log(`Player should press after ${validGuessTime} ms`)
+  console.log(Date.now())
 }
 
 function startGame() {
