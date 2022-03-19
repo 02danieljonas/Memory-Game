@@ -1,20 +1,21 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp,
 
-var pattern = [];//array contain the pattern for that round
-var clueInProgress = false;//is a clue playing right now
+var pattern = []; //array contain the pattern for that round
+var clueInProgress = false; //is a clue playing right now
 var progress = 0; //Score of the player
-var gamePlaying = false;//Has a game started
-var tonePlaying = false;//is a tone playing?
-var guessCounter = 0;//
-var validGuessTime;//contains the time the player should guess
+var gamePlaying = false; //Has a game started
+var tonePlaying = false; //is a tone playing?
+var guessCounter = 0; //
+var validGuessTime; //contains the time the player should guess
 
 //arrray.forEach(myFunction);
 
 // var userGuessTime;
 
-var strikes;//how much times the player guessed wrong
+var strikes; //how much times the player guessed wrong
 
-var gameSettings = {//the configuration object
+var gameSettings = {
+  //the configuration object
   patternLength: 5,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
@@ -24,9 +25,10 @@ var gameSettings = {//the configuration object
   // buttonSize: 4,
 };
 
-var userGameSettings = Object.assign({}, gameSettings);//clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
+var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
-
+var freqMap;
+updateFreqMap(gameSettings["buttonAmount"]);
 
 // TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 // TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -38,7 +40,8 @@ var userGameSettings = Object.assign({}, gameSettings);//clones gameSettings, Us
 // TODO: chang button size
 // TODO: maybe ad DO RE MI FA SOL LA SI
 
-function print(q) {//if i accidentally put print it wont run an error
+function print(q) {
+  //if i accidentally put print it wont run an error
   console.log(q);
 }
 
@@ -47,7 +50,7 @@ var context = new AudioContext();
 var o = context.createOscillator();
 var g = context.createGain();
 g.connect(context.destination);
-g.gain.setValueAtTime(0, context.currentTime);//magic
+g.gain.setValueAtTime(0, context.currentTime); //magic
 o.connect(g);
 o.start(0);
 
@@ -57,23 +60,21 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
 // var timePerClue = clueHoldTime + cluePauseTime + nextClueWaitTime;//delete
 
-
-function timer(clueLength) {//takes how much clue should be played
-  let howLong = nextClueWaitTime;//
-  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime);//for every clue add cPT and cHT to find out how long the clue plays for
-  validGuessTime = Date.now() + howLong;//gives the time the user should press
-  console.log(`Player should press after ${validGuessTime} ms`);//logs it
+function timer(clueLength) {
+  //takes how much clue should be played
+  let howLong = nextClueWaitTime; //
+  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime); //for every clue add cPT and cHT to find out how long the clue plays for
+  validGuessTime = Date.now() + howLong; //gives the time the user should press
+  console.log(`Player should press after ${validGuessTime} ms`); //logs it
 }
 
 function startGame() {
-  if (document.getElementById("settingsContainer").classList == "hidden") {//if settings is closed
-    console.log("Game set", gameSettings["buttonAmount"])
-    updateFreqMap(gameSettings["buttonAmount"]);
-
-    console.log("Map is ",freqMap);
+  if (document.getElementById("settingsContainer").classList == "hidden") {
+    //if settings is closed
     strikes = 0;
     pattern = [];
-    for (let i = 0; i < gameSettings["patternLength"]; i++) {//takes game length and makes a random pattern
+    for (let i = 0; i < gameSettings["patternLength"]; i++) {
+      //takes game length and makes a random pattern
       pattern.push(
         Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
       );
@@ -81,7 +82,7 @@ function startGame() {
     // console.log("Pattern is " + pattern);//logs the pattern
 
     document.getElementById("livesPlaceholder").innerText =
-      gameSettings["lives"];//updates the lives on the html
+      gameSettings["lives"]; //updates the lives on the html
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -95,18 +96,6 @@ function stopGame() {
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
-}
-
-var freqMap = [];
-updateFreqMap(gameSettings["buttonAmount"]);
-
-function updateFreqMap(buttonAmount) {//between 260 and 500 and 
-  let temp = (500 - 260) / (buttonAmount - 1);
-  for (let i = 0; i < buttonAmount; i++) {
-    freqMap[i] = Math.round(260 + temp * i);
-    // console.log(i);
-  }
-  // console.log("Map is ",freqMap);
 }
 
 function playTone(btn, len) {
@@ -255,6 +244,16 @@ function cancel() {
 function close() {
   document.getElementById("settingsContainer").classList.add("hidden");
   document.getElementById("settings").innerText = "Settings";
+}
+
+function updateFreqMap(buttonAmount) {
+  //freqMap is populated with values between 260 and 500
+  freqMap = [];
+  let temp = (500 - 260) / (buttonAmount - 1);
+  for (let i = 0; i < buttonAmount; i++) {
+    freqMap[i] = Math.round(260 + temp * i);
+  }
+  console.log("Map is ", freqMap);
 }
 
 function updateButtons(buttonAmount) {
