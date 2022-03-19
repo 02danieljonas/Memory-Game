@@ -5,7 +5,8 @@ What I have had issues with:
 the error message not being able to switch from transparent and not
 player cheating and playing sound at the same time as simon is saying
 the range sliders and extracting values
-
+CSS - dont remember what specifically but i do remember coming into problems with it
+fixing the glitches that came with it
 
 
 */
@@ -298,12 +299,16 @@ function updateSliderPlaceholder(slider, placeholder) {
 }
 
 function showErrorMessage(info) {
+  console.log("1. should be hidden ", document.getElementById("errorMessage").classList)
   document.getElementById("errorMessage").classList.remove("hidden");
+  console.log("2. should NOT be hidden ", document.getElementById("errorMessage").classList)
 
   document.getElementById("errorMessage").innerHTML = info;
                       
-  console.log("Why is this not working")
+  console.log("message: ", document.getElementById("errorMessage").innerHTML)
   
   document.getElementById("errorMessage").classList.add("hidden");
+  console.log("3. should be hidden ", document.getElementById("errorMessage").classList)
+  style.setProperty('color', 'initial')
 
 }
