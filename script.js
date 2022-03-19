@@ -121,7 +121,7 @@ function playTone(btn, len) {
 
 function startTone(btn) {
   console.log(tonePlaying);
-  stopTone();
+  // stopTone();
   if (!tonePlaying) {
     console.log("User Sound Played");
     context.resume();
@@ -191,14 +191,20 @@ function winGame() {
 
 function guess(btn) {
   console.log("User guessed: " + btn);
-  console.log(`Time1 is ${Date.now()/1000}\nTime is ${validGuessTime/1000}`)//lol make it readable by dividing to get minues, seconds and ms
+  console.log(`Time is ${Date.now()}\nTime is ${validGuessTime}`);
+  console.log(`Time is ${Date.now() / 1000}\nTime is ${validGuessTime / 1000}`);
+
+  //i have the two need values I just need to read them and only let the user guess after valid
+  //if not now >= VGT > return
+  
 
   if (!gamePlaying) {
     return;
-  } else if (!(Date.now() < validGuessTime)) {
-    console.log(`Time is ${Date.now() }\n Valid is ${validGuessTime}`)
+  } else if (!(Date.now() > validGuessTime)) {
+    error(`Please wait ${validGuessTime-Date.now()}ms to guess`)
+    console.log(`Please wait ${validGuessTime-Date.now()}ms to guess`)
     return;
-  } else if (!(pattern[guessCounter] == btn)) {
+  }  else if (!(pattern[guessCounter] == btn)) {
     strikes++;
     if (strikes >= gameSettings["lives"]) {
       loseGame();
