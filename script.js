@@ -8,6 +8,9 @@ var tonePlaying = false;
 var guessCounter = 0;
 var validGuessTime;
 
+//arrray.forEach(myFunction);
+
+
 // var userGuessTime;
 var strikes;
 
