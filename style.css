@@ -183,6 +183,20 @@ button {
 
 #errorMessage.hidden, #errorMessage:hover{
 /*   opacity: 0; */
-  background: blue;
+/*   background: blue;
+  transition: 2s; */
+  display: inline;
+
+  position: fixed;
+  
+  left: 0px;
+  bottom: 10px;
+    
+  text-align: center;
+  width: 100%;
+  opacity: 100;
+  
   transition: 2s;
+  
+  background: blue;
 }
