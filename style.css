@@ -163,28 +163,8 @@ button {
   background: rgb(196, 174, 173);
 }
 
+
 #errorMessage{
-  display: inline;
-
-  position: fixed;
-  
-  left: 0px;
-  bottom: 10px;
-    
-  text-align: center;
-  width: 100%;
-  opacity: 100;
-  
-  transition: 0s;
-  
-  background: red;
-
-}
-
-#errorMessage.hidden, #errorMessage:hover{
-/*   opacity: 0; */
-/*   background: blue;
-  transition: 2s; */
   display: inline;
 
   position: fixed;
@@ -198,5 +178,12 @@ button {
   
   transition: 2s;
   
-  background: blue;
+  background: blue
+}
+
+#errorMessage:hover, .show{
+  opacity: 0;
+
+  background: red; 
+  transition: 0s;
 }
