@@ -54,7 +54,8 @@ TODO: maybe ad DO RE MI FA SOL LA SI
 TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
 TODO: use cookies, have a popup that askes the user do they want cookies, the pop up should ask if they want cookies, how long to keep cookies,  should it keep a cookie of these options (if the user says know cookies) and a slider of how long options cookies stay
 TODO: implement pression number keys to also press buttons
-TODO: connect to a data base to read 
+TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
+TODO: add preset difficulties
 
 
 */
