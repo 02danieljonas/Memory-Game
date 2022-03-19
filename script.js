@@ -63,22 +63,25 @@ function timer(clueLength) {//takes how much clue should be played
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime);//for every clue add cPT and cHT to find out how long the clue plays for
   validGuessTime = Date.now() + howLong;//gives the time the user should press
   console.log(`Player should press after ${validGuessTime} ms`);//logs it
-  console.log(Date.now());
 }
 
 function startGame() {
-  if (document.getElementById("settingsContainer").classList == "hidden") {
+  if (document.getElementById("settingsContainer").classList == "hidden") {//if settings is closed
+    console.log("Game set", gameSettings["buttonAmount"])
+    updateFreqMap(gameSettings["buttonAmount"]);
+
+    console.log("Map is ",freqMap);
     strikes = 0;
     pattern = [];
-    for (let i = 0; i < gameSettings["patternLength"]; i++) {
+    for (let i = 0; i < gameSettings["patternLength"]; i++) {//takes game length and makes a random pattern
       pattern.push(
         Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
       );
     }
-    console.log("Pattern is " + pattern);
+    // console.log("Pattern is " + pattern);//logs the pattern
 
     document.getElementById("livesPlaceholder").innerText =
-      gameSettings["lives"];
+      gameSettings["lives"];//updates the lives on the html
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -97,13 +100,13 @@ function stopGame() {
 var freqMap = [];
 updateFreqMap(gameSettings["buttonAmount"]);
 
-function updateFreqMap(buttonAmount) {
+function updateFreqMap(buttonAmount) {//between 260 and 500 and 
   let temp = (500 - 260) / (buttonAmount - 1);
   for (let i = 0; i < buttonAmount; i++) {
     freqMap[i] = Math.round(260 + temp * i);
-    console.log(i);
+    // console.log(i);
   }
-  console.log(freqMap);
+  // console.log("Map is ",freqMap);
 }
 
 function playTone(btn, len) {
@@ -123,7 +126,7 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
-  console.log(tonePlaying);
+  // console.log(tonePlaying);
   // stopTone();
   if (!tonePlaying) {
     console.log("User Sound Played");
@@ -188,8 +191,8 @@ function winGame() {
 
 function guess(btn) {
   console.log("User guessed: " + btn);
-  console.log(`Time is ${Date.now()}\nTime is ${validGuessTime}`);
-  console.log(`Time is ${Date.now() / 1000}\nTime is ${validGuessTime / 1000}`);
+  // console.log(`Time is ${Date.now()}\nTime is ${validGuessTime}`);
+  // console.log(`Time is ${Date.now() / 1000}\nTime is ${validGuessTime / 1000}`);
 
   //i have the two need values I just need to read them and only let the user guess after valid
   //if not now >= VGT > return
