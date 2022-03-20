@@ -37,14 +37,22 @@ var gameSettings = {
 
 //goes to cookies and changes the above values to what ever was in cookies
 
-saveCookie();
+// saveCookie();
 
 loadCookie()
 console.log(gameSettings);
 
 function loadCookie() {
-  let x = document.cookie;
-  console.log(x);
+  let x = decodeURIComponent(document.cookie);;
+  if (x==""){
+    return
+  }
+  console.log(x)
+  for (var key in gameSettings) {
+    //looks for key in cookies and replaces 
+    console.log(x[key])
+  }
+
 
 
   //looks for my cookies
