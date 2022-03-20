@@ -69,6 +69,12 @@ function print(q) {
   console.log(q);
 }
 
+function dict2cookie(object){
+  var json = JSON.stringify(object)
+  
+}
+
+
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 var o = context.createOscillator();
