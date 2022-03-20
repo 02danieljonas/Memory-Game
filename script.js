@@ -17,10 +17,6 @@ var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var validGuessTime; //contains the time the player should guess
 
-//arrray.forEach(myFunction);
-
-// var userGuessTime;
-
 var strikes; //how much times the player guessed wrong
 
 var gameSettings = {
@@ -36,39 +32,14 @@ var gameSettings = {
 };
 
 //goes to cookies and changes the above values to what ever was in cookies
+// saveCookie();
 
-saveCookie();
-
-loadCookie()
-console.log(gameSettings);
-
-function loadCookie() {
-  let x = decodeURIComponent(document.cookie);;
-  if (x==""){
-    return
-  }
-  for (let i = 0;i<5;i++){
-    
-  }
-  for (var key in gameSettings) {
-    let index = x.indexOf(key)
-    let value = parseInt(x.slice(index+key.length+1))
-    console.log(`${key} is ${value}`)
-  }//cookies are loaded just save them into
-}
-
-function saveCookie() {
-  for (var key in gameSettings) {
-    var value = gameSettings[key];
-    document.cookie = key + "=" + value +";"+ ";path=/";
-  }
-}
+loadCookie();
 
 
 
 
-
-
+// console.log(gameSettings);
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
@@ -98,6 +69,7 @@ TODO: use cookies, have a popup that askes the user do they want cookies, the po
 TODO: make it known to the user when they can guess
 TODO: change code to use setTimeout setInterval
 */
+
 
 function print(q) {
   //if i accidentally put print it wont run an error
@@ -337,10 +309,8 @@ function applySettings() {
     updateButtons(userGameSettings["buttonAmount"]);
   }
   gameSettings = Object.assign({}, userGameSettings);
-
   close();
-  document.cookie =
-    "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+  saveCookie() 
 }
 
 function updateSliderPlaceholder(slider, placeholder) {
@@ -355,4 +325,28 @@ function showErrorMessage(info) {
   document.getElementById("errorMessage").classList.add("show");
   document.getElementById("errorMessage").innerHTML = info;
   document.getElementById("errorMessage").classList.remove("show");
+}
+
+function loadCookie(load = true) {
+  console.log(gameSettings);
+  let x = decodeURIComponent(document.cookie);
+  if (x == "") {
+    return;
+  }
+
+  for (var key in gameSettings) {
+    let index = x.indexOf(key);
+    let value = parseInt(x.slice(index + key.length + 1));
+    if (load) {
+      gameSettings[key] = value+1;
+    }
+  }
+  console.log(gameSettings);
+}
+
+function saveCookie() {
+  for (var key in gameSettings) {
+    var value = gameSettings[key];
+    document.cookie = key + "=" + value + ";" + ";path=/";
+  }
 }
