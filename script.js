@@ -69,7 +69,13 @@ function print(q) {
   console.log(q);
 }
 
-function dict2cookie(object){
+function loadCookie(){
+  //looks for my cookies
+  //if cookies load
+}
+
+function saveCookie(object){
+  //loops through the object and saves it to the cookie
   var json = JSON.stringify(object)
   
 }
@@ -308,6 +314,7 @@ function applySettings() {
     updateButtons(userGameSettings["buttonAmount"]);
   }
   gameSettings = Object.assign({}, userGameSettings);
+  
   close();
   document.cookie="username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 
