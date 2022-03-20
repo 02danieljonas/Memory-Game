@@ -36,9 +36,6 @@ var gameSettings = {
 
 loadCookie();
 
-
-
-
 // console.log(gameSettings);
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -69,7 +66,6 @@ TODO: use cookies, have a popup that askes the user do they want cookies, the po
 TODO: make it known to the user when they can guess
 TODO: change code to use setTimeout setInterval
 */
-
 
 function print(q) {
   //if i accidentally put print it wont run an error
@@ -310,7 +306,11 @@ function applySettings() {
   }
   gameSettings = Object.assign({}, userGameSettings);
   close();
-  saveCookie() 
+}
+
+function saveSettings() {
+  applySettings();
+  saveCookie();
 }
 
 function updateSliderPlaceholder(slider, placeholder) {
@@ -338,7 +338,7 @@ function loadCookie(load = true) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
     if (load) {
-      gameSettings[key] = value+1;
+      gameSettings[key] = value + 1;
     }
   }
   console.log(gameSettings);
@@ -349,4 +349,13 @@ function saveCookie() {
     var value = gameSettings[key];
     document.cookie = key + "=" + value + ";" + ";path=/";
   }
+}
+
+function clearCookies() {
+  for (var key in gameSettings) {
+    var value = gameSettings[key];
+    document.cookie =
+      key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
+  }
+  console.log(document.cookie);
 }
