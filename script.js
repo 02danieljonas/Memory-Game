@@ -28,7 +28,6 @@ var gameSettings = {
   timePerButton: 4,
   timeDecay: 0,
 };
-var TODO = "verify-cookie, or use try except, it best to verify the cookie is really mine and check things like length to make sure it's a minumum size"
 
 //goes to cookies and changes the above values to what ever was in cookies
 // saveCookie();
@@ -93,7 +92,7 @@ function timer(clueLength) {
   }, howLong);
 
   validGuessTime = Date.now() + howLong; //gives the time the user should press
-  console.log(`Player should press after ${validGuessTime} ms`); //logs it
+  console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
 
 function startGame() {
@@ -111,7 +110,7 @@ function startGame() {
         Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
       );
     }
-    console.log("Pattern is " + pattern); //logs the pattern
+    // console.log("Pattern is " + pattern); //logs the pattern
 
     document.getElementById("livesPlaceholder").innerText =
       gameSettings["lives"]; //updates the lives on the html
@@ -147,10 +146,10 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
-  console.log(tonePlaying);
+  // console.log(tonePlaying);
   // stopTone();
   if (!tonePlaying) {
-    console.log("User Sound Played");
+    // console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(
@@ -191,7 +190,7 @@ function playClueSequence() {
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
   for (let i = 0; i <= progress; i++) {
-    console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
+    // console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
@@ -210,12 +209,16 @@ function winGame() {
 }
 
 function guess(btn) {
-  console.log("User guessed: " + btn);
+  // console.log("User guessed: " + btn);
   if (!gamePlaying) {
     return;
   } else if (!(Date.now() > validGuessTime)) {
-    showErrorMessage(`Please wait ${validGuessTime - Date.now()}ms to guess`);
-    console.log(`Please wait ${validGuessTime - Date.now()}ms to guess`);
+    showErrorMessage(
+      `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
+    );
+    console.log(
+      `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
+    );
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
@@ -234,7 +237,7 @@ function guess(btn) {
   } else if (!(progress == pattern.length - 1)) {
     progress++;
     if (cluePauseTime < 150) {
-      console.log(cluePauseTime);
+      // console.log(cluePauseTime);
       cluePauseTime *= 0.8;
       clueHoldTime *= 0.8;
     }
@@ -283,7 +286,7 @@ function updateFreqMap(buttonAmount) {
   for (let i = 0; i < buttonAmount; i++) {
     freqMap[i] = Math.round(260 + temp * i);
   }
-  console.log("Map is ", freqMap);
+  // console.log("Frequency Map is ", freqMap);
 }
 
 function updateButtons(buttonAmount) {
@@ -300,7 +303,7 @@ function updateButtons(buttonAmount) {
 
 function applySettings() {
   if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]) {
-    console.log("Change in buttons");
+    // console.log("Change in button amount");
     updateButtons(userGameSettings["buttonAmount"]);
   }
   gameSettings = Object.assign({}, userGameSettings);
@@ -327,9 +330,9 @@ function showErrorMessage(info) {
 }
 
 function loadCookie(load = true) {
-  console.log(gameSettings);
+  // console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
-  if (x == "" || x==0) {
+  if (x == "" || x == 0) {
     return;
   }
 
@@ -337,17 +340,22 @@ function loadCookie(load = true) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
     if (load) {
-      gameSettings[key] = value + 1;
+      gameSettings[key] = value;
     }
   }
   console.log(gameSettings);
 }
 
+var TODO =
+  "verify-cookie, or use try except, it best to verify the cookie is really mine and check things like length to make sure it's a minumum size";
+
 function saveCookie() {
   for (let key in gameSettings) {
     let value = gameSettings[key];
+    console.log(`Saving ${key} as ${value}`);
     document.cookie = key + "=" + value + ";" + ";path=/";
   }
+  console.log(document.cookie);
 }
 
 function clearCookies() {
