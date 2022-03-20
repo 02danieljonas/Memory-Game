@@ -85,7 +85,11 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 function timer(clueLength) {
   //if I had more time I would use setTimeout but I want to work on other features
   let howLong = nextClueWaitTime; //
-  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime); //for every clue add cPT and cHT to find out how long the clue plays for
+  howLong += ((clueLength + 1) * (cluePauseTime + clueHoldTime)-100); //for every clue add cPT and cHT to find out how long the clue plays for
+  setTimeout(function () {
+    console.log("Play now");
+  }, howLong);
+
   validGuessTime = Date.now() + howLong; //gives the time the user should press
   console.log(`Player should press after ${validGuessTime} ms`); //logs it
 }
@@ -299,6 +303,8 @@ function applySettings() {
   }
   gameSettings = Object.assign({}, userGameSettings);
   close();
+  document.cookie="username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+
 }
 
 function updateSliderPlaceholder(slider, placeholder) {
