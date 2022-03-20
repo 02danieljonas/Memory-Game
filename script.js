@@ -47,6 +47,9 @@ function loadCookie() {
   if (x==""){
     return
   }
+  for (let i = 0;i<5;i++){
+    
+  }
   console.log(x)
   for (var key in gameSettings) {
     //looks for key in cookies and replaces 
