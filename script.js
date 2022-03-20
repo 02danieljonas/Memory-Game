@@ -82,8 +82,7 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
-function timer(clueLength) {
-  //takes how much clue should be played
+function timer(clueLength) {//if I had more time I would use setTime
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime); //for every clue add cPT and cHT to find out how long the clue plays for
   validGuessTime = Date.now() + howLong; //gives the time the user should press
@@ -105,7 +104,7 @@ function startGame() {
         Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
       );
     }
-    // console.log("Pattern is " + pattern);//logs the pattern
+    console.log("Pattern is " + pattern);//logs the pattern
 
     document.getElementById("livesPlaceholder").innerText =
       gameSettings["lives"]; //updates the lives on the html
@@ -128,8 +127,6 @@ function stopGame() {
 
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
-  //console.log(context.currentTime)
-
   g.gain.setTargetAtTime(
     gameSettings["volume"] / 10,
     context.currentTime + 0.05,
@@ -143,7 +140,7 @@ function playTone(btn, len) {
 }
 
 function startTone(btn) {
-  // console.log(tonePlaying);
+  console.log(tonePlaying);
   // stopTone();
   if (!tonePlaying) {
     console.log("User Sound Played");
@@ -183,13 +180,6 @@ function playSingleClue(btn) {
 function playClueSequence() {
   var started = Math.round(Date.now());
   timer(progress);
-  
-  
-  document.getElementByClass("gameButtonArea").style.setProperty('background', 'white')
-  // setTimeout(playSingleClue, delay, when player can play);
-
-
-
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
