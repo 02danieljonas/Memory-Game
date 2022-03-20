@@ -32,7 +32,7 @@ var gameSettings = {
   lives: 3,
   buttonAmount: 4,
   timePerButton: 4,
-  timeDecay: 20,
+  timeDecay: 10,
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -203,12 +203,6 @@ function winGame() {
 
 function guess(btn) {
   console.log("User guessed: " + btn);
-  // console.log(`Time is ${Date.now()}\nTime is ${validGuessTime}`);
-  // console.log(`Time is ${Date.now() / 1000}\nTime is ${validGuessTime / 1000}`);
-
-  //i have the two need values I just need to read them and only let the user guess after valid
-  //if not now >= VGT > return
-
   if (!gamePlaying) {
     return;
   } else if (!(Date.now() > validGuessTime)) {
@@ -231,10 +225,11 @@ function guess(btn) {
     return;
   } else if (!(progress == pattern.length - 1)) {
     progress++;
-    cluePauseTime*=
-    clueHoldTime
-    make-clue-go-faster
-    gameSettings["timeDecay"]
+    // if (cluePauseTime<100){
+    console.log(cluePauseTime)
+    cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
+    clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
+    // }
     playClueSequence();
     return;
   } else {
