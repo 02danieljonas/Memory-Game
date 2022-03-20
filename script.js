@@ -334,7 +334,7 @@ function loadCookie(load = true) {
     return;
   }
 
-  for (var key in gameSettings) {
+  for (let key in gameSettings) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
     if (load) {
@@ -345,15 +345,15 @@ function loadCookie(load = true) {
 }
 
 function saveCookie() {
-  for (var key in gameSettings) {
-    var value = gameSettings[key];
+  for (let key in gameSettings) {
+    let value = gameSettings[key];
     document.cookie = key + "=" + value + ";" + ";path=/";
   }
 }
 
 function clearCookies() {
-  for (var key in gameSettings) {
-    var value = gameSettings[key];
+  for (let key in gameSettings) {
+    let value = gameSettings[key];
     document.cookie =
       key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
