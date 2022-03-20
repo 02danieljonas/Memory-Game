@@ -82,7 +82,8 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
-function timer(clueLength) {//if I had more time I would use setTime
+function timer(clueLength) {
+  //if I had more time I would use setTimeout but I want to work on other features
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime); //for every clue add cPT and cHT to find out how long the clue plays for
   validGuessTime = Date.now() + howLong; //gives the time the user should press
@@ -104,7 +105,7 @@ function startGame() {
         Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
       );
     }
-    console.log("Pattern is " + pattern);//logs the pattern
+    console.log("Pattern is " + pattern); //logs the pattern
 
     document.getElementById("livesPlaceholder").innerText =
       gameSettings["lives"]; //updates the lives on the html
@@ -226,10 +227,10 @@ function guess(btn) {
     return;
   } else if (!(progress == pattern.length - 1)) {
     progress++;
-    if (cluePauseTime<100){
+    if (cluePauseTime < 150) {
       console.log(cluePauseTime);
-      cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
-      clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
+      cluePauseTime *= 0.80;
+      clueHoldTime *= 0.80;
     }
     playClueSequence();
     return;
