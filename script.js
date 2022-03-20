@@ -50,21 +50,11 @@ function loadCookie() {
   for (let i = 0;i<5;i++){
     
   }
-  console.log(`x is ${x}`)
   for (var key in gameSettings) {
-    //looks for keys in the cookie, after the key and "=" it takes the string number or parseInt right after
-    //
-    x.indexOf(key);
-    console.log(`key is ${key}`)
-
-    //looks for key in cookies and replaces 
-    console.log(    x.indexOf(key))
-  }
-
-
-
-  //looks for my cookies
-  //if cookies load
+    let index = x.indexOf(key)
+    let value = parseInt(x.slice(index+key.length+1))
+    console.log(`${key} is ${value}`)
+  }//cookies are loaded just save them into
 }
 
 function saveCookie() {
