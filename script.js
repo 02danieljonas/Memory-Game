@@ -3,8 +3,6 @@
 /*
 What I have had issues with: 
 the error message not being able to switch from transparent and not
-player cheating and playing sound at the same time as simon is saying
-the range sliders and extracting values
 CSS - dont remember what specifically but i do remember coming into problems with it
 fixing the glitches that came with it
 */
@@ -30,6 +28,7 @@ var gameSettings = {
   timePerButton: 4,
   timeDecay: 0,
 };
+var TODO = "verify-cookie, or use try except, it best to verify the cookie is really mine and check things like length to make sure it's a minumum size"
 
 //goes to cookies and changes the above values to what ever was in cookies
 // saveCookie();
@@ -330,7 +329,7 @@ function showErrorMessage(info) {
 function loadCookie(load = true) {
   console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
-  if (x == "") {
+  if (x == "" || x==0) {
     return;
   }
 
