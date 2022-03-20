@@ -32,8 +32,7 @@ var gameSettings = {
   lives: 3,
   buttonAmount: 4,
   timePerButton: 4,
-  timeLost: 20,
-  // buttonSize: 4,
+  timeDecay: 20,
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -232,7 +231,10 @@ function guess(btn) {
     return;
   } else if (!(progress == pattern.length - 1)) {
     progress++;
+    cluePauseTime*=
+    clueHoldTime
     make-clue-go-faster
+    gameSettings["timeDecay"]
     playClueSequence();
     return;
   } else {
