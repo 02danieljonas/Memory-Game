@@ -23,23 +23,25 @@ var gameSettings = {
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
   volume: 5,
-  lives: 100,
+  lives: 3,
   buttonAmount: 4,
   timePerButton: 4,
   timeDecay: 0,
 };
+console.log(gameSettings);
 
-//goes to cookies and changes the above values to what ever was in cookies
-// saveCookie();
 
 loadCookie();
 
-// console.log(gameSettings);
+console.log(gameSettings);
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 var freqMap;
 updateFreqMap(gameSettings["buttonAmount"]);
+
+document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
+
 /* 
 TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
@@ -329,7 +331,7 @@ function showErrorMessage(info) {
   document.getElementById("errorMessage").classList.remove("show");
 }
 
-function loadCookie(load = true) {
+function loadCookie(/*load = true*/) {
   // console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
   if (x == "" || x == 0) {
@@ -339,9 +341,10 @@ function loadCookie(load = true) {
   for (let key in gameSettings) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
-    if (load) {
-      gameSettings[key] = value;
-    }
+    //if (load == true)
+    gameSettings[key] = value;
+    console.log("changing values");
+    //}
   }
   console.log(gameSettings);
 }
@@ -362,7 +365,9 @@ function clearCookies() {
   for (let key in gameSettings) {
     let value = gameSettings[key];
     document.cookie =
-      key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
+      key + "=" + ";" + "expires=0;" + ";path=/";
+      // key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
+
   }
   console.log(document.cookie);
 }
