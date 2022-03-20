@@ -48,6 +48,8 @@ TODO: fix: spamming start stop adds a bunch to the timeline and will force sound
 TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
 */
 
+//read the docs first
+
 /*
 TODO: implement pression number keys to also press buttons
 
@@ -58,8 +60,8 @@ TODO: allow user to decide how fast
 TODO: ADD infinity to game length and lives
 TODO: change button size
 TODO: use cookies, have a popup that askes the user do they want cookies, the pop up should ask if they want cookies, how long to keep cookies,  should it keep a cookie of these options (if the user says know cookies) and a slider of how long options cookies stay
-TODO: add preset difficulties
 TODO: make it known to the user when they can guess
+TODO: change code to use setTimeout setInterval
 */
 
 function print(q) {
@@ -181,8 +183,10 @@ function playSingleClue(btn) {
 function playClueSequence() {
   var started = Math.round(Date.now());
   timer(progress);
+  
+  
   document.getElementByClass("gameButtonArea").style.setProperty('background', 'white')
-  setTimeout(playSingleClue, delay, when player can play);
+  // setTimeout(playSingleClue, delay, when player can play);
 
 
 
