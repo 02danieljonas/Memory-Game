@@ -15,16 +15,6 @@ button {
   border-radius: 10px;
 }
 
-
-
-
-/* 
-#error.shown {
-  opacity: 100;
-  transition: 5s;
-
-} */
-
 #gameButtonArea button {
   width: 200px;
   height: 200px;
@@ -163,26 +153,27 @@ button {
   background: rgb(196, 174, 173);
 }
 
-
-#errorMessage{
+#errorMessage {
   display: inline;
 
   position: fixed;
-  
+
   left: 0px;
   bottom: 10px;
-    
+
   text-align: center;
   width: 100%;
   opacity: 100;
-  
+
   transition: 2s;
-  
-  background: blue
+
+  background: blue;
 }
 
-#errorMessage:hover, .show{
+#errorMessage:hover,
+.show {
   opacity: 0;
-  background: red; 
+  background: red;
   transition: 0s;
 }
+

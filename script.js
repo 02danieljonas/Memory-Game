@@ -7,9 +7,8 @@ player cheating and playing sound at the same time as simon is saying
 the range sliders and extracting values
 CSS - dont remember what specifically but i do remember coming into problems with it
 fixing the glitches that came with it
-
-
 */
+
 var pattern = []; //array contain the pattern for that round
 var clueInProgress = false; //is a clue playing right now
 var progress = 0; //Score of the player
@@ -32,7 +31,7 @@ var gameSettings = {
   volume: 5,
   lives: 3,
   buttonAmount: 4,
-  timePerButton:4,
+  timePerButton: 4,
   timeLost: 20,
   // buttonSize: 4,
 };
@@ -45,21 +44,25 @@ updateFreqMap(gameSettings["buttonAmount"]);
 TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
 TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
 TODO: user should not be able to input anything while the game is playing hint
+TODO: maybe add DO RE MI FA SOL LA SI
+TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
+TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
+*/
+
+/*
+TODO: implement pression number keys to also press buttons
+
 TODO: fix error
 TODO: allow user to change game speed
 TODO: make game get faster every time
 TODO: allow user to decide how fast
 TODO: ADD infinity to game length and lives
-TODO: chang button size
-TODO: maybe add DO RE MI FA SOL LA SI
-TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
+TODO: change button size
 TODO: use cookies, have a popup that askes the user do they want cookies, the pop up should ask if they want cookies, how long to keep cookies,  should it keep a cookie of these options (if the user says know cookies) and a slider of how long options cookies stay
-TODO: implement pression number keys to also press buttons
-TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
 TODO: add preset difficulties
-
-
+TODO: make it known to the user when they can guess
 */
+
 function print(q) {
   //if i accidentally put print it wont run an error
   console.log(q);
@@ -87,7 +90,7 @@ function timer(clueLength) {
 }
 
 function startGame() {
-  showErrorMessage("Starting Game")
+  showErrorMessage("Starting Game");
   if (document.getElementById("settingsContainer").classList == "hidden") {
     //if settings is closed
     strikes = 0;
@@ -112,7 +115,7 @@ function startGame() {
 }
 
 function stopGame() {
-  showErrorMessage("Stopping Game")
+  showErrorMessage("Stopping Game");
 
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
@@ -229,6 +232,7 @@ function guess(btn) {
     return;
   } else if (!(progress == pattern.length - 1)) {
     progress++;
+    make-clue-go-faster
     playClueSequence();
     return;
   } else {
