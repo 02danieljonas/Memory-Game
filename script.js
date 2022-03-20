@@ -29,10 +29,10 @@ var gameSettings = {
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
   volume: 5,
-  lives: 3,
+  lives: 100,
   buttonAmount: 4,
   timePerButton: 4,
-  timeDecay: 10,
+  timeDecay: 0,
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -94,6 +94,9 @@ function startGame() {
     //if settings is closed
     strikes = 0;
     pattern = [];
+    clueHoldTime = 1000; //how long each clue is played for
+    cluePauseTime = 333; //how long to pause between clues
+
     for (let i = 0; i < gameSettings["patternLength"]; i++) {
       //takes game length and makes a random pattern
       pattern.push(
@@ -178,6 +181,10 @@ function playSingleClue(btn) {
 function playClueSequence() {
   var started = Math.round(Date.now());
   timer(progress);
+  document.getElementByClass("gameButtonArea").style.setProperty('background', 'white')
+  setTimeout(playSingleClue, delay, when player can play);
+
+
 
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
@@ -225,11 +232,11 @@ function guess(btn) {
     return;
   } else if (!(progress == pattern.length - 1)) {
     progress++;
-    // if (cluePauseTime<100){
-    console.log(cluePauseTime)
-    cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
-    clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
-    // }
+    if (cluePauseTime<100){
+      console.log(cluePauseTime);
+      cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
+      clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
+    }
     playClueSequence();
     return;
   } else {
