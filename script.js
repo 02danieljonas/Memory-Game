@@ -37,7 +37,7 @@ var gameSettings = {
 
 //goes to cookies and changes the above values to what ever was in cookies
 
-// saveCookie();
+saveCookie();
 
 loadCookie()
 console.log(gameSettings);
@@ -50,10 +50,15 @@ function loadCookie() {
   for (let i = 0;i<5;i++){
     
   }
-  console.log(x)
+  console.log(`x is ${x}`)
   for (var key in gameSettings) {
+    //looks for keys in the cookie, after the key and "=" it takes the string number or parseInt right after
+    //
+    x.indexOf(key);
+    console.log(`key is ${key}`)
+
     //looks for key in cookies and replaces 
-    console.log(x[key])
+    console.log(    x.indexOf(key))
   }
 
 
@@ -65,7 +70,7 @@ function loadCookie() {
 function saveCookie() {
   for (var key in gameSettings) {
     var value = gameSettings[key];
-    document.cookie = key + "=" + value + ";" + ";path=/";
+    document.cookie = key + "=" + value +";"+ ";path=/";
   }
 }
 
