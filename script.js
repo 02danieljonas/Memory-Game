@@ -30,7 +30,6 @@ var gameSettings = {
 };
 console.log(gameSettings);
 
-
 loadCookie();
 
 console.log(gameSettings);
@@ -291,7 +290,8 @@ function updateFreqMap(buttonAmount) {
   // console.log("Frequency Map is ", freqMap);
 }
 
-function updateButtons(buttonAmount) {
+function updateButtons() {
+  let buttonAmount = gameSettings["buttonAmount"];
   for (let i = buttonAmount; i < 10; i++) {
     document.getElementById("button" + i).classList.add("hidden");
     // console.log("button" + i, "is hidden");
@@ -317,6 +317,13 @@ function saveSettings() {
   saveCookie();
 }
 
+function updateSlider() {
+  for (let elem in gameSettings) {
+    // slider values = gamesSettings
+    updateSliderPlaceholder(`${elem}Slider`, elem);
+  }
+}
+
 function updateSliderPlaceholder(slider, placeholder) {
   var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
@@ -334,6 +341,9 @@ function showErrorMessage(info) {
 function loadCookie(/*load = true*/) {
   // console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
+  if (x.length < 15) {
+    return;
+  }
   if (x == "" || x == 0) {
     return;
   }
@@ -346,6 +356,9 @@ function loadCookie(/*load = true*/) {
     console.log("changing values");
     //}
   }
+  updateSlider();
+  updateButtons(gameSettings["buttonAmount"]);
+
   console.log(gameSettings);
 }
 
@@ -364,10 +377,8 @@ function saveCookie() {
 function clearCookies() {
   for (let key in gameSettings) {
     let value = gameSettings[key];
-    document.cookie =
-      key + "=" + ";" + "expires=0;" + ";path=/";
-      // key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
-
+    document.cookie = key + "=" + ";" + "expires=0;" + ";path=/";
+    // key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
   console.log(document.cookie);
 }
