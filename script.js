@@ -14,7 +14,6 @@ var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var validGuessTime; //contains the time the player should guess
-
 var strikes; //how much times the player guessed wrong
 
 var gameSettings = {
@@ -28,11 +27,8 @@ var gameSettings = {
   timePerButton: 4,
   timeDecay: 0,
 };
-console.log(gameSettings);
 
 loadCookie();
-
-console.log(gameSettings);
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
@@ -43,8 +39,6 @@ document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
 /* 
 TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
-TODO: fix glitch where if you know the pattern before hand sound will play on top of each other
-TODO: user should not be able to input anything while the game is playing hint
 TODO: maybe add DO RE MI FA SOL LA SI
 TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
 TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
@@ -54,14 +48,10 @@ TODO: connect to a data base to read highscores and allow the user submit their 
 
 /*
 TODO: implement pression number keys to also press buttons
-
 TODO: fix error
 TODO: allow user to change game speed
-TODO: make game get faster every time
-TODO: allow user to decide how fast
 TODO: ADD infinity to game length and lives
 TODO: change button size
-TODO: use cookies, have a popup that askes the user do they want cookies, the pop up should ask if they want cookies, how long to keep cookies,  should it keep a cookie of these options (if the user says know cookies) and a slider of how long options cookies stay
 TODO: make it known to the user when they can guess
 TODO: change code to use setTimeout setInterval
 */
@@ -319,12 +309,14 @@ function saveSettings() {
 
 function updateSlider() {
   for (let elem in gameSettings) {
+    console.log(elem, gameSettings[elem])
     // slider values = gamesSettings
     updateSliderPlaceholder(`${elem}Slider`, elem);
   }
 }
 
 function updateSliderPlaceholder(slider, placeholder) {
+  console.log(gameSettings)
   var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
   userGameSettings[placeholder] = Number(sliderElem.value);
@@ -356,7 +348,7 @@ function loadCookie(/*load = true*/) {
     console.log("changing values");
     //}
   }
-  updateSlider();
+  // updateSlider();
   updateButtons(gameSettings["buttonAmount"]);
 
   console.log(gameSettings);
