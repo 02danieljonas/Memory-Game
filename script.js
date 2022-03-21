@@ -88,7 +88,7 @@ function timer(clueLength) {
 }
 
 function startGame() {
-  showErrorMessage("Starting Game");
+  showMessage("Starting Game");
   if (document.getElementById("settingsContainer").classList == "hidden") {
     //if settings is closed
     strikes = 0;
@@ -116,7 +116,7 @@ function startGame() {
 }
 
 function stopGame() {
-  showErrorMessage("Stopping Game");
+  showMessage("Stopping Game");
 
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
@@ -205,7 +205,7 @@ function guess(btn) {
   if (!gamePlaying) {
     return;
   } else if (!(Date.now() > validGuessTime)) {
-    showErrorMessage(
+    showMessage(
       `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
     );
     console.log(
@@ -249,7 +249,7 @@ function showSettingContainer() {
       cancel();
     }
   } else {
-    showErrorMessage("Please stop the game to change settings");
+    showMessage("Please stop the game to change settings");
     // console.log("Error");
   }
 }
@@ -324,7 +324,7 @@ function updateSliderPlaceholder(slider, placeholder) {
   placeholderElem.innerHTML = userGameSettings[placeholder];
 }
 
-function showErrorMessage(info) {
+function showMessage(info) {
   // document.getElementById("errorMessage").style.setProperty('background', 'initial')
   document.getElementById("errorMessage").classList.add("show");
   document.getElementById("errorMessage").innerHTML = info;
@@ -334,10 +334,12 @@ function showErrorMessage(info) {
 function loadCookie(/*load = true*/) {
   // console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
-  if (x.length < 15) {
+  if (x == "" || x == 0) {
+    console.log("No cookies")
     return;
   }
-  if (x == "" || x == 0) {
+  if (x.length < 90) {
+    console.log("An error occured with the cookies");
     return;
   }
 
@@ -362,16 +364,14 @@ function saveCookie() {
   for (let key in gameSettings) {
     let value = gameSettings[key];
     console.log(`Saving ${key} as ${value}`);
-    document.cookie = key + "=" + value + ";" + ";path=/";
+    document.cookie = key + "=" + value + ";" + `expires=${Date.now()+604800}` + ";path=/";
   }
-  console.log(document.cookie);
 }
 
 function clearCookies() {
   for (let key in gameSettings) {
     let value = gameSettings[key];
     document.cookie = key + "=" + ";" + "expires=0;" + ";path=/";
-    // key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
   console.log(document.cookie);
 }
