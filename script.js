@@ -29,9 +29,9 @@ var gameSettings = {
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
   // clueHoldTime: 8,
-  volume: 1,
-  lives: Infinity,
-  buttonAmount: 4,
+  volume: 5,
+  lives: 3,
+  buttonAmount: 5,
   timePerButton: 4,
   timeDecay: 0,
 };
@@ -396,12 +396,13 @@ function loadCookie(/*load = true*/) {
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
 
     userGameSettings[key] = value;
-
     // console.log(`${key} is ${value}`);
   }
-  applySettings("Loaded Previous Save")
+  var TODO = "Error with loading buttons it doesn't seem to work at all in cookie"
+  // applySettings("Loaded Previous Save")
   // updateSlider()
   applySettings("Loaded Previous Save");
+  console.log(gameSettings)
   // updateButtons(gameSettings["buttonAmount"]);
 }
 
