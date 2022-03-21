@@ -36,6 +36,11 @@ var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, U
 loadCookie();
 
 var freqMap;
+
+applySettings();
+// function updateScreen(){
+//   update buttons, update lives time and progress, 
+// }
 updateFreqMap(gameSettings["buttonAmount"]);
 
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
@@ -371,7 +376,7 @@ function loadCookie(/*load = true*/) {
 
     console.log(`${key} is ${value}`);
   }
-  updateSlider();
+  // updateSlider();
   applySettings();
   // updateButtons(gameSettings["buttonAmount"]);
 }
