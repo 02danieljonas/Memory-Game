@@ -163,17 +163,15 @@ button {
 
   text-align: center;
   width: 100%;
-  opacity: 100;
+  visibility: hidden;
 
   transition: 2s;
 
   background: blue;
 }
 
-#errorMessage:hover,
-.show {
-  opacity: 0;
+#errorMessage.show {
+  visibility: visible;
   background: red;
   transition: 0s;
 }
-

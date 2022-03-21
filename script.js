@@ -353,6 +353,9 @@ function showMessage(info) {
   document.getElementById("errorMessage").classList.remove("show");
 }
 
+
+
+
 function loadCookie(/*load = true*/) {
   let cookie = decodeURIComponent(document.cookie) + ";";
   // console.log(`Cookie is "${cookie}"`);
