@@ -348,24 +348,30 @@ function updateSliderPlaceholder(slider, placeholder) {
 
 function showMessage(info) {
   // document.getElementById("errorMessage").style.setProperty('background', 'initial')
-  print("Removing Show")
-  document.getElementById("errorMessage").classList.remove("show");
-  document.getElementById("errorMessage").classList.add("show");
 
-  
+
   document.getElementById("errorMessage").innerHTML = info;
-//   setTimeout(function () {
-//     print("Addind Show")
-//     document.getElementById("errorMessage").classList.add("show");
-//   }, 9000);
+  
+  print("Adding Show");
+  document.getElementById("errorMessage").classList.add("show");
+  
+  setTimeout(function () {
+    print("Removing Show");
+    document.getElementById("errorMessage").classList.remove("show");
+  }, 4000);
 }
 
+//
+//
+//
+//
+//
+//
+//
+//
 
-
-
-
-
-
+//
+//
 
 function loadCookie(/*load = true*/) {
   let cookie = decodeURIComponent(document.cookie) + ";";

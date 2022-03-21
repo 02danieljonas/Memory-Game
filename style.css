@@ -155,24 +155,23 @@ button {
 
 #errorMessage {
   display: inline;
-
   position: fixed;
-
+  background: red;
   left: 0px;
   bottom: 10px;
-
   text-align: center;
   width: 100%;
+
   visibility: hidden;
+  opacity: 0;
+  transition: opacity 90s, background 90s;
 
-  transition: 0s;
-
-  background: red;
 }
 
 #errorMessage.show {
   visibility: visible;
-  opacity: 0;
-  background: red;
-  transition: 3s;
+  opacity: 100;
+
+/*   background: red; */
+  transition: opacity 0s, background 0s;
 }
