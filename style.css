@@ -158,20 +158,25 @@ button {
   position: fixed;
   background: red;
   left: 0px;
-  bottom: 10px;
+  bottom: -20px;
   text-align: center;
   width: 100%;
 
-  visibility: hidden;
-  opacity: 0;
+/*   visibility: hidden;
+  opacity: 0; */
+  
   transition: 5s;
-
 }
 
-#errorMessage.show #errorMessage:hover{
-  visibility: visible;
-  opacity: 100;
+#errorMessage.show, #errorMessage:hover{
+  background: blue;
+  bottom: 10px;
+  transition: 5s;
+
+
+/*   visibility: visible;
+  opacity: 100; */
 
 /*   background: red; */
-  transition: 0s;
+/*   transition: 0s; */
 }
