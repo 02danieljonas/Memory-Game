@@ -8,13 +8,12 @@ fixing the glitches that came with it
 */
 console.log(Infinity - 1);
 
-const keyBoard = document.querySelector('body')
+const keyBoard = document.querySelector("body");
 
-print(keyBoard)
-keyBoard.addEventListener('keydown', e =>{
-    console.log(e)
-})
-
+print(keyBoard);
+keyBoard.addEventListener("keydown", (e) => {
+  console.log(e);
+});
 
 var TODO = `CATASTROPHIC ERROR WITH SETTINGS`;
 
@@ -33,8 +32,8 @@ var gameSettings = {
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
   // clueHoldTime: 8,
-  volume: 5,
-  lives: 3,
+  volume: 1,
+  lives: Infinity,
   buttonAmount: 4,
   timePerButton: 4,
   timeDecay: 0,
@@ -106,13 +105,15 @@ function startGame() {
     pattern = [];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
-
-    for (let i = 0; i < gameSettings["patternLength"]; i++) {
-      //takes game length and makes a random pattern
-      pattern.push(
-        Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
-      );
-    }
+    /* if (gameSettings["patternLength"] != Infinity) {
+    //   for (let i = 0; i < gameSettings["patternLength"]; i++) {
+    //     //takes game length and makes a random pattern
+    //     pattern.push(
+    //       Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
+    //     );
+    //   }
+     }
+     */
     // console.log("Pattern is " + pattern); //logs the pattern
 
     document.getElementById("livesPlaceholder").innerText =
@@ -192,7 +193,14 @@ function playClueSequence() {
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
+  
+  pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
   for (let i = 0; i <= progress; i++) {
+    //pattern equals random stuff
+    /*
+    pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
+      */
+      
     // console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
