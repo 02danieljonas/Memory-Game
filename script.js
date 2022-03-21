@@ -54,6 +54,7 @@ TODO: ADD infinity to game length and lives
 TODO: change button size
 TODO: make it known to the user when they can guess
 TODO: change code to use setTimeout setInterval
+TODO: if the user tries to input a pattern on a reattempt, it stops playing and lets the user go
 */
 
 function print(q) {
@@ -309,14 +310,14 @@ function saveSettings() {
 
 function updateSlider() {
   for (let elem in gameSettings) {
-    console.log(elem, gameSettings[elem])
+    console.log(elem, gameSettings[elem]);
     // slider values = gamesSettings
     updateSliderPlaceholder(`${elem}Slider`, elem);
   }
 }
 
 function updateSliderPlaceholder(slider, placeholder) {
-  console.log(gameSettings)
+  console.log(gameSettings);
   var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
   userGameSettings[placeholder] = Number(sliderElem.value);
