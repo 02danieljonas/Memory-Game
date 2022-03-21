@@ -33,7 +33,6 @@ var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, U
 
 loadCookie();
 
-
 var freqMap;
 updateFreqMap(gameSettings["buttonAmount"]);
 
@@ -296,7 +295,6 @@ function findInfinity() {
   if (userGameSettings["lives"] == 21) {
     userGameSettings["lives"] = Infinity;
     gameSettings["lives"] = Infinity;
-
   }
   if (userGameSettings["patternLength"] == 31) {
     userGameSettings["patternLength"] = Infinity;
@@ -347,54 +345,45 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
-  let x = decodeURIComponent(document.cookie);
-  console.log(`Cookie is "${x}"`);
-  if (x == "" || x == 0) {
+  let cookie = decodeURIComponent(document.cookie);
+  console.log(`Cookie is "${cookie}"`);
+  if (cookie == "" || cookie == 0) {
     console.log("No cookies");
     return;
   }
-  if (x.length < 90) {
+  if (cookie.length < 90) {
     console.log("An error occured with the cookies");
     return;
   }
 
   for (let key in userGameSettings) {
-    let index = x.indexOf(key);
-    let value = parseInt(x.slice(index + key.length + 1));
-    if (isNaN(value)) {
+    let index = cookie.indexOf(key);
+    let valueSlice = cookie.slice(index + key.length + 1)
+    
+    let value = parseInt(valueSlice);
+    console.log(key, valueSlice)
+    
+    if (valueSlice.indexOf(Infinity)==0){
+      userGameSettings[key] = Infinity
+      console.log(`${key} is ${Infinity}`)
+    }
+    else if (!isNaN(value)) {
+      userGameSettings[key] = value;
+      console.log("changing values");
+      console.log(890);
+    } else {
       console.log(`${key} is ${value} and an error`);
-      return;
-    console
     }
     //if (load == true)
-    userGameSettings[key] = value;
-    console.log("changing values");
+
     //}
   }
   updateSlider();
-  applySettings()
+  applySettings();
   // updateButtons(gameSettings["buttonAmount"]);
   console.log(document.cookie);
   console.log(userGameSettings);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 var TODO =
   "verify-cookie, or use try except, it best to verify the cookie is really mine and check things like length to make sure it's a minumum size";
