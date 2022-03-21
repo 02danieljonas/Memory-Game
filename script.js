@@ -6,6 +6,10 @@ CSS - dont remember what specifically but i do remember coming into problems wit
 fixing the glitches that came with it
 */
 
+
+//"nameofrange".value = number I want
+
+
 // const keyBoard = document.querySelector("body");
 
 // print(keyBoard);
@@ -39,6 +43,11 @@ var gameSettings = {
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 loadCookie();
+
+applySettings("Loaded Previous Save")
+
+gameSettings["buttonAmount"] = 2;
+
 
 var freqMap;
 
@@ -401,7 +410,7 @@ function loadCookie(/*load = true*/) {
   var TODO = "Error with loading buttons it doesn't seem to work at all in cookie"
   // applySettings("Loaded Previous Save")
   // updateSlider()
-  applySettings("Loaded Previous Save");
+  // applySettings("Loaded Previous Save");
   console.log(gameSettings)
   // updateButtons(gameSettings["buttonAmount"]);
 }
