@@ -2,20 +2,17 @@
 
 /*
 What I have had issues with: 
-the error message not being able to switch from transparent and not
 CSS - dont remember what specifically but i do remember coming into problems with it
 fixing the glitches that came with it
 */
-console.log(Infinity - 1);
 
-const keyBoard = document.querySelector("body");
+// const keyBoard = document.querySelector("body");
 
-print(keyBoard);
-keyBoard.addEventListener("keydown", (e) => {
-  console.log(e);
-});
+// print(keyBoard);
+// keyBoard.addEventListener("keydown", (e) => {
+//   console.log(e);
+// });
 
-var TODO = `CATASTROPHIC ERROR WITH SETTINGS`;
 
 var pattern = []; //array contain the pattern for that round
 var clueInProgress = false; //is a clue playing right now
@@ -55,7 +52,6 @@ document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
 /* 
 TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
-TODO: maybe add DO RE MI FA SOL LA SI
 TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
 TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
 */
@@ -65,6 +61,9 @@ TODO: implement pression number keys to also press buttons
 TODO: allow user to change game speed
 TODO: change button size
 TODO: make it known to the user when they can guess
+TODO: Connect cookies with slider info
+TODO: Add Infinity to settings page
+TODO: Connect Time Left
 
 */
 
@@ -337,10 +336,8 @@ function findInfinity() {
 }
 
 function applySettings(message = "Applied Settings") {
-  if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]) {
     // console.log("Change in button amount");
-    updateButtons(userGameSettings["buttonAmount"]);
-  }
+  updateButtons(userGameSettings["buttonAmount"]);
   findInfinity();
   gameSettings = Object.assign({}, userGameSettings);
   showMessage(message);
@@ -371,11 +368,11 @@ function updateSliderPlaceholder(slider, placeholder) {
 function showMessage(info) {
   document.getElementById("errorMessage").innerHTML = info;
 
-  print("Adding Show");
+  // print("Adding Show");
   document.getElementById("errorMessage").classList.add("show");
 
   setTimeout(function () {
-    print("Removing Show");
+    // print("Removing Show");
     document.getElementById("errorMessage").classList.remove("show");
   }, 4000);
 }
@@ -389,7 +386,7 @@ function loadCookie(/*load = true*/) {
     return;
   }
   if (cookie.length < 90) {
-    console.log("An error occured with the cookies");
+    console.log("An error occured when reading cookies");
     return;
   }
 
@@ -400,8 +397,9 @@ function loadCookie(/*load = true*/) {
 
     userGameSettings[key] = value;
 
-    console.log(`${key} is ${value}`);
+    // console.log(`${key} is ${value}`);
   }
+  applySettings("Loaded Previous Save")
   // updateSlider()
   applySettings("Loaded Previous Save");
   // updateButtons(gameSettings["buttonAmount"]);
