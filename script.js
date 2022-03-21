@@ -29,9 +29,10 @@ var gameSettings = {
   timeDecay: 0,
 };
 
+var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
+
 loadCookie();
 
-var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 var freqMap;
 updateFreqMap(gameSettings["buttonAmount"]);
@@ -294,14 +295,16 @@ function updateButtons() {
 function findInfinity() {
   if (userGameSettings["lives"] == 21) {
     userGameSettings["lives"] = Infinity;
-    userGameSettings["lives"] = Infinity;
+    gameSettings["lives"] = Infinity;
 
   }
   if (userGameSettings["patternLength"] == 31) {
     userGameSettings["patternLength"] = Infinity;
+    gameSettings["patternLength"] = Infinity;
   }
   if (userGameSettings["timePerButton"] == 11) {
     userGameSettings["timePerButton"] = Infinity;
+    gameSettings["timePerButton"] = Infinity;
   }
 }
 
@@ -311,8 +314,6 @@ function applySettings() {
     updateButtons(userGameSettings["buttonAmount"]);
   }
   findInfinity();
-
-
   gameSettings = Object.assign({}, userGameSettings);
   close();
 }
@@ -346,8 +347,8 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
-  console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
+  console.log(`Cookie is "${x}"`);
   if (x == "" || x == 0) {
     console.log("No cookies");
     return;
@@ -357,23 +358,43 @@ function loadCookie(/*load = true*/) {
     return;
   }
 
-  for (let key in gameSettings) {
+  for (let key in userGameSettings) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
     if (isNaN(value)) {
       console.log(`${key} is ${value} and an error`);
       return;
+    console
     }
     //if (load == true)
-    gameSettings[key] = value;
+    userGameSettings[key] = value;
     console.log("changing values");
     //}
   }
-  // updateSlider();
-  updateButtons(gameSettings["buttonAmount"]);
+  updateSlider();
+  applySettings()
+  // updateButtons(gameSettings["buttonAmount"]);
   console.log(document.cookie);
-  console.log(gameSettings);
+  console.log(userGameSettings);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var TODO =
   "verify-cookie, or use try except, it best to verify the cookie is really mine and check things like length to make sure it's a minumum size";
