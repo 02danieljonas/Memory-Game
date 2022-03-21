@@ -7,6 +7,8 @@ CSS - dont remember what specifically but i do remember coming into problems wit
 fixing the glitches that came with it
 */
 
+var TODO = `CATASTROPHIC ERROR WITH SETTINGS`
+
 var pattern = []; //array contain the pattern for that round
 var clueInProgress = false; //is a clue playing right now
 var progress = 0; //Score of the player
@@ -21,7 +23,7 @@ var gameSettings = {
   patternLength: 5,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
-  clueHoldTime: 8,
+  // clueHoldTime: 8,
   volume: 5,
   lives: 3,
   buttonAmount: 4,
@@ -373,9 +375,6 @@ function loadCookie(/*load = true*/) {
   applySettings();
   // updateButtons(gameSettings["buttonAmount"]);
 }
-
-var TODO =
-  "verify-cookie, or use try except, it best to verify the cookie is really mine and check things like length to make sure it's a minumum size";
 
 function saveCookie() {
   for (let key in gameSettings) {
