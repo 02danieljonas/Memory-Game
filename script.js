@@ -6,7 +6,7 @@ the error message not being able to switch from transparent and not
 CSS - dont remember what specifically but i do remember coming into problems with it
 fixing the glitches that came with it
 */
-console.log(Infinity-1)
+console.log(Infinity - 1);
 
 var TODO = `CATASTROPHIC ERROR WITH SETTINGS`;
 
@@ -38,7 +38,7 @@ loadCookie();
 
 var freqMap;
 
-applySettings();
+// applySettings();
 // function updateScreen(){
 //   update buttons, update lives time and progress,
 // }
@@ -123,7 +123,6 @@ function startGame() {
 
 function stopGame() {
   showMessage("Stopping Game");
-
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
@@ -316,18 +315,19 @@ function findInfinity() {
   }
 }
 
-function applySettings() {
+function applySettings(message="Applied Settings") {
   if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]) {
     // console.log("Change in button amount");
     updateButtons(userGameSettings["buttonAmount"]);
   }
   findInfinity();
   gameSettings = Object.assign({}, userGameSettings);
+  showMessage(message)
   close();
 }
 
 function saveSettings() {
-  applySettings();
+  applySettings("Saved Settings");
   saveCookie();
 }
 
@@ -348,31 +348,16 @@ function updateSliderPlaceholder(slider, placeholder) {
 }
 
 function showMessage(info) {
-  // document.getElementById("errorMessage").style.setProperty('background', 'initial')
-
-
   document.getElementById("errorMessage").innerHTML = info;
-  
+
   print("Adding Show");
   document.getElementById("errorMessage").classList.add("show");
-  
+
   setTimeout(function () {
     print("Removing Show");
     document.getElementById("errorMessage").classList.remove("show");
   }, 4000);
 }
-
-//
-//
-//
-//
-//
-//
-//
-//
-
-//
-//
 
 function loadCookie(/*load = true*/) {
   let cookie = decodeURIComponent(document.cookie) + ";";
@@ -382,7 +367,6 @@ function loadCookie(/*load = true*/) {
     console.log("No cookies");
     return;
   }
-
   if (cookie.length < 90) {
     console.log("An error occured with the cookies");
     return;
@@ -397,8 +381,8 @@ function loadCookie(/*load = true*/) {
 
     console.log(`${key} is ${value}`);
   }
-  // updateSlider();
-  applySettings();
+  // updateSlider()
+  applySettings("Loaded Previous Save");
   // updateButtons(gameSettings["buttonAmount"]);
 }
 
@@ -419,4 +403,5 @@ function clearCookies() {
       key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
   console.log(document.cookie);
+  showMessage("Cookies Cleared")
 }
