@@ -345,16 +345,18 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
-  let cookie = decodeURIComponent(document.cookie);
+  let cookie = decodeURIComponent(document.cookie)+";";
   console.log(`Cookie is "${cookie}"`);
+  
   if (cookie == "" || cookie == 0) {
     console.log("No cookies");
     return;
   }
+  
   if (cookie.length < 90) {
     console.log("An error occured with the cookies");
     return;
-  }
+  }//locate the ; and take the values between the start of slice and the end of ;
 
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
