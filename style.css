@@ -154,29 +154,20 @@ button {
 }
 
 #errorMessage {
-  display: inline;
   position: fixed;
   background: red;
   left: 0px;
-  bottom: -20px;
+  top: -30px;
   text-align: center;
   width: 100%;
-
-/*   visibility: hidden;
-  opacity: 0; */
-  
   transition: 5s;
+  opacity:0%;
 }
 
-#errorMessage.show, #errorMessage:hover{
-  background: blue;
-  bottom: 10px;
-  transition: 5s;
+#errorMessage.show,
+#errorMessage:hover {
+  top: 10px;
+  transition: 0s;
+  opacity:80%;
 
-
-/*   visibility: visible;
-  opacity: 100; */
-
-/*   background: red; */
-/*   transition: 0s; */
 }

@@ -6,6 +6,7 @@ the error message not being able to switch from transparent and not
 CSS - dont remember what specifically but i do remember coming into problems with it
 fixing the glitches that came with it
 */
+console.log(Infinity-1)
 
 var TODO = `CATASTROPHIC ERROR WITH SETTINGS`;
 
