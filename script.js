@@ -21,6 +21,7 @@ var gameSettings = {
   patternLength: 5,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
+  clueHoldTime: NaN,
   volume: 5,
   lives: 3,
   buttonAmount: 4,
@@ -48,7 +49,6 @@ TODO: connect to a data base to read highscores and allow the user submit their 
 TODO: implement pression number keys to also press buttons
 TODO: fix error
 TODO: allow user to change game speed
-TODO: ADD infinity to game length and lives
 TODO: change button size
 TODO: make it known to the user when they can guess
 TODO: change code to use setTimeout setInterval
@@ -291,12 +291,28 @@ function updateButtons() {
   }
   updateFreqMap(buttonAmount);
 }
+function findInfinity() {
+  if (userGameSettings["lives"] == 21) {
+    userGameSettings["lives"] = Infinity;
+    userGameSettings["lives"] = Infinity;
+
+  }
+  if (userGameSettings["patternLength"] == 31) {
+    userGameSettings["patternLength"] = Infinity;
+  }
+  if (userGameSettings["timePerButton"] == 11) {
+    userGameSettings["timePerButton"] = Infinity;
+  }
+}
 
 function applySettings() {
   if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]) {
     // console.log("Change in button amount");
     updateButtons(userGameSettings["buttonAmount"]);
   }
+  findInfinity();
+
+
   gameSettings = Object.assign({}, userGameSettings);
   close();
 }
@@ -333,7 +349,7 @@ function loadCookie(/*load = true*/) {
   console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
   if (x == "" || x == 0) {
-    console.log("No cookies")
+    console.log("No cookies");
     return;
   }
   if (x.length < 90) {
@@ -344,9 +360,9 @@ function loadCookie(/*load = true*/) {
   for (let key in gameSettings) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
-    if (isNaN(value)){
-      console.log("error")
-      return
+    if (isNaN(value)) {
+      console.log(`${key} is ${value} and an error`);
+      return;
     }
     //if (load == true)
     gameSettings[key] = value;
@@ -355,7 +371,7 @@ function loadCookie(/*load = true*/) {
   }
   // updateSlider();
   updateButtons(gameSettings["buttonAmount"]);
-  console.log(document.cookie)
+  console.log(document.cookie);
   console.log(gameSettings);
 }
 
@@ -368,14 +384,15 @@ function saveCookie() {
     console.log(`Saving ${key} as ${value}`);
     document.cookie = key + "=" + value + ";" + ";path=/";
   }
-  console.log(document.cookie)
+  console.log(document.cookie);
 }
 
 function clearCookies() {
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
-    document.cookie = key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 GMT;" + ";path=/";
+    document.cookie =
+      key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
   console.log(document.cookie);
 }
