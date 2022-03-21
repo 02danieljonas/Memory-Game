@@ -116,7 +116,6 @@ function startGame() {
 
     playClueSequence();
     showMessage("Game Started");
-
   }
 }
 
@@ -124,8 +123,7 @@ function stopGame() {
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
-    showMessage("Game Stopped");
-
+  showMessage("Game Stopped");
 }
 
 function playTone(btn, len) {
@@ -315,14 +313,14 @@ function findInfinity() {
   }
 }
 
-function applySettings(message="Applied Settings") {
+function applySettings(message = "Applied Settings") {
   if (userGameSettings["buttonAmount"] != gameSettings["buttonAmount"]) {
     // console.log("Change in button amount");
     updateButtons(userGameSettings["buttonAmount"]);
   }
   findInfinity();
   gameSettings = Object.assign({}, userGameSettings);
-  showMessage(message)
+  showMessage(message);
   close();
 }
 
@@ -403,5 +401,20 @@ function clearCookies() {
       key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
   console.log(document.cookie);
-  showMessage("Cookies Cleared")
+  showMessage("Cookies Cleared");
+}
+
+function buttonPress(event) {
+  startTone(event.key-1)
+  guess(event.key-1)
+  console.log(event)
+  setTimeout(function () {
+      stopTone()
+;
+  }, .5);
+  
+  
+  
+  
+  showMessage(event.key);
 }
