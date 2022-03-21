@@ -44,8 +44,6 @@ TODO: fix: spamming start stop adds a bunch to the timeline and will force sound
 TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
 */
 
-//read the docs first
-
 /*
 TODO: implement pression number keys to also press buttons
 TODO: fix error
@@ -332,7 +330,7 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
-  // console.log(gameSettings);
+  console.log(gameSettings);
   let x = decodeURIComponent(document.cookie);
   if (x == "" || x == 0) {
     console.log("No cookies")
@@ -346,6 +344,10 @@ function loadCookie(/*load = true*/) {
   for (let key in gameSettings) {
     let index = x.indexOf(key);
     let value = parseInt(x.slice(index + key.length + 1));
+    if (isNaN(value)){
+      console.log("error")
+      return
+    }
     //if (load == true)
     gameSettings[key] = value;
     console.log("changing values");
@@ -353,7 +355,7 @@ function loadCookie(/*load = true*/) {
   }
   // updateSlider();
   updateButtons(gameSettings["buttonAmount"]);
-
+  console.log(document.cookie)
   console.log(gameSettings);
 }
 
@@ -364,14 +366,16 @@ function saveCookie() {
   for (let key in gameSettings) {
     let value = gameSettings[key];
     console.log(`Saving ${key} as ${value}`);
-    document.cookie = key + "=" + value + ";" + `expires=${Date.now()+604800}` + ";path=/";
+    document.cookie = key + "=" + value + ";" + ";path=/";
   }
+  console.log(document.cookie)
 }
 
 function clearCookies() {
+  console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
-    document.cookie = key + "=" + ";" + "expires=0;" + ";path=/";
+    document.cookie = key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 GMT;" + ";path=/";
   }
   console.log(document.cookie);
 }
