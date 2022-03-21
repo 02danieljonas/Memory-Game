@@ -7,7 +7,7 @@ CSS - dont remember what specifically but i do remember coming into problems wit
 fixing the glitches that came with it
 */
 
-var TODO = `CATASTROPHIC ERROR WITH SETTINGS`
+var TODO = `CATASTROPHIC ERROR WITH SETTINGS`;
 
 var pattern = []; //array contain the pattern for that round
 var clueInProgress = false; //is a clue playing right now
@@ -39,7 +39,7 @@ var freqMap;
 
 applySettings();
 // function updateScreen(){
-//   update buttons, update lives time and progress, 
+//   update buttons, update lives time and progress,
 // }
 updateFreqMap(gameSettings["buttonAmount"]);
 
@@ -348,10 +348,21 @@ function updateSliderPlaceholder(slider, placeholder) {
 
 function showMessage(info) {
   // document.getElementById("errorMessage").style.setProperty('background', 'initial')
-  document.getElementById("errorMessage").classList.add("show");
-  document.getElementById("errorMessage").innerHTML = info;
+  print("Removing Show")
   document.getElementById("errorMessage").classList.remove("show");
+  document.getElementById("errorMessage").classList.add("show");
+
+  
+  document.getElementById("errorMessage").innerHTML = info;
+//   setTimeout(function () {
+//     print("Addind Show")
+//     document.getElementById("errorMessage").classList.add("show");
+//   }, 9000);
 }
+
+
+
+
 
 
 

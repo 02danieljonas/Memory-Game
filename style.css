@@ -165,13 +165,14 @@ button {
   width: 100%;
   visibility: hidden;
 
-  transition: 2s;
+  transition: 0s;
 
-  background: blue;
+  background: red;
 }
 
 #errorMessage.show {
   visibility: visible;
+  opacity: 0;
   background: red;
-  transition: 0s;
+  transition: 3s;
 }
