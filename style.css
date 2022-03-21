@@ -15,28 +15,36 @@ button {
   border-radius: 10px;
 }
 
+
 #gameButtonArea button {
   width: 200px;
   height: 200px;
   margin: 2px;
+  opacity: 50%;
 }
 
+#gameButtonArea button .lit{
+  
+}
+
+
 #button0 {
-  background: lightgreen;
+  background: rgb(0, 128, 0);
 }
 
 #button0:active,
 #button0.lit {
-  background: green;
+  opacity: 100%;
 }
 
 #button1 {
-  background: lightblue;
+  background: blue;
+
 }
 
 #button1:active,
 #button1.lit {
-  background: blue;
+  opacity: 100%;
 }
 
 #button2 {
@@ -95,7 +103,7 @@ button {
 }
 
 #startBtn:hover {
-  background: darkblue;
+  background: cyan;
   transition: 50s;
 }
 
