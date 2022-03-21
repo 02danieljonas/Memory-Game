@@ -105,6 +105,13 @@ function startGame() {
     pattern = [];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
+    
+    
+    
+    
+    
+    
+    
     /* if (gameSettings["patternLength"] != Infinity) {
     //   for (let i = 0; i < gameSettings["patternLength"]; i++) {
     //     //takes game length and makes a random pattern
@@ -189,12 +196,12 @@ function playSingleClue(btn) {
 
 function playClueSequence() {
   var started = Math.round(Date.now());
+  print(`Pattern is ${pattern}`)
   timer(progress);
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
-  
-  pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
+  pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)//To get infinity to work with the least amount of code I write the pattern here
   for (let i = 0; i <= progress; i++) {
     //pattern equals random stuff
     /*
@@ -245,7 +252,7 @@ function guess(btn) {
   } else if (!(guessCounter == progress)) {
     guessCounter++;
     return;
-  } else if (!(progress == pattern.length - 1)) {
+  } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
     document.getElementById("progressPlaceholder").innerText = progress;
 
@@ -299,7 +306,7 @@ function updateFreqMap(buttonAmount) {
   for (let i = 0; i < buttonAmount; i++) {
     freqMap[i] = Math.round(260 + temp * i);
   }
-  // console.log("Frequency Map is ", freqMap);
+  console.log("Frequency Map is ", freqMap);
 }
 
 function updateButtons() {
