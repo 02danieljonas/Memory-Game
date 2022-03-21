@@ -21,7 +21,7 @@ var gameSettings = {
   patternLength: 5,
   // countDownTimer: 3,
   // countDownTimerIncrement: 1.5,
-  clueHoldTime: NaN,
+  clueHoldTime: 8,
   volume: 5,
   lives: 3,
   buttonAmount: 4,
@@ -226,6 +226,8 @@ function guess(btn) {
     return;
   } else if (!(progress == pattern.length - 1)) {
     progress++;
+    document.getElementById("progressPlaceholder").innerText = progress;
+
     if (cluePauseTime < 150) {
       // console.log(cluePauseTime);
       cluePauseTime *= 0.8;
@@ -345,52 +347,31 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
-  let cookie = decodeURIComponent(document.cookie)+";";
-  console.log(`Cookie is "${cookie}"`);
-  
+  let cookie = decodeURIComponent(document.cookie) + ";";
+  // console.log(`Cookie is "${cookie}"`);
+
   if (cookie == "" || cookie == 0) {
     console.log("No cookies");
     return;
   }
-  
+
   if (cookie.length < 90) {
     console.log("An error occured with the cookies");
     return;
-  }//locate the ; and take the values between the start of slice and the end of ;
-  
+  }
+
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
-    let valueSlice = cookie.slice(index + key.length + 1, cookie.indexOf(";",index + key.length + 1))
-    
+    let valueStart = index + key.length + 1;
+    let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
+
     userGameSettings[key] = value;
 
-    
-    console.log(`You are looking for - ${key} is ${valueSlice}`)
-    valueSlice=valueSlice.slice()
-    
-    let value = parseInt(valueSlice);
-    console.log(key, valueSlice)
-    
-    if (valueSlice.indexOf(Infinity)==0){
-      userGameSettings[key] = Infinity
-      console.log(`${key} is ${Infinity}`)
-    }
-    else if (!isNaN(value)) {
-      userGameSettings[key] = value;
-      console.log("changing values");
-      console.log(890);
-    } else {
-      console.log(`${key} is ${value} and an error`);
-    }
-    //if (load == true)
-
-    //}
+    console.log(`${key} is ${value}`);
   }
   updateSlider();
   applySettings();
   // updateButtons(gameSettings["buttonAmount"]);
-  console.log(document.cookie);
-  console.log(userGameSettings);
 }
 
 var TODO =
