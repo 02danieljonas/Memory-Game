@@ -46,7 +46,7 @@ loadCookie();
 
 applySettings("Loaded Previous Save")
 
-gameSettings["buttonAmount"] = 2;
+// gameSettings["buttonAmount"] = 2;
 
 
 var freqMap;
