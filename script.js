@@ -8,8 +8,9 @@ fixing the glitches that came with it
 */
 console.log(Infinity - 1);
 
-const keyBoard = document.querySelector('.keyboard')
+const keyBoard = document.querySelector('body')
 
+print(keyBoard)
 keyBoard.addEventListener('keydown', e =>{
     console.log(e)
 })
