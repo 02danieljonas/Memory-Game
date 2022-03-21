@@ -15,54 +15,56 @@ button {
   border-radius: 10px;
 }
 
-
 #gameButtonArea button {
   width: 200px;
   height: 200px;
   margin: 2px;
-  opacity: 50%;
+  opacity: 20%;
 }
 
-#gameButtonArea button .lit{
-  
+#gameButtonArea button .lit,
+#gameButtonArea button :active {
+  opacity: 100%;
 }
-
 
 #button0 {
   background: rgb(0, 128, 0);
 }
 
-#button0:active,
-#button0.lit {
-  opacity: 100%;
-}
-
 #button1 {
   background: blue;
-
-}
-
-#button1:active,
-#button1.lit {
-  opacity: 100%;
 }
 
 #button2 {
-  background: #feb6b3;
-}
-
-#button2:active,
-#button2.lit {
   background: red;
 }
 
 #button3 {
-  background: lightyellow;
+  background: yellow;
 }
 
-#button3:active,
-#button3.lit {
-  background: yellow;
+#button4 {
+  background: purple;
+}
+
+#button5 {
+  background: rgb(100, 70, 36);
+}
+
+#button6 {
+  background: black;
+}
+
+#button7 {
+  background: rgb(38, 118, 0);
+}
+
+#button8 {
+  background: rgb(253, 2, 135);
+}
+
+#button9 {
+  background: rgb(196, 174, 173);
 }
 
 .hidden {
@@ -107,60 +109,6 @@ button {
   transition: 50s;
 }
 
-#button4 {
-  background: plum;
-}
-
-#button4:active,
-#button4.lit {
-  background: purple;
-}
-
-#button5 {
-  background: rgb(196, 164, 132);
-}
-
-#button5:active,
-#button5.lit {
-  background: rgb(100, 70, 36);
-}
-
-#button6 {
-  background: grey;
-}
-
-#button6:active,
-#button6.lit {
-  background: black;
-}
-
-#button7 {
-  background: rgb(255, 213, 128);
-}
-
-#button7:active,
-#button7.lit {
-  background: rgb(238, 118, 0);
-}
-
-#button8 {
-  background: #fe90cb;
-}
-
-#button8:active,
-#button8.lit {
-  background: #fd0287;
-}
-
-#button9 {
-  background: rgb(248, 248, 255);
-}
-
-#button9:active,
-#button9.lit {
-  background: rgb(196, 174, 173);
-}
-
 #errorMessage {
   position: fixed;
   background: red;
@@ -169,13 +117,12 @@ button {
   text-align: center;
   width: 100%;
   transition: 5s;
-  opacity:0%;
+  opacity: 0%;
 }
 
 #errorMessage.show,
 #errorMessage:hover {
   top: 10px;
   transition: 0s;
-  opacity:80%;
-
+  opacity: 80%;
 }
