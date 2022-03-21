@@ -55,12 +55,10 @@ TODO: connect to a data base to read highscores and allow the user submit their 
 
 /*
 TODO: implement pression number keys to also press buttons
-TODO: fix error
 TODO: allow user to change game speed
 TODO: change button size
 TODO: make it known to the user when they can guess
-TODO: change code to use setTimeout setInterval
-TODO: if the user tries to input a pattern on a reattempt, it stops playing and lets the user go
+
 */
 
 function print(q) {
@@ -94,7 +92,6 @@ function timer(clueLength) {
 }
 
 function startGame() {
-  showMessage("Starting Game");
   if (document.getElementById("settingsContainer").classList == "hidden") {
     //if settings is closed
     strikes = 0;
@@ -118,14 +115,17 @@ function startGame() {
     document.getElementById("stopBtn").classList.remove("hidden");
 
     playClueSequence();
+    showMessage("Game Started");
+
   }
 }
 
 function stopGame() {
-  showMessage("Stopping Game");
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
+    showMessage("Game Stopped");
+
 }
 
 function playTone(btn, len) {
