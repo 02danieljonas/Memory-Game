@@ -357,10 +357,16 @@ function loadCookie(/*load = true*/) {
     console.log("An error occured with the cookies");
     return;
   }//locate the ; and take the values between the start of slice and the end of ;
-
+  
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
-    let valueSlice = cookie.slice(index + key.length + 1)
+    let valueSlice = cookie.slice(index + key.length + 1, cookie.indexOf(";",index + key.length + 1))
+    
+    userGameSettings[key] = value;
+
+    
+    console.log(`You are looking for - ${key} is ${valueSlice}`)
+    valueSlice=valueSlice.slice()
     
     let value = parseInt(valueSlice);
     console.log(key, valueSlice)
