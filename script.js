@@ -6,9 +6,7 @@ CSS - dont remember what specifically but i do remember coming into problems wit
 fixing the glitches that came with it
 */
 
-
 //"nameofrange".value = number I want
-
 
 // const keyBoard = document.querySelector("body");
 
@@ -16,7 +14,6 @@ fixing the glitches that came with it
 // keyBoard.addEventListener("keydown", (e) => {
 //   console.log(e);
 // });
-
 
 var pattern = []; //array contain the pattern for that round
 var clueInProgress = false; //is a clue playing right now
@@ -47,7 +44,6 @@ loadCookie();
 // applySettings("Loaded Previous Save")
 
 // gameSettings["buttonAmount"] = 2;
-
 
 var freqMap;
 
@@ -113,13 +109,7 @@ function startGame() {
     pattern = [];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
-    
-    
-    
-    
-    
-    
-    
+
     /* if (gameSettings["patternLength"] != Infinity) {
     //   for (let i = 0; i < gameSettings["patternLength"]; i++) {
     //     //takes game length and makes a random pattern
@@ -204,18 +194,18 @@ function playSingleClue(btn) {
 
 function playClueSequence() {
   var started = Math.round(Date.now());
-  print(`Pattern is ${pattern}`)
+  print(`Pattern is ${pattern}`);
   timer(progress);
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
-  pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)//To get infinity to work with the least amount of code I write the pattern here
+  pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
   for (let i = 0; i <= progress; i++) {
     //pattern equals random stuff
     /*
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
       */
-      
+
     // console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
@@ -345,7 +335,7 @@ function findInfinity() {
 }
 
 function applySettings(message = "Applied Settings") {
-    // console.log("Change in button amount");
+  // console.log("Change in button amount");
   updateButtons(userGameSettings["buttonAmount"]);
   findInfinity();
   gameSettings = Object.assign({}, userGameSettings);
@@ -360,14 +350,21 @@ function saveSettings() {
 
 function updateSlider() {
   for (let elem in gameSettings) {
-    console.log(elem, gameSettings[elem]);
-    // slider values = gamesSettings
-    let sliderElem = document.getElementById(`${elem}Slider`)
-    sliderElem.value = gameSettings[elem] 
-    updateSliderPlaceholder(sliderElem, elem);
+    let value = gameSettings[elem];
+    
+    let sliderElem = document.getElementById(`${elem}Slider`);
+    
+    console.log(elem, value, sliderElem);
+    
+    if (elem != NaN) {
+      sliderElem.value = value;
+    }
+    if (elem != NaN) {
+      updateSliderPlaceholder(sliderElem, elem);
+    }
+    // updateSliderPlaceholder(sliderElem, elem);
 
     //"nameofrange".value = number I want
-
   }
 }
 
@@ -408,21 +405,23 @@ function loadCookie(/*load = true*/) {
     let index = cookie.indexOf(key);
     let valueStart = index + key.length + 1;
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
-    
-    console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`)
 
-    if (value != userGameSettings[key]){
-      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}2`)
+    console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
+
+    if (value != userGameSettings[key]) {
+      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}2`);
     }
 
     userGameSettings[key] = value;
     // console.log(`${key} is ${value}`);
   }
-  var TODO = "Error with loading buttons it doesn't seem to work at all in cookie"
-  applySettings("Loaded Previous Save")
-  // updateSlider()
+  var TODO =
+    "Error with loading buttons it doesn't seem to work at all in cookie";
+  applySettings("Loaded Previous Save");
+  updateSlider();
+
   // applySettings("Loaded Previous Save");
-  console.log(gameSettings)
+  console.log(gameSettings);
   // updateButtons(gameSettings["buttonAmount"]);
 }
 
