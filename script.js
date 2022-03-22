@@ -141,6 +141,12 @@ function stopGame() {//setts gamePlaying to false, swaps hide from start button 
   showMessage("Game Stopped");
 }
 
+//
+//
+//
+//
+//
+
 function playTone(btn, len) {//gets called by buttons on the screen 
   o.frequency.value = freqMap[btn];
   g.gain.setTargetAtTime(
@@ -334,6 +340,16 @@ function findInfinity() {
     gameSettings["timePerButton"] = Infinity;
   }
 }
+
+//
+//
+//
+// j
+//
+//
+//
+//
+
 
 function applySettings(message = "Applied Settings") {//called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
   
