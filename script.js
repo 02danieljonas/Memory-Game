@@ -1,17 +1,12 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q
 
 /*
-TODO: implement pression number keys to also press buttons
-TODO: allow user to change game speed
-TODO: change button size
-TODO: make it known to the user when they can guess
-TODO: Connect cookies with slider info
-TODO: Add Infinity to settings page
-TODO: Connect Time Left
+What I have had issues with: 
+CSS - dont remember what specifically but i do remember coming into problems with it
+fixing the glitches that came with it
 */
 
-
-
+//"nameofrange".value = number I want
 
 // const keyBoard = document.querySelector("body");
 
@@ -42,11 +37,9 @@ var gameSettings = {
   timeDecay: 0,
 };
 
-
-
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
-// loadCookie();
+loadCookie();
 
 // applySettings("Loaded Previous Save")
 
@@ -54,8 +47,7 @@ var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, U
 
 var freqMap;
 
-applySettings();
-
+// applySettings();
 // function updateScreen(){
 //   update buttons, update lives time and progress,
 // }
@@ -63,7 +55,22 @@ updateFreqMap(gameSettings["buttonAmount"]);
 
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
+/* 
+TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
+TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
+TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
+*/
 
+/*
+TODO: implement pression number keys to also press buttons
+TODO: allow user to change game speed
+TODO: change button size
+TODO: make it known to the user when they can guess
+TODO: Connect cookies with slider info
+TODO: Add Infinity to settings page
+TODO: Connect Time Left
+
+*/
 
 function print(q) {
   //if i accidentally put print it wont run an error
@@ -92,7 +99,7 @@ function timer(clueLength) {
   }, howLong);
 
   validGuessTime = Date.now() + howLong; //gives the time the user should press
-  console.log(`Player should press after ${(validGuessTime-Date.now()) / 1000} s`); //logs it
+  console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
 
 function startGame() {
@@ -120,7 +127,6 @@ function startGame() {
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("stopBtn").classList.remove("hidden");
-    
 
     playClueSequence();
     showMessage("Game Started");
@@ -152,7 +158,6 @@ function startTone(btn) {
   // console.log(tonePlaying);
   // stopTone();
   if (!tonePlaying) {
-    // document.getElementById(`button${btn}`).classList.add("lit");
     // console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
@@ -167,7 +172,6 @@ function startTone(btn) {
 }
 
 function stopTone() {
-  
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
 }
@@ -356,7 +360,7 @@ function updateSlider() {
       sliderElem.value = value;
     }
     if (elem != NaN) {
-      updateSliderPlaceholder(`${elem}Slider`, elem);
+      updateSliderPlaceholder(sliderElem, elem);
     }
     // updateSliderPlaceholder(sliderElem, elem);
 
@@ -365,9 +369,6 @@ function updateSlider() {
 }
 
 function updateSliderPlaceholder(sliderElem, placeholder) {
-  sliderElem = document.getElementById(sliderElem);
-
-  
   console.log(gameSettings);
   // var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
@@ -388,8 +389,6 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
-  console.log(document.cookie);
-
   let cookie = decodeURIComponent(document.cookie) + ";";
   // console.log(`Cookie is "${cookie}"`);
 
@@ -427,7 +426,6 @@ function loadCookie(/*load = true*/) {
 }
 
 function saveCookie() {
-  console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
     console.log(`Saving ${key} as ${value}`);
