@@ -40,7 +40,7 @@ var gameSettings = {
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
-// loadCookie();
+loadCookie();
 
 // applySettings("Loaded Previous Save")
 
@@ -379,10 +379,16 @@ function updateSlider() {
 
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
+    
+    console.log(`Key is ${key}, value is ${value}`)
+    
     let sliderElem = document.getElementById(`${key}Slider`);
 
     sliderElem.value = value;
-    let sliderPlaceholder = document.getElementById(`${key}Slider`);
+    
+    let sliderPlaceholder = document.getElementById(key);
+    
+    document.getElementById(sliderPlaceholder).innerHTML=value;
 
     //looks at the sliderplaceholder and changes it value
     
@@ -426,9 +432,10 @@ function showMessage(info) {
 function loadCookie(/*load = true*/) {
   // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
 
+  let cookie = decodeURIComponent(document.cookie) + ";";
+  
   console.log(`Cookie is "${cookie}"`);
 
-  let cookie = decodeURIComponent(document.cookie) + ";";
 
   if (cookie == "" || cookie == 0) {
     console.log("No cookies");
@@ -447,9 +454,10 @@ function loadCookie(/*load = true*/) {
     }
     userGameSettings[key] = value;
   }
-  applySettings("Loaded Previous Save");
   updateSlider();
-  // applySettings("Loaded Previous Save");
+  console.log("Passed")
+  applySettings("Loaded Previous Save");
+
   console.log(gameSettings);
   // updateButtons(gameSettings["buttonAmount"]);
 }
