@@ -115,25 +115,13 @@ function timer(clueLength) {
   console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
 
-function startGame() {
+function startGame() {//called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
+  
   if (document.getElementById("settingsContainer").classList == "hidden") {
-    //if settings is closed
     strikes = 0;
     pattern = [];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
-
-    /* if (gameSettings["patternLength"] != Infinity) {
-    //   for (let i = 0; i < gameSettings["patternLength"]; i++) {
-    //     //takes game length and makes a random pattern
-    //     pattern.push(
-    //       Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0
-    //     );
-    //   }
-     }
-     */
-    // console.log("Pattern is " + pattern); //logs the pattern
-
     document.getElementById("livesPlaceholder").innerText =
       gameSettings["lives"]; //updates the lives on the html
     progress = 0;
@@ -146,14 +134,14 @@ function startGame() {
   }
 }
 
-function stopGame() {
+function stopGame() {//setts gamePlaying to false, swaps hide from start button to stop buttons
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   showMessage("Game Stopped");
 }
 
-function playTone(btn, len) {
+function playTone(btn, len) {//gets called by buttons on the screen 
   o.frequency.value = freqMap[btn];
   g.gain.setTargetAtTime(
     gameSettings["volume"] / 10,
@@ -347,9 +335,7 @@ function findInfinity() {
   }
 }
 
-function applySettings(message = "Applied Settings") {
-  
-  
+function applySettings(message = "Applied Settings") {//called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
   
   // console.log("Change in button amount");
   updateButtons(userGameSettings["buttonAmount"]);
@@ -361,14 +347,15 @@ function applySettings(message = "Applied Settings") {
   close();
 }
 
-function saveSettings() {
+function saveSettings() {//called by HTML  save button
   applySettings("Saved Settings");
   saveCookie();
 }
 
 
 
-function updateSlider() {//this should update the slider values to what every code is in gameSettings meant for cookies
+function updateSlider() {//should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
+  
   for (let elem in gameSettings) {
     let value = gameSettings[elem];
 
@@ -389,7 +376,7 @@ function updateSlider() {//this should update the slider values to what every co
 }
 
 
-function updateSliderPlaceholder(sliderElem, placeholder) {//called when slider value is changed to display its value next to it, called through html
+function updateSliderPlaceholder(sliderElem, placeholder) {//called when HTML slider value is changed to display its value next to it in the placeholder
   sliderElem = document.getElementById(sliderElem);
 
   console.log(gameSettings);
@@ -442,7 +429,7 @@ function loadCookie(/*load = true*/) {// loads cookies and if its not empty or l
 }
 
 
-function saveCookie() {//takes the values in gameSettings and saves them
+function saveCookie() {//called by saveSettings, takes the values in gameSettings and saves them
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
@@ -452,7 +439,7 @@ function saveCookie() {//takes the values in gameSettings and saves them
   console.log(document.cookie);
 }
 
-function clearCookies() {//clears the cookies, outputs 0 into document.cookie
+function clearCookies() {//called by HTML clear button, clears the cookies, outputs 0 into document.cookie
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
