@@ -45,14 +45,12 @@ var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, U
 
 // gameSettings["buttonAmount"] = 2;
 
-function updateScreen(){
+function updateScreen() {
   //updates livesPplaceholder
   //update timerPlaceholder
   //update buttons
-  
   //everything that updates on the screen should be called through here
 }
-
 
 var freqMap;
 
@@ -103,7 +101,8 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
-function timer(clueLength) {// called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
+function timer(clueLength) {
+  // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
   //if I had more time I would use setTimeout but I want to work on other features
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
@@ -115,8 +114,9 @@ function timer(clueLength) {// called by playClueSequence, sets validGuessTime t
   console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
 
-function startGame() {//called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
-  
+function startGame() {
+  //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
+
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
     pattern = [];
@@ -134,18 +134,13 @@ function startGame() {//called by HTML start button, if settings is hidden, it r
   }
 }
 
-function stopGame() {//setts gamePlaying to false, swaps hide from start button to stop buttons
+function stopGame() {
+  //setts gamePlaying to false, swaps hide from start button to stop buttons
   gamePlaying = false;
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   showMessage("Game Stopped");
 }
-
-//
-//
-//
-//
-//
 
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
@@ -161,8 +156,9 @@ function playTone(btn, len) {
   }, len);
 }
 
-function startTone(btn) {//gets called by buttons on the screen 
-  
+function startTone(btn) {
+  //gets called by buttons on the screen
+
   // console.log(tonePlaying);
   // stopTone();
   if (!tonePlaying) {
@@ -179,20 +175,24 @@ function startTone(btn) {//gets called by buttons on the screen
   }
 }
 
-function stopTone() {//gets called by buttons on the screen  and playTone, stops the sound
+function stopTone() {
+  //gets called by buttons on the screen  and playTone, stops the sound
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
 }
 
-function lightButton(btn) {//gets called by buttons on the screen  and playSingleClue, lights the button
+function lightButton(btn) {
+  //gets called by buttons on the screen  and playSingleClue, lights the button
   document.getElementById("button" + btn).classList.add("lit");
 }
 
-function clearButton(btn) {//gets called by buttons on the screen  and playSingleClue, unlights the button
+function clearButton(btn) {
+  //gets called by buttons on the screen  and playSingleClue, unlights the button
   document.getElementById("button" + btn).classList.remove("lit");
 }
 
-function playSingleClue(btn) {//gets called by playClueSequence, calls lightButton and playTone and setTimeout to call clearButton
+function playSingleClue(btn) {
+  //gets called by playClueSequence, calls lightButton and playTone and setTimeout to call clearButton
   if (gamePlaying) {
     lightButton(btn);
     playTone(btn, clueHoldTime);
@@ -200,7 +200,8 @@ function playSingleClue(btn) {//gets called by playClueSequence, calls lightButt
   }
 }
 
-function playClueSequence() {//called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
+function playClueSequence() {
+  //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   var started = Math.round(Date.now());
   print(`Pattern is ${pattern}`);
   timer(progress);
@@ -221,19 +222,21 @@ function playClueSequence() {//called by start and guess, calls timer, makes up 
   }
 }
 
-
-function loseGame() {//called by guess, calls stopGame display lost
+function loseGame() {
+  //called by guess, calls stopGame display lost
   document.getElementById("livesPlaceholder").innerText = 0;
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
 
-function winGame() {//called by guess, calls stopGame display win
+function winGame() {
+  //called by guess, calls stopGame display win
   stopGame();
   alert("Game Over. You Won!");
 }
 
-function guess(btn) {//called by HTML buttons, if not gamePlaying or guessed before validGuessTime return,  if the guess is wrong, strikes++ and calls loseGame and returns only if strikes is >= lives anything else and it updates the lives on screen calls playClueSequence and return, if the user still has more guesses it returns after guessCounter++, if the user finished guessing progress++ updates the progress on screen and make 
+function guess(btn) {
+  //called by HTML buttons, if not gamePlaying or guessed before validGuessTime return,  if the guess is wrong, strikes++ and calls loseGame and returns only if strikes is >= lives anything else and it updates the lives on screen calls playClueSequence and return, if the user still has more guesses it returns after guessCounter++, if the user finished guessing progress++ updates the progress on screen, makes cluePauseTime and clueHoldTime less if clueHoldTime > 150 and finially playCluesequence and returns, if noones of the above conditions are meant it call winGame()
   // console.log("User guessed: " + btn);
   if (!gamePlaying) {
     return;
@@ -259,15 +262,12 @@ function guess(btn) {//called by HTML buttons, if not gamePlaying or guessed bef
   } else if (!(guessCounter == progress)) {
     guessCounter++;
     return;
-  } 
-  
-  else if (!(progress == gameSettings["patternLength"] - 1)) {
+  } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
     document.getElementById("progressPlaceholder").innerText = progress;
-    if (cluePauseTime < 150) {
-      // console.log(cluePauseTime);
-      cluePauseTime *= 0.8;
-      clueHoldTime *= 0.8;
+    if (clueHoldTime > 150) {
+      cluePauseTime *= 0.85;
+      clueHoldTime *= 0.85;
     }
     playClueSequence();
     return;
@@ -275,8 +275,17 @@ function guess(btn) {//called by HTML buttons, if not gamePlaying or guessed bef
     winGame();
   }
 }
+//
+//
+//
+//
+//
+//
+///
+//
 
 function showSettingContainer() {
+  //
   if (gamePlaying == false) {
     if (document.getElementById("settingsContainer").classList == "hidden") {
       document.getElementById("settingsContainer").classList.remove("hidden");
@@ -353,9 +362,9 @@ function findInfinity() {
 //
 //
 
+function applySettings(message = "Applied Settings") {
+  //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
 
-function applySettings(message = "Applied Settings") {//called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
-  
   // console.log("Change in button amount");
   updateButtons(userGameSettings["buttonAmount"]);
   findInfinity();
@@ -366,15 +375,15 @@ function applySettings(message = "Applied Settings") {//called by HTML apply but
   close();
 }
 
-function saveSettings() {//called by HTML  save button
+function saveSettings() {
+  //called by HTML  save button
   applySettings("Saved Settings");
   saveCookie();
 }
 
+function updateSlider() {
+  //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
 
-
-function updateSlider() {//should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
-  
   for (let elem in gameSettings) {
     let value = gameSettings[elem];
 
@@ -394,8 +403,8 @@ function updateSlider() {//should be called to clones gameSettings value into sl
   }
 }
 
-
-function updateSliderPlaceholder(sliderElem, placeholder) {//called when HTML slider value is changed to display its value next to it in the placeholder
+function updateSliderPlaceholder(sliderElem, placeholder) {
+  //called when HTML slider value is changed to display its value next to it in the placeholder
   sliderElem = document.getElementById(sliderElem);
 
   console.log(gameSettings);
@@ -417,8 +426,9 @@ function showMessage(info) {
   }, 4000);
 }
 
-function loadCookie(/*load = true*/) {// loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
-  
+function loadCookie(/*load = true*/) {
+  // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
+
   console.log(`Cookie is "${cookie}"`);
 
   let cookie = decodeURIComponent(document.cookie) + ";";
@@ -447,8 +457,8 @@ function loadCookie(/*load = true*/) {// loads cookies and if its not empty or l
   // updateButtons(gameSettings["buttonAmount"]);
 }
 
-
-function saveCookie() {//called by saveSettings, takes the values in gameSettings and saves them
+function saveCookie() {
+  //called by saveSettings, takes the values in gameSettings and saves them
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
@@ -458,7 +468,8 @@ function saveCookie() {//called by saveSettings, takes the values in gameSetting
   console.log(document.cookie);
 }
 
-function clearCookies() {//called by HTML clear button, clears the cookies, outputs 0 into document.cookie
+function clearCookies() {
+  //called by HTML clear button, clears the cookies, outputs 0 into document.cookie
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
