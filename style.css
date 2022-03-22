@@ -4,6 +4,7 @@ body {
   line-height: 1.5;
   background-color: slategrey;
   color: white;
+  height:300vh;
 }
 
 h1 {
@@ -84,7 +85,7 @@ button {
   color: black;
 }
 
-.ACS:hover {
+.ApplyClearSave:hover {
   background: black;
   color: white;
 }
@@ -110,9 +111,8 @@ button {
 }
 
 #info{
-  position: fixed;
-  top: 30px;
-  left: 10px;
+  position: sticky;
+  top: 35px;
 }
 
 #errorMessage {

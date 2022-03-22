@@ -61,7 +61,10 @@ TODO: fix glitch dragging mouse away from screen causes sounds to continue until
 TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
 TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
 */
+/*
 
+
+*/
 /*
 TODO: implement pression number keys to also press buttons
 TODO: allow user to change game speed
