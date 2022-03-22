@@ -33,9 +33,10 @@ var gameSettings = {
   volume: 5,
   lives: 3,
   buttonAmount: 5,
-  timePerButton: 4,
-  speedDecay: 0.85,
-  timeDecay: 0,
+  clueHoldTime: 4,//clueHoldTime timePerButton
+  timePerButton:0,
+  // speedDecay:0.85,
+  // timeDecay: 0,
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -267,8 +268,8 @@ function guess(btn) {
     progress++;
     document.getElementById("progressPlaceholder").innerText = progress;
     if (clueHoldTime > 150) {
-      cluePauseTime *= gameSettings["speedDecay"];
-      clueHoldTime *= gameSettings["speedDecay"];
+      cluePauseTime *= 0.85;
+      clueHoldTime *= 0.85;
     }
     playClueSequence();
     return;
@@ -380,15 +381,17 @@ function updateSlider() {
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
     
-    console.log(`Key is ${key}, value is ${value}`)
     
     let sliderElem = document.getElementById(`${key}Slider`);
 
     sliderElem.value = value;
     
-    let sliderPlaceholder = document.getElementById(key);
+    let placeholder = document.getElementById(key);
     
-    document.getElementById(sliderPlaceholder).innerHTML=value;
+    document.getElementById(placeholder).innerHTML = value;
+    
+    console.log(`Key is ${key}, value is ${value}`)
+
 
     //looks at the sliderplaceholder and changes it value
     
@@ -437,20 +440,20 @@ function loadCookie(/*load = true*/) {
   console.log(`Cookie is "${cookie}"`);
 
 
-  if (cookie == "" || cookie == 0) {
+  if (cookie == "" || cookie == "0;") {
     console.log("No cookies");
     return;
-  }
-  if (cookie.length < 90) {
+  }else if (cookie.length < 90) {
     console.log("An error occured when reading cookies");
     return;
   }
+  
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
     let valueStart = index + key.length + 1;
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
     if (value != userGameSettings[key]) {
-      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}2`);
+      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
     }
     userGameSettings[key] = value;
   }
