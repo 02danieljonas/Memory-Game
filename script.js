@@ -16,6 +16,7 @@ fixing the glitches that came with it
 // });
 
 var pattern = []; //array contain the pattern for that round
+var freqMap;
 var clueInProgress = false; //is a clue playing right now
 var progress = 0; //Score of the player
 var gamePlaying = false; //Has a game started
@@ -23,6 +24,7 @@ var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var validGuessTime; //contains the time the player should guess
 var strikes; //how much times the player guessed wrong
+
 
 var gameSettings = {
   //the configuration object
@@ -42,19 +44,6 @@ var gameSettings = {
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 loadCookie();
-
-// applySettings("Loaded Previous Save")
-
-// gameSettings["buttonAmount"] = 2;
-
-function updateScreen() {
-  //updates livesPplaceholder
-  //update timerPlaceholder
-  //update buttons
-  //everything that updates on the screen should be called through here
-}
-
-var freqMap;
 
 applySettings();
 
