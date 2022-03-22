@@ -200,7 +200,7 @@ function playSingleClue(btn) {//gets called by playClueSequence, calls lightButt
   }
 }
 
-function playClueSequence() {//called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout until progress,
+function playClueSequence() {//called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   var started = Math.round(Date.now());
   print(`Pattern is ${pattern}`);
   timer(progress);
@@ -221,18 +221,19 @@ function playClueSequence() {//called by start and guess, calls timer, makes up 
   }
 }
 
-function loseGame() {
+
+function loseGame() {//called by guess, calls stopGame display lost
   document.getElementById("livesPlaceholder").innerText = 0;
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
 
-function winGame() {
+function winGame() {//called by guess, calls stopGame display win
   stopGame();
   alert("Game Over. You Won!");
 }
 
-function guess(btn) {
+function guess(btn) {//called by HTML buttons, if not gamePlaying or guessed before validGuessTime return,  if the guess is wrong, strikes++ and calls loseGame and returns only if strikes is >= lives anything else and it updates the lives on screen calls playClueSequence and return, if the user still has more guesses it returns after guessCounter++, if the user finished guessing progress++ updates the progress on screen and make 
   // console.log("User guessed: " + btn);
   if (!gamePlaying) {
     return;
@@ -258,10 +259,11 @@ function guess(btn) {
   } else if (!(guessCounter == progress)) {
     guessCounter++;
     return;
-  } else if (!(progress == gameSettings["patternLength"] - 1)) {
+  } 
+  
+  else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
     document.getElementById("progressPlaceholder").innerText = progress;
-
     if (cluePauseTime < 150) {
       // console.log(cluePauseTime);
       cluePauseTime *= 0.8;
