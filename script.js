@@ -34,7 +34,7 @@ var gameSettings = {
   lives: 3,
   buttonAmount: 5,
   timePerButton: 4,
-  speedDecay:0.85,
+  speedDecay: 0.85,
   timeDecay: 0,
 };
 
@@ -60,7 +60,7 @@ applySettings();
 // function updateScreen(){
 //   update buttons, update lives time and progress,
 // }
-updateFreqMap(gameSettings["buttonAmount"]);
+updateFreqMap();
 
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
@@ -276,16 +276,9 @@ function guess(btn) {
     winGame();
   }
 }
-//
-//
-//
-//
-//
-//
-///
-//
 
-function showSettingContainer() {//called by HTML settings buttons, if not playing( if settings isn't showns it shows settings if settings is shown it calls cancel) else shoes messages 
+function showSettingContainer() {
+  //called by HTML settings buttons, if not playing( if settings isn't showns it shows settings if settings is shown it calls cancel) else shoes messages
   //
   if (gamePlaying == false) {
     if (document.getElementById("settingsContainer").classList == "hidden") {
@@ -300,7 +293,8 @@ function showSettingContainer() {//called by HTML settings buttons, if not playi
   }
 }
 
-function cancel() {//called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
+function cancel() {
+  //called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
   //I could change this by hard coding userGameSettings and the slider infos to be the same so all I have to do is clone
   for (const property in userGameSettings) {
     if (userGameSettings[property] != gameSettings[property]) {
@@ -313,34 +307,38 @@ function cancel() {//called by showSettingContainer, goes through userGameSettin
   close();
 }
 
-function close() {//called by cancel and applySettings, closes settings container
+function close() {
+  //called by cancel and applySettings, closes settings container
   document.getElementById("settingsContainer").classList.add("hidden");
   document.getElementById("settings").innerText = "Settings";
 }
 
-function updateFreqMap(buttonAmount) {//called in line and updateButtons, 
+function updateFreqMap() {
+  //called in line and updateButtons, empties freqMap calculates what info is needed through the passed argument buttonAmount and puts it into freqMap
   //freqMap is populated with values between 260 and 500
   freqMap = [];
-  let temp = (500 - 260) / (buttonAmount - 1);
-  for (let i = 0; i < buttonAmount; i++) {
+  let temp = (500 - 260) / (gameSettings["buttonAmount"] - 1);
+  for (let i = 0; i < gameSettings["buttonAmount"]; i++) {
     freqMap[i] = Math.round(260 + temp * i);
   }
   console.log("Frequency Map is ", freqMap);
 }
 
 function updateButtons() {
-  let buttonAmount = gameSettings["buttonAmount"];
-  for (let i = buttonAmount; i < 10; i++) {
+  //called by applySettings, goes through all the buttons and adds or remove the class hidden depending on if they are bigger or smaller than userGameSettings["buttonAmount"]
+  for (let i = userGameSettings["buttonAmount"]; i < 10; i++) {
     document.getElementById("button" + i).classList.add("hidden");
     // console.log("button" + i, "is hidden");
   }
-  for (let i = 0; i < buttonAmount; i++) {
+  for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
     document.getElementById("button" + i).classList.remove("hidden");
     // console.log("button", i, "is shown");
   }
-  updateFreqMap(buttonAmount);
+  updateFreqMap();
 }
+
 function findInfinity() {
+  //called by applySettings, sets values to infinity
   if (userGameSettings["lives"] == 21) {
     userGameSettings["lives"] = Infinity;
     gameSettings["lives"] = Infinity;
@@ -354,15 +352,6 @@ function findInfinity() {
     gameSettings["timePerButton"] = Infinity;
   }
 }
-
-//
-//
-//
-// j
-//
-//
-//
-//
 
 function applySettings(message = "Applied Settings") {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
@@ -481,3 +470,8 @@ function clearCookies() {
   console.log(document.cookie);
   showMessage("Cookies Cleared");
 }
+
+
+/*
+placeholder values should only ever reflect the slidervalue, 
+userGameSettings should only ever reflect the slidervalue,
