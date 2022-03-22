@@ -396,13 +396,25 @@ function updateSlider() {
 
 function updateSliderPlaceholder(sliderElem, placeholder) {
   //called when HTML slider value is changed to display its value next to it in the placeholder
+  
+  //if sliderValue is changed, change place holder and usergameSettings.
+  let sliderElemValue = document.getElementById(sliderElem).value;
+  let placeholderElem = document.getElementById(placeholder);
+  placeholderElem.innerHTML = userGameSettings[sliderElemValue];
+  userGameSettings[placeholder] = sliderElem.value;
+
+
+
+  
+  
+  /*
   sliderElem = document.getElementById(sliderElem);
 
   console.log(gameSettings);
   // var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
   userGameSettings[placeholder] = Number(sliderElem.value);
-  placeholderElem.innerHTML = userGameSettings[placeholder];
+  placeholderElem.innerHTML = userGameSettings[placeholder];*/
 }
 
 function showMessage(info) {
@@ -472,6 +484,11 @@ function clearCookies() {
 }
 
 
+
 /*
+if sliderValue is changed, change place holder and usergameSettings.
+
+
 placeholder values should only ever reflect the slidervalue, 
 userGameSettings should only ever reflect the slidervalue,
+*/
