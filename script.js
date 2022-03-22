@@ -34,6 +34,7 @@ var gameSettings = {
   lives: 3,
   buttonAmount: 5,
   timePerButton: 4,
+  speedDecay:0.85,
   timeDecay: 0,
 };
 
@@ -266,8 +267,8 @@ function guess(btn) {
     progress++;
     document.getElementById("progressPlaceholder").innerText = progress;
     if (clueHoldTime > 150) {
-      cluePauseTime *= 0.85;
-      clueHoldTime *= 0.85;
+      cluePauseTime *= gameSettings["speedDecay"];
+      clueHoldTime *= gameSettings["speedDecay"];
     }
     playClueSequence();
     return;
@@ -284,7 +285,7 @@ function guess(btn) {
 ///
 //
 
-function showSettingContainer() {
+function showSettingContainer() {//called by HTML settings buttons, if not playing( if settings isn't showns it shows settings if settings is shown it calls cancel) else shoes messages 
   //
   if (gamePlaying == false) {
     if (document.getElementById("settingsContainer").classList == "hidden") {
@@ -299,7 +300,8 @@ function showSettingContainer() {
   }
 }
 
-function cancel() {
+function cancel() {//called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
+  //I could change this by hard coding userGameSettings and the slider infos to be the same so all I have to do is clone
   for (const property in userGameSettings) {
     if (userGameSettings[property] != gameSettings[property]) {
       document.getElementById(property).innerHTML =
@@ -311,12 +313,12 @@ function cancel() {
   close();
 }
 
-function close() {
+function close() {//called by cancel and applySettings, closes settings container
   document.getElementById("settingsContainer").classList.add("hidden");
   document.getElementById("settings").innerText = "Settings";
 }
 
-function updateFreqMap(buttonAmount) {
+function updateFreqMap(buttonAmount) {//called in line and updateButtons, 
   //freqMap is populated with values between 260 and 500
   freqMap = [];
   let temp = (500 - 260) / (buttonAmount - 1);
