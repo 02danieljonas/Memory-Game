@@ -38,7 +38,7 @@ var gameSettings = {
   clueHoldTime: 4,//clueHoldTime timePerButton
   timePerButton:0,
   // speedDecay:0.85,
-  // timeDecay: 0,
+  // timeDecay: 0
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
