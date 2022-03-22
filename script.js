@@ -374,48 +374,42 @@ function saveSettings() {
 
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
+  
+  //changes slider.value into gamesettings or uGS and cal USP
 
-  for (let elem in gameSettings) {
-    let value = gameSettings[elem];
+  for (let key in userGameSettings) {
+    let value = userGameSettings[key];
+    let sliderElem = document.getElementById(`${key}Slider`);
 
-    let sliderElem = document.getElementById(`${elem}Slider`);
+    sliderElem.value = value;
+    let sliderPlaceholder = document.getElementById(`${key}Slider`);
 
-    console.log(elem, value, sliderElem);
+    //looks at the sliderplaceholder and changes it value
+    
+//     console.log(key, value, sliderElem);
 
-    if (elem != NaN) {
-      sliderElem.value = value;
-    }
-    if (elem != NaN) {
-      updateSliderPlaceholder(`${elem}Slider`, elem);
-    }
-    // updateSliderPlaceholder(sliderElem, elem);
+//     if (key != NaN) {
+//       sliderElem.value = value;
+//     }
+//     if (key != NaN) {
+//       updateSliderPlaceholder(`${key}Slider`, key);
+//     }
+    // updateSliderPlaceholder(sliderElem, key);
 
     //"nameofrange".value = number I want
   }
 }
 
-function updateSliderPlaceholder(sliderElem, placeholder) {
-  //called when HTML slider value is changed to display its value next to it in the placeholder
-  
-  //if sliderValue is changed, change place holder and usergameSettings.
+
+
+function updateSliderPlaceholder(sliderElem, placeholder) {//sliderElem is the slider ID and placeholder is the Key
   let sliderElemValue = document.getElementById(sliderElem).value;
   let placeholderElem = document.getElementById(placeholder);
-  placeholderElem.innerHTML = userGameSettings[sliderElemValue];
-  userGameSettings[placeholder] = sliderElem.value;
-
-
-
-  
-  
-  /*
-  sliderElem = document.getElementById(sliderElem);
-
-  console.log(gameSettings);
-  // var sliderElem = document.getElementById(slider);
-  var placeholderElem = document.getElementById(placeholder);
-  userGameSettings[placeholder] = Number(sliderElem.value);
-  placeholderElem.innerHTML = userGameSettings[placeholder];*/
+  placeholderElem.innerHTML = sliderElemValue;
+  userGameSettings[placeholder] = sliderElemValue;
 }
+
+
 
 function showMessage(info) {
   document.getElementById("errorMessage").innerHTML = info;
