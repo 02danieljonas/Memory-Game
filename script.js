@@ -44,7 +44,7 @@ var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, U
 
 loadCookie();
 
-applySettings("Loaded Previous Save")
+// applySettings("Loaded Previous Save")
 
 // gameSettings["buttonAmount"] = 2;
 
@@ -362,13 +362,18 @@ function updateSlider() {
   for (let elem in gameSettings) {
     console.log(elem, gameSettings[elem]);
     // slider values = gamesSettings
-    updateSliderPlaceholder(`${elem}Slider`, elem);
+    let sliderElem = document.getElementById(`${elem}Slider`)
+    sliderElem.value = gameSettings[elem] 
+    updateSliderPlaceholder(sliderElem, elem);
+
+    //"nameofrange".value = number I want
+
   }
 }
 
-function updateSliderPlaceholder(slider, placeholder) {
+function updateSliderPlaceholder(sliderElem, placeholder) {
   console.log(gameSettings);
-  var sliderElem = document.getElementById(slider);
+  // var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
   userGameSettings[placeholder] = Number(sliderElem.value);
   placeholderElem.innerHTML = userGameSettings[placeholder];
@@ -403,12 +408,18 @@ function loadCookie(/*load = true*/) {
     let index = cookie.indexOf(key);
     let valueStart = index + key.length + 1;
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
+    
+    console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`)
+
+    if (value != userGameSettings[key]){
+      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}2`)
+    }
 
     userGameSettings[key] = value;
     // console.log(`${key} is ${value}`);
   }
   var TODO = "Error with loading buttons it doesn't seem to work at all in cookie"
-  // applySettings("Loaded Previous Save")
+  applySettings("Loaded Previous Save")
   // updateSlider()
   // applySettings("Loaded Previous Save");
   console.log(gameSettings)
