@@ -22,8 +22,8 @@ button {
   opacity: 20%;
 }
 
-#gameButtonArea button .lit,
-#gameButtonArea button :active {
+#gameButtonArea button.lit,
+#gameButtonArea button:active {
   opacity: 100%;
 }
 
@@ -107,6 +107,12 @@ button {
 #startBtn:hover {
   background: cyan;
   transition: 50s;
+}
+
+#info{
+  position: fixed;
+  top: 30px;
+  left: 10px;
 }
 
 #errorMessage {

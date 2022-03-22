@@ -37,8 +37,6 @@ var gameSettings = {
   timeDecay: 0,
 };
 
-
-
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 // loadCookie();
@@ -354,11 +352,11 @@ function saveSettings() {
 function updateSlider() {
   for (let elem in gameSettings) {
     let value = gameSettings[elem];
-    
+
     let sliderElem = document.getElementById(`${elem}Slider`);
-    
+
     console.log(elem, value, sliderElem);
-    
+
     if (elem != NaN) {
       sliderElem.value = value;
     }
@@ -374,7 +372,6 @@ function updateSlider() {
 function updateSliderPlaceholder(sliderElem, placeholder) {
   sliderElem = document.getElementById(sliderElem);
 
-  
   console.log(gameSettings);
   // var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
