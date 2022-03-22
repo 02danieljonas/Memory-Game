@@ -37,9 +37,11 @@ var gameSettings = {
   timeDecay: 0,
 };
 
+
+
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
-loadCookie();
+// loadCookie();
 
 // applySettings("Loaded Previous Save")
 
@@ -47,7 +49,8 @@ loadCookie();
 
 var freqMap;
 
-// applySettings();
+applySettings();
+
 // function updateScreen(){
 //   update buttons, update lives time and progress,
 // }
@@ -360,7 +363,7 @@ function updateSlider() {
       sliderElem.value = value;
     }
     if (elem != NaN) {
-      updateSliderPlaceholder(sliderElem, elem);
+      updateSliderPlaceholder(`${elem}Slider`, elem);
     }
     // updateSliderPlaceholder(sliderElem, elem);
 
@@ -369,6 +372,9 @@ function updateSlider() {
 }
 
 function updateSliderPlaceholder(sliderElem, placeholder) {
+  sliderElem = document.getElementById(sliderElem);
+
+  
   console.log(gameSettings);
   // var sliderElem = document.getElementById(slider);
   var placeholderElem = document.getElementById(placeholder);
@@ -389,6 +395,8 @@ function showMessage(info) {
 }
 
 function loadCookie(/*load = true*/) {
+  console.log(document.cookie);
+
   let cookie = decodeURIComponent(document.cookie) + ";";
   // console.log(`Cookie is "${cookie}"`);
 
@@ -426,6 +434,7 @@ function loadCookie(/*load = true*/) {
 }
 
 function saveCookie() {
+  console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
     console.log(`Saving ${key} as ${value}`);
