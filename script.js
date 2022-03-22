@@ -45,6 +45,15 @@ var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, U
 
 // gameSettings["buttonAmount"] = 2;
 
+function updateScreen(){
+  //updates livesPplaceholder
+  //update timerPlaceholder
+  //update buttons
+  
+  //everything that updates on the screen should be called through here
+}
+
+
 var freqMap;
 
 applySettings();
@@ -339,10 +348,15 @@ function findInfinity() {
 }
 
 function applySettings(message = "Applied Settings") {
+  
+  
+  
   // console.log("Change in button amount");
   updateButtons(userGameSettings["buttonAmount"]);
   findInfinity();
   gameSettings = Object.assign({}, userGameSettings);
+  document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
+
   showMessage(message);
   close();
 }
@@ -352,7 +366,9 @@ function saveSettings() {
   saveCookie();
 }
 
-function updateSlider() {
+
+
+function updateSlider() {//this should update the slider values to what every code is in gameSettings meant for cookies
   for (let elem in gameSettings) {
     let value = gameSettings[elem];
 
@@ -372,7 +388,8 @@ function updateSlider() {
   }
 }
 
-function updateSliderPlaceholder(sliderElem, placeholder) {
+
+function updateSliderPlaceholder(sliderElem, placeholder) {//called when slider value is changed to display its value next to it, called through html
   sliderElem = document.getElementById(sliderElem);
 
   console.log(gameSettings);
@@ -394,11 +411,11 @@ function showMessage(info) {
   }, 4000);
 }
 
-function loadCookie(/*load = true*/) {
-  console.log(document.cookie);
+function loadCookie(/*load = true*/) {// loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
+  
+  console.log(`Cookie is "${cookie}"`);
 
   let cookie = decodeURIComponent(document.cookie) + ";";
-  // console.log(`Cookie is "${cookie}"`);
 
   if (cookie == "" || cookie == 0) {
     console.log("No cookies");
@@ -408,32 +425,24 @@ function loadCookie(/*load = true*/) {
     console.log("An error occured when reading cookies");
     return;
   }
-
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
     let valueStart = index + key.length + 1;
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
-
-    console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
-
     if (value != userGameSettings[key]) {
       console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}2`);
     }
-
     userGameSettings[key] = value;
-    // console.log(`${key} is ${value}`);
   }
-  var TODO =
-    "Error with loading buttons it doesn't seem to work at all in cookie";
   applySettings("Loaded Previous Save");
   updateSlider();
-
   // applySettings("Loaded Previous Save");
   console.log(gameSettings);
   // updateButtons(gameSettings["buttonAmount"]);
 }
 
-function saveCookie() {
+
+function saveCookie() {//takes the values in gameSettings and saves them
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
@@ -443,7 +452,7 @@ function saveCookie() {
   console.log(document.cookie);
 }
 
-function clearCookies() {
+function clearCookies() {//clears the cookies, outputs 0 into document.cookie
   console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
