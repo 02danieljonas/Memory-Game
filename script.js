@@ -103,7 +103,7 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 
-function timer(clueLength) {
+function timer(clueLength) {// called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
   //if I had more time I would use setTimeout but I want to work on other features
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
@@ -147,7 +147,7 @@ function stopGame() {//setts gamePlaying to false, swaps hide from start button 
 //
 //
 
-function playTone(btn, len) {//gets called by buttons on the screen 
+function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
   g.gain.setTargetAtTime(
     gameSettings["volume"] / 10,
@@ -161,7 +161,8 @@ function playTone(btn, len) {//gets called by buttons on the screen
   }, len);
 }
 
-function startTone(btn) {
+function startTone(btn) {//gets called by buttons on the screen 
+  
   // console.log(tonePlaying);
   // stopTone();
   if (!tonePlaying) {
@@ -178,20 +179,20 @@ function startTone(btn) {
   }
 }
 
-function stopTone() {
+function stopTone() {//gets called by buttons on the screen  and playTone, stops the sound
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
 }
 
-function lightButton(btn) {
+function lightButton(btn) {//gets called by buttons on the screen  and playSingleClue, lights the button
   document.getElementById("button" + btn).classList.add("lit");
 }
 
-function clearButton(btn) {
+function clearButton(btn) {//gets called by buttons on the screen  and playSingleClue, unlights the button
   document.getElementById("button" + btn).classList.remove("lit");
 }
 
-function playSingleClue(btn) {
+function playSingleClue(btn) {//gets called by playClueSequence, calls lightButton and playTone and setTimeout to call clearButton
   if (gamePlaying) {
     lightButton(btn);
     playTone(btn, clueHoldTime);
@@ -199,7 +200,7 @@ function playSingleClue(btn) {
   }
 }
 
-function playClueSequence() {
+function playClueSequence() {//called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout until progress,
   var started = Math.round(Date.now());
   print(`Pattern is ${pattern}`);
   timer(progress);
