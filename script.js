@@ -369,15 +369,14 @@ function updateSlider() {
 
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
-    
-    
+
     let sliderElem = document.getElementById(`${key}Slider`);
 
     sliderElem.value = value;
     
     let placeholder = document.getElementById(key);
     
-    document.getElementById(placeholder).innerHTML = value;
+    placeholder.innerHTML = value;
     
     console.log(`Key is ${key}, value is ${value}`)
 
@@ -436,17 +435,20 @@ function loadCookie(/*load = true*/) {
     console.log("An error occured when reading cookies");
     return;
   }
-  
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
     let valueStart = index + key.length + 1;
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
-    if (value != userGameSettings[key]) {
+    if (!isNaN(value)) {
       console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
+      userGameSettings[key] = value;
     }
-    userGameSettings[key] = value;
   }
+  
+  
   updateSlider();
+  
+  
   console.log("Passed")
   applySettings("Loaded Previous Save");
 
