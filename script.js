@@ -23,7 +23,7 @@ var progress = 0; //Score of the player
 var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
-var validGuessTime; //contains the time the player should guess
+// var validGuessTime; //contains the time the player should guess
 var strikes; //how much times the player guessed wrong
 
 var gameSettings = {
@@ -67,7 +67,7 @@ o.start(0);
 var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
-var canPlay = false;
+var canPlay = true;
 
 
 
@@ -81,8 +81,8 @@ function timer(clueLength) {
     console.log("Time to Play");
   }, howLong);
 
-  validGuessTime = Date.now() + howLong; //gives the time the user should press
-  console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
+  // validGuessTime = Date.now() + howLong; //gives the time the user should press
+  // console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
 
 function startGame() {
@@ -218,14 +218,8 @@ function guess(btn) {
   // console.log("User guessed: " + btn);
   if (!gamePlaying) {
     return;
-  } else if (!(Date.now() > validGuessTime)) {
-    // showMessage(
-    //   `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
-    // );
-    // console.log(
-    //   `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
-    // );
-    
+  } else if (!(canPlay)) {
+    showMessage("Please Wait Until Simon finishes say")
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
