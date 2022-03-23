@@ -234,7 +234,9 @@ function winGame() {
 
 function keyboardGuess(btn) {
   startTone(btn);
+  lightButton(btn)
   setTimeout(stopTone, 100);
+  setTimeout(clearButton(btn), 100);
   console.log("Passing button" + btn);
   guess(btn);
 }

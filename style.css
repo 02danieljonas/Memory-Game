@@ -82,34 +82,35 @@ button {
 }
 
 #settings {
-  background: black;
-  color: white;
   position: absolute;
   top: 30px;
   right: 10px;
+  background: black;
+  color: white;
 }
 
 #settings:hover {
   background: white;
   color: black;
 }
+
 .ApplyClearSave {
   margin: 1px;
 }
+
 .ApplyClearSave:hover {
   background: black;
   color: white;
 }
 
 #settingsContainer {
-  border: outset;
-
-  text-align: right;
-  background: rgba(250, 0, 0, 0.85);
-  padding: 10px;
   position: absolute;
   top: 60px;
   right: 10px;
+  border: outset;
+  text-align: right;
+  background: rgba(250, 0, 0, 0.85);
+  padding: 10px;
 }
 
 #startBtn {
@@ -133,13 +134,13 @@ button {
   top: -30px;
   text-align: center;
   width: 100%;
-  transition: 5s;
   opacity: 0%;
+  transition: 2s opacity, 4s top;
 }
 
 #errorMessage.show,
 #errorMessage:hover {
   top: 10px;
+  opacity: 90%;
   transition: 0s;
-  opacity: 80%;
 }
