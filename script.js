@@ -6,10 +6,11 @@ const keyBoard = document.querySelector("body");
 
 print(keyBoard);
 keyBoard.addEventListener("keydown", (e) => {
-  if (Number.isInteger(e.key)){
+  if (Number.isInteger(parseInt(e.key))){
     keyboardGuess(e);
     console.log(e.key);
   }
+  else{print("not number")}
 });
 
 var pattern = []; //array contain the pattern for that round
