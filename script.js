@@ -47,7 +47,6 @@ updateFreqMap();
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
 /*
-TODO: Add Infinity to settings page
 TODO: Connect Time Left
 */
 
@@ -70,18 +69,7 @@ var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 var canPlay = false;
 
-// function timer(clueLength) {
-//   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
-//   //if I had more time I would use setTimeout but I want to work on other features
-//   let howLong = nextClueWaitTime; //
-//   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
-//   setTimeout(function () {
-//     console.log("Play now");
-//   }, howLong);
 
-//   validGuessTime = Date.now() + howLong; //gives the time the user should press
-//   console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
-// }
 
 function timer(clueLength) {
   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
@@ -231,12 +219,13 @@ function guess(btn) {
   if (!gamePlaying) {
     return;
   } else if (!(Date.now() > validGuessTime)) {
-    showMessage(
-      `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
-    );
-    console.log(
-      `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
-    );
+    // showMessage(
+    //   `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
+    // );
+    // console.log(
+    //   `Please wait ${(validGuessTime - Date.now()) / 1000}s to guess`
+    // );
+    
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
@@ -347,16 +336,13 @@ function saveSettings() {
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
 
-  //changes slider.value into gamesettings or uGS and cal USP
 
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
 
     let sliderElem = document.getElementById(`${key}Slider`);
 
-    // if (value==31){
-    //   //slidervalue ==31
-    // }
+
 
     sliderElem.value = value == Infinity ? 31 : value;
 
@@ -366,19 +352,7 @@ function updateSlider() {
 
     console.log(`Key is ${key}, value is ${value}`);
 
-    //looks at the sliderplaceholder and changes it value
 
-    //     console.log(key, value, sliderElem);
-
-    //     if (key != NaN) {
-    //       sliderElem.value = value;
-    //     }
-    //     if (key != NaN) {
-    //       updateSliderPlaceholder(`${key}Slider`, key);
-    //     }
-    // updateSliderPlaceholder(sliderElem, key);
-
-    //"nameofrange".value = number I want
   }
 }
 
@@ -396,11 +370,9 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
 function showMessage(info) {
   document.getElementById("errorMessage").innerHTML = info;
 
-  // print("Adding Show");
   document.getElementById("errorMessage").classList.add("show");
 
   setTimeout(function () {
-    // print("Removing Show");
     document.getElementById("errorMessage").classList.remove("show");
   }, 4000);
 }
