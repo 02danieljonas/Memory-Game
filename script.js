@@ -54,7 +54,7 @@ loadCookie();
 
 updateSlider();
 
-applySettings();
+applySettings(false);
 
 updateFreqMap();
 
@@ -92,25 +92,20 @@ function whenCanPlay(clueLength) {
     canPlay = true;
     console.log("Time to Play");
   }, howLong);
-  if (gameSettings["timePerRound"] != Infinity) setCountDown();//<---- do this when the you can play and stop on everything
+  if (gameSettings["timePerRound"] != Infinity) setCountDown(); //<---- do this when the you can play and stop on everything
 }
 
-var timePlaceholderReplaceLaterU
+var timePlaceholderReplaceLaterU;
 function setCountDown() {
-  if (canPlay){
+  if (canPlay) {
     timePlaceholderReplaceLaterU = setInterval(countDown, 1000);
   }
-  
 }
-function countDown(){
-  document.getElementById("timerPlaceholder").innerHTML--
+function countDown() {
+  document.getElementById("timerPlaceholder").innerHTML--;
 }
 
-
-
-countDown()
-
-
+countDown();
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -337,20 +332,22 @@ function updateButtons() {
   updateFreqMap();
 }
 
-function applySettings(message = "Applied Settings") {
+function applySettings(message = true) {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
 
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
-  document.getElementById("timerPlaceholder").innerText = gameSettings["timePerRound"];
-  showMessage(message);
+  document.getElementById("timerPlaceholder").innerText =
+    gameSettings["timePerRound"];
   close();
+  if (message) showMessage("Applied Settings");
 }
 
 function saveSettings() {
-  //called by HTML  save button
-  applySettings("Saved Settings");
+  //called by HTML save button
+  applySettings(false);
+  showMessage("Cookies Saved")
   saveCookie();
 }
 
@@ -423,8 +420,9 @@ function loadCookie(/*load = true*/) {
 
   updateSlider();
 
-  console.log("Passed");
-  applySettings("Loaded Previous Save");
+  showMessage("Cookies applied");
+
+  applySettings(false);
 
   console.log(gameSettings);
   // updateButtons(gameSettings["buttonAmount"]);
