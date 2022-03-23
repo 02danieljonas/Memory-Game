@@ -92,12 +92,23 @@ function whenCanPlay(clueLength) {
     canPlay = true;
     console.log("Time to Play");
   }, howLong);
-  if timePerRound== Infinity
+  if (gameSettings["timePerRound"] != Infinity) setCountDown();//<---- do this when the you can play and stop on everything
+}
+
+var timePlaceholderReplaceLaterU
+function setCountDown() {
+  if (canPlay){
+    timePlaceholderReplaceLaterU = setInterval(countDown, 1000);
+  }
+  
+}
+function countDown(){
+  document.getElementById("timerPlaceholder").innerHTML--
 }
 
 
 
-
+countDown()
 
 
 
@@ -319,11 +330,9 @@ function updateButtons() {
   //called by applySettings, goes through all the buttons and adds or remove the class hidden depending on if they are bigger or smaller than userGameSettings["buttonAmount"]
   for (let i = userGameSettings["buttonAmount"]; i < 10; i++) {
     document.getElementById("button" + i).classList.add("hidden");
-    // console.log("button" + i, "is hidden");
   }
   for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
     document.getElementById("button" + i).classList.remove("hidden");
-    // console.log("button", i, "is shown");
   }
   updateFreqMap();
 }
@@ -334,7 +343,7 @@ function applySettings(message = "Applied Settings") {
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
-
+  document.getElementById("timerPlaceholder").innerText = gameSettings["timePerRound"];
   showMessage(message);
   close();
 }
