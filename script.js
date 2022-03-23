@@ -68,7 +68,7 @@ o.start(0);
 var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
-var canPlay = true;
+var canPlay = false;
 
 // function timer(clueLength) {
 //   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
@@ -168,12 +168,12 @@ function stopTone() {
 }
 
 function lightButton(btn) {
-  //gets called by buttons on the screen  and playSingleClue, lights the button
+  //gets called by playSingleClue, lights the button
   document.getElementById("button" + btn).classList.add("lit");
 }
 
 function clearButton(btn) {
-  //gets called by buttons on the screen  and playSingleClue, unlights the button
+  //gets called by playSingleClue, unlights the button
   document.getElementById("button" + btn).classList.remove("lit");
 }
 
