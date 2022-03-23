@@ -95,7 +95,10 @@ button {
   background: white;
   color: black;
 }
+.ApplyClearSave {
+    margin:1px;
 
+}
 .ApplyClearSave:hover {
   background: black;
   color: white;

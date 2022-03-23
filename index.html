@@ -22,7 +22,7 @@
 
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
-    
+
     <div id="info">
       Lives: <span id="livesPlaceholder">3</span> <br />
       Time Left: <span id="timerPlaceholder">100</span><br />
@@ -108,17 +108,8 @@
     </button>
 
     <div class="hidden" id="settingsContainer">
-      Game Length - <span id="patternLength">5</span>
-      <input
-        type="range"
-        min="1"
-        max="31"
-        value="10"
-        id="patternLengthSlider"
-        oninput='updateSliderPlaceholder(this.id, "patternLength")'
-      />
-      <br />
-      Volume - <span id="volume">5</span>
+      
+      Volume: <span id="volume">5</span>
       <input
         type="range"
         min="0"
@@ -129,7 +120,18 @@
       />
       <br />
 
-      How much lives - <span id="lives">3</span>
+      Game Length: <span id="patternLength">5</span>
+      <input
+        type="range"
+        min="1"
+        max="31"
+        value="10"
+        id="patternLengthSlider"
+        oninput='updateSliderPlaceholder(this.id, "patternLength")'
+      />
+      <br />
+
+      How much lives: <span id="lives">3</span>
       <input
         type="range"
         min="0"
@@ -140,7 +142,7 @@
       />
       <br />
 
-      Amount of Buttons - <span id="buttonAmount">4</span>
+      Amount of Buttons: <span id="buttonAmount">4</span>
       <input
         type="range"
         min="2"
@@ -151,49 +153,31 @@
       />
       <br />
 
-      Time Per Button - <span id="clueHoldTime">4</span>s
-      <input
-        type="range"
-        min="2"
-        max="31"
-        value="4"
-        id="clueHoldTimeSlider"
-        oninput='updateSliderPlaceholder(this.id, "clueHoldTime")'
-      />
-      <br />
-
-      Time Lost Each Round - <span id="timeDecay">20</span>%
+      Seconds Per Round: <span id="timePerButton">20</span>
       <input
         type="range"
         min="0"
-        max="50"
+        max="31"
+        value="10"
+        id="timePerButtonSlider"
+        oninput='updateSliderPlaceholder(this.id, "timePerButton")'
+      />
+      <br />
+
+      Time Lost Each Round: <span id="timeDecay">20</span>%
+      <input
+        type="range"
+        min="0"
+        max="30"
         value="10"
         id="timeDecaySlider"
         oninput='updateSliderPlaceholder(this.id, "timeDecay")'
       />
       <br />
 
-      Time Per Button - <span id="timePerButton">20</span>%
-      <input
-        type="range"
-        min="0"
-        max="50"
-        value="10"
-        id="timePerButtonSlider"
-        oninput='updateSliderPlaceholder(this.id, "timePerButton")'
-      />
-      <br />
-      <!--       Speed of Sequence - <span id="placeholderSequence">3</span>
-      <input
-        type="range"
-        min="1"
-        max="10"
-        value="3"
-        id="placeholderSequenceSlider"
-        oninput='updateSliderPlaceholder(this.id, "placeholderSequence")'
-      />
-      <br /> -->
-      <button class="ApplyClearSave" id="apply" onclick="applySettings()">Apply</button>
+      <button class="ApplyClearSave" id="apply" onclick="applySettings()">
+        Apply
+      </button>
       <button class="ApplyClearSave" id="clear" onclick="clearCookies()">
         Clear Cookies
       </button>

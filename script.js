@@ -89,15 +89,13 @@ function timer(clueLength) {
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
   setTimeout(function () {
-    canPlay=true;
-    console.log("Time to Play")
+    canPlay = true;
+    console.log("Time to Play");
   }, howLong);
 
   validGuessTime = Date.now() + howLong; //gives the time the user should press
   console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
-
-
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -161,7 +159,6 @@ function startTone(btn) {
 }
 
 function stopTone() {
-  
   //gets called by buttons on the screen  and playTone, stops the sound
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
@@ -188,7 +185,7 @@ function playSingleClue(btn) {
 
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
-  canPlay = false
+  canPlay = false;
   timer(progress);
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
@@ -330,28 +327,10 @@ function updateButtons() {
   updateFreqMap();
 }
 
-function findInfinity() {//change each value to 31
-  //called by applySettings, sets values to infinity
-  if (userGameSettings["lives"] == 31) {
-    userGameSettings["lives"] = Infinity;
-    gameSettings["lives"] = Infinity;
-  }
-  if (userGameSettings["patternLength"] == 31) {
-    userGameSettings["patternLength"] = Infinity;
-    gameSettings["patternLength"] = Infinity;
-  }
-  if (userGameSettings["timePerButton"] == 31) {
-    userGameSettings["timePerButton"] = Infinity;
-    gameSettings["timePerButton"] = Infinity;
-  }
-}
-
 function applySettings(message = "Applied Settings") {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
 
-  // console.log("Change in button amount");
   updateButtons(userGameSettings["buttonAmount"]);
-  findInfinity();
   gameSettings = Object.assign({}, userGameSettings);
   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
@@ -374,12 +353,12 @@ function updateSlider() {
     let value = userGameSettings[key];
 
     let sliderElem = document.getElementById(`${key}Slider`);
-    
+
     // if (value==31){
     //   //slidervalue ==31
     // }
 
-    sliderElem.value = (value==Infinity) ? 31 : value;
+    sliderElem.value = value == Infinity ? 31 : value;
 
     let placeholder = document.getElementById(key);
 
@@ -406,7 +385,10 @@ function updateSlider() {
 function updateSliderPlaceholder(sliderElem, placeholder) {
   //sliderElem is the slider ID and placeholder is the Key
   let sliderElemValue = document.getElementById(sliderElem).value;
+  sliderElemValue = sliderElemValue == 31 ? Infinity : sliderElemValue;
+
   let placeholderElem = document.getElementById(placeholder);
+
   placeholderElem.innerHTML = sliderElemValue;
   userGameSettings[placeholder] = sliderElemValue;
 }
