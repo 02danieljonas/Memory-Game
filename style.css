@@ -21,14 +21,15 @@ button {
   height: 200px;
   margin: 2px;
   opacity: 20%;
-  transition:1s width, 1s height;
+  transition:1s width, 1s height, 1s margin;
 
 }
 
 @media only screen and (max-width: 1200px) {
   #gameButtonArea button {
-    width: 15vw;
-    height: 15vw;
+    width: 12vw;
+    height: 12vw;
+    margin: 1vw;
     transition:1s;
   }
 }
