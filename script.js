@@ -7,7 +7,8 @@ const keyBoard = document.querySelector("body");
 print(keyBoard);
 keyBoard.addEventListener("keydown", (e) => {
   if (Number.isInteger(parseInt(e.key))){
-    keyboardGuess(e);
+    if()
+    keyboardGuess(parseInt(e.key)-1);
     console.log(e.key);
   }
   else{print("not number")}
@@ -87,7 +88,7 @@ function startGame() {
 
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
-    pattern = [];
+    pattern = [Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
     document.getElementById("livesPlaceholder").innerText =
@@ -175,7 +176,6 @@ function playClueSequence() {
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
-  pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
   print(`Pattern is ${pattern}`);
 
   for (let i = 0; i <= progress; i++) {
@@ -207,6 +207,7 @@ function winGame() {
 function keyboardGuess(btn){
   //plays sounds
   //setTimeout for 0.5
+  console.log("Passing button"+btn)
   guess(btn)
 }
 
@@ -239,6 +240,7 @@ function guess(btn) {
     return;
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
+    pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
     document.getElementById("progressPlaceholder").innerText = progress;
     if (clueHoldTime > 200) {
       cluePauseTime *= (100-gameSettings["timeDecay"])/100;
