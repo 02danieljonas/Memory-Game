@@ -41,9 +41,6 @@ loadCookie();
 
 applySettings();
 
-// function updateScreen(){
-//   update buttons, update lives time and progress,
-// }
 updateFreqMap();
 
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
@@ -59,10 +56,6 @@ TODO: connect to a data base to read highscores and allow the user submit their 
 */
 /*
 TODO: implement pression number keys to also press buttons
-TODO: allow user to change game speed
-TODO: change button size
-TODO: make it known to the user when they can guess
-TODO: Connect cookies with slider info
 TODO: Add Infinity to settings page
 TODO: Connect Time Left
 
