@@ -71,18 +71,14 @@ var canPlay = true;
 
 
 
-function timer(clueLength) {
+function whenCanPlay(clueLength) {
   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
-  //if I had more time I would use setTimeout but I want to work on other features
   let howLong = nextClueWaitTime; //
-  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
+  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 333; //for every clue add cPT and cHT to find out how long the clue plays for
   setTimeout(function () {
     canPlay = true;
     console.log("Time to Play");
   }, howLong);
-
-  // validGuessTime = Date.now() + howLong; //gives the time the user should press
-  // console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
 
 function startGame() {
@@ -174,7 +170,11 @@ function playSingleClue(btn) {
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   canPlay = false;
-  timer(progress);
+  
+  
+  whenCanPlay(progress);
+  
+  
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
