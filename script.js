@@ -14,7 +14,7 @@ document.addEventListener("keydown", (btn) => {
 
 document.addEventListener("keyup", (btn) => {
   stopTone();
-})
+});
 
 var pattern = []; //array contain the pattern for that round
 var freqMap;
@@ -68,6 +68,20 @@ o.start(0);
 var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
+var canPlay = true;
+
+// function timer(clueLength) {
+//   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
+//   //if I had more time I would use setTimeout but I want to work on other features
+//   let howLong = nextClueWaitTime; //
+//   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
+//   setTimeout(function () {
+//     console.log("Play now");
+//   }, howLong);
+
+//   validGuessTime = Date.now() + howLong; //gives the time the user should press
+//   console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
+// }
 
 function timer(clueLength) {
   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
@@ -75,12 +89,15 @@ function timer(clueLength) {
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 100; //for every clue add cPT and cHT to find out how long the clue plays for
   setTimeout(function () {
-    console.log("Play now");
+    canPlay=true;
+    console.log("Time to Play")
   }, howLong);
 
   validGuessTime = Date.now() + howLong; //gives the time the user should press
   console.log(`Player should press after ${validGuessTime / 1000} s`); //logs it
 }
+
+
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -129,7 +146,7 @@ function startTone(btn) {
 
   // console.log(tonePlaying);
   // stopTone();
-  if (!tonePlaying) {
+  if (!tonePlaying && canPlay) {
     // console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
@@ -144,6 +161,7 @@ function startTone(btn) {
 }
 
 function stopTone() {
+  
   //gets called by buttons on the screen  and playTone, stops the sound
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
@@ -170,7 +188,7 @@ function playSingleClue(btn) {
 
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
-  var started = Math.round(Date.now());
+  canPlay = false
   timer(progress);
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
@@ -204,8 +222,8 @@ function winGame() {
 }
 
 function keyboardGuess(btn) {
-  startTone(btn)
-  setTimeout(stopTone, 100)
+  startTone(btn);
+  setTimeout(stopTone, 100);
   console.log("Passing button" + btn);
   guess(btn);
 }
@@ -271,12 +289,12 @@ function showSettingContainer() {
 function cancel() {
   //called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
   //I could change this by hard coding userGameSettings and the slider infos to be the same so all I have to do is clone
-  for (const property in userGameSettings) {
-    if (userGameSettings[property] != gameSettings[property]) {
-      document.getElementById(property).innerHTML =
-        document.getElementById(property + "Slider").value =
-        userGameSettings[property] =
-          gameSettings[property];
+  for (let key in userGameSettings) {
+    if (userGameSettings[key] != gameSettings[key]) {
+      document.getElementById(key).innerHTML =
+        document.getElementById(key + "Slider").value =
+        userGameSettings[key] =
+          gameSettings[key];
     }
   }
   close();
