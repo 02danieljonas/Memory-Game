@@ -1,20 +1,6 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval,
 
-document.addEventListener("keydown", (btn) => {
-  btn = parseInt(btn.key);
-  if (Number.isInteger(btn)) {
-    if (btn != 0) {
-      btn--;
-    } else {
-      btn = 9;
-    }
-    keyboardGuess(btn);
-  }
-});
 
-document.addEventListener("keyup", (btn) => {
-  stopTone();
-});
 
 var pattern = []; //array contain the pattern for that round
 var freqMap;
@@ -232,11 +218,30 @@ function winGame() {
   alert("Game Over. You Won!");
 }
 
+document.addEventListener("keydown", (btn) => {
+  btn = parseInt(btn.key);
+  if (Number.isInteger(btn)) {
+    if (btn != 0) {
+      btn--;
+    } else {
+      btn = 9;
+    }
+    if (btn < gameSettings["buttonAmount"]) {
+      keyboardGuess(btn);
+    }
+  }
+});
+
+// document.addEventListener("keyup", (btn) => {
+//   stopTone();
+// });
+
 function keyboardGuess(btn) {
+  lightButton(btn);
   startTone(btn);
-  lightButton(btn)
+
   setTimeout(stopTone, 100);
-  setTimeout(clearButton(btn), 100);
+  setTimeout(clearButton(btn), 1000);
   console.log("Passing button" + btn);
   guess(btn);
 }
@@ -454,11 +459,3 @@ function clearCookies() {
   console.log(document.cookie);
   showMessage("Cookies Cleared");
 }
-
-/*
-if sliderValue is changed, change place holder and usergameSettings.
-
-
-placeholder values should only ever reflect the slidervalue, 
-userGameSettings should only ever reflect the slidervalue,
-*/
