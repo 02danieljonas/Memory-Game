@@ -173,6 +173,16 @@
       />
       <br />
 
+      Time Per Button - <span id="timePerButton">20</span>%
+      <input
+        type="range"
+        min="0"
+        max="50"
+        value="10"
+        id="timePerButtonSlider"
+        oninput='updateSliderPlaceholder(this.id, "timePerButton")'
+      />
+      <br />
       <!--       Speed of Sequence - <span id="placeholderSequence">3</span>
       <input
         type="range"

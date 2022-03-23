@@ -25,7 +25,6 @@ var guessCounter = 0; //
 var validGuessTime; //contains the time the player should guess
 var strikes; //how much times the player guessed wrong
 
-
 var gameSettings = {
   //the configuration object
   patternLength: 5,
@@ -35,8 +34,8 @@ var gameSettings = {
   volume: 5,
   lives: 3,
   buttonAmount: 5,
-  clueHoldTime: 4,//clueHoldTime timePerButton
-  timePerButton:0,
+  clueHoldTime: 4, //clueHoldTime timePerButton
+  timePerButton: 0,//<<--brickes my code
   // speedDecay:0.85,
   // timeDecay: 0
 };
@@ -194,12 +193,13 @@ function playSingleClue(btn) {
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   var started = Math.round(Date.now());
-  print(`Pattern is ${pattern}`);
   timer(progress);
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
   pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
+  print(`Pattern is ${pattern}`);
+
   for (let i = 0; i <= progress; i++) {
     //pattern equals random stuff
     /*
@@ -364,7 +364,7 @@ function saveSettings() {
 
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
-  
+
   //changes slider.value into gamesettings or uGS and cal USP
 
   for (let key in userGameSettings) {
@@ -373,40 +373,36 @@ function updateSlider() {
     let sliderElem = document.getElementById(`${key}Slider`);
 
     sliderElem.value = value;
-    
-    let placeholder = document.getElementById(key);
-    
-    placeholder.innerHTML = value;
-    
-    console.log(`Key is ${key}, value is ${value}`)
 
+    let placeholder = document.getElementById(key);
+
+    placeholder.innerHTML = value;
+
+    console.log(`Key is ${key}, value is ${value}`);
 
     //looks at the sliderplaceholder and changes it value
-    
-//     console.log(key, value, sliderElem);
 
-//     if (key != NaN) {
-//       sliderElem.value = value;
-//     }
-//     if (key != NaN) {
-//       updateSliderPlaceholder(`${key}Slider`, key);
-//     }
+    //     console.log(key, value, sliderElem);
+
+    //     if (key != NaN) {
+    //       sliderElem.value = value;
+    //     }
+    //     if (key != NaN) {
+    //       updateSliderPlaceholder(`${key}Slider`, key);
+    //     }
     // updateSliderPlaceholder(sliderElem, key);
 
     //"nameofrange".value = number I want
   }
 }
 
-
-
-function updateSliderPlaceholder(sliderElem, placeholder) {//sliderElem is the slider ID and placeholder is the Key
+function updateSliderPlaceholder(sliderElem, placeholder) {
+  //sliderElem is the slider ID and placeholder is the Key
   let sliderElemValue = document.getElementById(sliderElem).value;
   let placeholderElem = document.getElementById(placeholder);
   placeholderElem.innerHTML = sliderElemValue;
   userGameSettings[placeholder] = sliderElemValue;
 }
-
-
 
 function showMessage(info) {
   document.getElementById("errorMessage").innerHTML = info;
@@ -424,32 +420,36 @@ function loadCookie(/*load = true*/) {
   // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
 
   let cookie = decodeURIComponent(document.cookie) + ";";
-  
-  console.log(`Cookie is "${cookie}"`);
 
+  console.log(`Cookie is "${cookie}"`);
 
   if (cookie == "" || cookie == "0;") {
     console.log("No cookies");
     return;
-  }else if (cookie.length < 90) {
+  } else if (cookie.length < 90) {
     console.log("An error occured when reading cookies");
     return;
   }
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
+    print("index "+index)
+    
     let valueStart = index + key.length + 1;
+    print("vS "+ valueStart)
+    
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
+    print("v "+ value)
+
+    
     if (!isNaN(value)) {
       console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
       userGameSettings[key] = value;
     }
   }
-  
-  
+
   updateSlider();
-  
-  
-  console.log("Passed")
+
+  console.log("Passed");
   applySettings("Loaded Previous Save");
 
   console.log(gameSettings);
@@ -478,8 +478,6 @@ function clearCookies() {
   console.log(document.cookie);
   showMessage("Cookies Cleared");
 }
-
-
 
 /*
 if sliderValue is changed, change place holder and usergameSettings.
