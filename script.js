@@ -124,6 +124,8 @@ function startGame() {
 
     playClueSequence();
     showMessage("Game Started");
+  } else {
+    showMessage("Please Close Settings");
   }
 }
 
@@ -347,7 +349,7 @@ function applySettings(message = true) {
 function saveSettings() {
   //called by HTML save button
   applySettings(false);
-  showMessage("Cookies Saved")
+  showMessage("Cookies Saved");
   saveCookie();
 }
 
