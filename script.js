@@ -1,19 +1,16 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q
 
-/*
-What I have had issues with: 
-CSS - dont remember what specifically but i do remember coming into problems with it
-fixing the glitches that came with it
-*/
 
-//"nameofrange".value = number I want
 
-// const keyBoard = document.querySelector("body");
+const keyBoard = document.querySelector("body");
 
-// print(keyBoard);
-// keyBoard.addEventListener("keydown", (e) => {
-//   console.log(e);
-// });
+print(keyBoard);
+keyBoard.addEventListener("keydown", (e) => {
+  if (Number.isInteger(e.key)){
+    keyboardGuess(e);
+    console.log(e.key);
+  }
+});
 
 var pattern = []; //array contain the pattern for that round
 var freqMap;
@@ -45,21 +42,13 @@ updateFreqMap();
 
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
-/* 
-TODO: fix glitch dragging mouse away from screen causes sounds to continue until any button is pressed
-TODO: fix: spamming start stop adds a bunch to the timeline and will force sound to play no matter what
-TODO: connect to a data base to read highscores and allow the user submit their own score, only if the default values are not changed
-*/
-/*
 
-
-*/
 /*
 TODO: implement pression number keys to also press buttons
 TODO: Add Infinity to settings page
 TODO: Connect Time Left
-
 */
+
 
 function print(q) {
   //if i accidentally put print it wont run an error
@@ -212,6 +201,12 @@ function winGame() {
   //called by guess, calls stopGame display win
   stopGame();
   alert("Game Over. You Won!");
+}
+
+function keyboardGuess(btn){
+  //plays sounds
+  //setTimeout for 0.5
+  guess(btn)
 }
 
 function guess(btn) {
