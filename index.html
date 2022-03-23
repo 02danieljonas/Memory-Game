@@ -108,7 +108,6 @@
     </button>
 
     <div class="hidden" id="settingsContainer">
-      
       Volume: <span id="volume">5</span>
       <input
         type="range"
@@ -153,14 +152,14 @@
       />
       <br />
 
-      Seconds Per Round: <span id="timePerButton">20</span>
+      Seconds Per Round: <span id="timePerRound">20</span>
       <input
         type="range"
         min="1"
         max="31"
         value="10"
-        id="timePerButtonSlider"
-        oninput='updateSliderPlaceholder(this.id, "timePerButton")'
+        id="timePerRoundSlider"
+        oninput='updateSliderPlaceholder(this.id, "timePerRound")'
       />
       <br />
 

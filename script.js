@@ -1,4 +1,4 @@
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval, 
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval,
 
 document.addEventListener("keydown", (btn) => {
   btn = parseInt(btn.key);
@@ -31,28 +31,28 @@ var gameSettings = {
   patternLength: 8,
   volume: 5,
   lives: 3,
-  buttonAmount: 5,
-  timePerButton: 0,
+  buttonAmount: 4,
+  timePerRound: Infinity,
   timeDecay: 0,
 };
+
 //if canPlay
-//time count down
+//time countdown on screen, if countdown reached lose one live count again for ever
 //timePerRound
 
+// var rrrrrrrrrr=0;
 
-var rrrrrrrrrr=0;
+// function tttttt(s){
+//   console.log(`Timer:${rrrrrrrrrr++} `+s)
+// }
 
-function tttttt(s){
-  console.log(`Timer:${rrrrrrrrrr++} `+s)
-}
-
-let h = setInterval(tttttt, 1000);
+// let h = setInterval(tttttt, 1000);
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 loadCookie();
 
-updateSlider() 
+updateSlider();
 
 applySettings();
 
@@ -84,8 +84,6 @@ var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 var canPlay = true;
 
-
-
 function whenCanPlay(clueLength) {
   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
   let howLong = nextClueWaitTime; //
@@ -94,7 +92,14 @@ function whenCanPlay(clueLength) {
     canPlay = true;
     console.log("Time to Play");
   }, howLong);
+  if timePerRound== Infinity
 }
+
+
+
+
+
+
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -185,11 +190,9 @@ function playSingleClue(btn) {
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   canPlay = false;
-  
-  
+
   whenCanPlay(progress);
-  
-  
+
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
@@ -233,8 +236,8 @@ function guess(btn) {
   // console.log("User guessed: " + btn);
   if (!gamePlaying) {
     return;
-  } else if (!(canPlay)) {
-    showMessage("Please Wait Until Simon finishes say")
+  } else if (!canPlay) {
+    showMessage("Please Wait Until Simon finishes say");
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
@@ -345,23 +348,16 @@ function saveSettings() {
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
 
-
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
 
     let sliderElem = document.getElementById(`${key}Slider`);
-
-
 
     sliderElem.value = value == Infinity ? 31 : value;
 
     let placeholder = document.getElementById(key);
 
     placeholder.innerHTML = value;
-
-    console.log(`Key is ${key}, value is ${value}`);
-
-
   }
 }
 
@@ -391,7 +387,7 @@ function loadCookie(/*load = true*/) {
 
   let cookie = decodeURIComponent(document.cookie) + ";";
 
-  console.log(`Cookie is "${cookie}"`);
+  // console.log(`Cookie is "${cookie}"`);
 
   if (cookie == "" || cookie == "0;") {
     console.log("No cookies");
