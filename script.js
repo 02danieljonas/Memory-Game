@@ -35,6 +35,14 @@ var gameSettings = {
   timePerButton: 0,
   timeDecay: 0,
 };
+var rrrrrrrrrr=0;
+function tttttt(){
+  console.log(`Timer: ${rrrrrrrrrr++}`)
+  
+}
+setInterval(tttttt(), 1);
+
+
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
@@ -48,6 +56,7 @@ document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
 /*
 TODO: Connect Time Left
+TODO: Make this all look better
 */
 
 function print(q) {
