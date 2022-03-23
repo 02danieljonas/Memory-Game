@@ -28,16 +28,11 @@ var strikes; //how much times the player guessed wrong
 var gameSettings = {
   //the configuration object
   patternLength: 5,
-  // countDownTimer: 3,
-  // countDownTimerIncrement: 1.5,
-  // clueHoldTime: 8,
   volume: 5,
   lives: 3,
   buttonAmount: 5,
-  clueHoldTime: 4, //clueHoldTime timePerButton
-  timePerButton: 0,//<<--brickes my code
-  // speedDecay:0.85,
-  // timeDecay: 0
+  timePerButton: 0,
+  timeDecay: 0
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -256,9 +251,9 @@ function guess(btn) {
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
     document.getElementById("progressPlaceholder").innerText = progress;
-    if (clueHoldTime > 150) {
-      cluePauseTime *= 0.85;
-      clueHoldTime *= 0.85;
+    if (clueHoldTime > 200) {
+      cluePauseTime *= (100-gameSettings["timeDecay"])/100;
+      clueHoldTime *= (100-gameSettings["timeDecay"])/100;
     }
     playClueSequence();
     return;
