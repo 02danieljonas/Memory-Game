@@ -118,7 +118,7 @@ function startGame() {
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("stopBtn").classList.remove("hidden");
-
+    updateScreenValues();
     playClueSequence();
     showMessage("Game Started");
   } else {
@@ -388,7 +388,9 @@ function applySettings(message = true) {
   //   document.getElementById("timerPlaceholder").innerText =
   //     gameSettings["timePerRound"];
   close();
-  if (message) showMessage("Applied Settings");
+  if (message) {
+    showMessage("Applied Settings")
+  };
 }
 
 function saveSettings() {
@@ -452,26 +454,17 @@ function loadCookie(/*load = true*/) {
   }
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
-    print("index " + index);
-
     let valueStart = index + key.length + 1;
-    print("vS " + valueStart);
-
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
-    print("v " + value);
-
     if (!isNaN(value)) {
-      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
+      // console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
       userGameSettings[key] = value;
     }
   }
-
   updateSlider();
-
   showMessage("Cookies applied");
-
+  console.log(gameSettings);
   applySettings(false);
-
   console.log(gameSettings);
   // updateButtons(gameSettings["buttonAmount"]);
 }
@@ -510,24 +503,23 @@ function activateModal(headerText, color) {
 
   //loop through this showing everything
   
-  let output = `Progress: ${progress} / ${gameSettings["patternLength"]}`;
+  let output = `Progress: ${progress} / ${gameSettings["patternLength"]} <br>`;
+  
+  output+= `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`
+  
+  output+= `Button Amount ${gameSettings["buttonAmount"]} <br>`
+  
+  output+= `Time: ${gameSettings["timePerRound"]} <br> Time Decay: ${gameSettings["timeDecay"]}% <br>`
   
   document.getElementById("modalBody").innerHTML = output;
 
-  
-//   for (let keys in gameSettings){
-    
-//   }
   
   document.getElementById("modalTitle").innerHTML = headerText
   
 }
 
-  // document.getElementById("livesPlaceholder").innerText =
-  //   gameSettings["lives"] - strikes;
-  // document.getElementById("timerPlaceholder").innerText =
-  //   gameSettings["timePerRound"];
-
+TODO: "Issue With ScreenUpdate Fix it"
+TODO: "When a time is given value is reset to starting time when clue is being given"
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
