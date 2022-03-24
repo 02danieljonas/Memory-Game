@@ -162,12 +162,6 @@ function close() {
 }
 
 
-
-
-
-
-
-
 var timeTimer;
 
 function setCountDown() {
