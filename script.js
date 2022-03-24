@@ -223,13 +223,15 @@ function loseGame() {
   // document.getElementById("livesPlaceholder").innerText = 0;
   updateScreenValues();
   stopGame();
-  alert("Game Over. You lost! \n Progress: " + progress);
+  // alert("Game Over. You lost! \n Progress: " + progress);
+  activateModal("Better luck next time","red")
+
 }
 
 function winGame() {
   //called by guess, calls stopGame display win
   stopGame();
-  activateModal(undefined,"green")
+  activateModal("Winner!!!!","green")
   // alert("Game Over. You Won!");
 }
 
@@ -497,7 +499,7 @@ function clearCookies() {
   showMessage("Cookies Cleared");
 }
 
-function activateModal(color) {
+function activateModal(headerText, color) {
   print("You should add confetti");
   document.getElementById("modal").classList.add("active");
   document.getElementById("overlay").classList.add("active");
@@ -506,10 +508,26 @@ function activateModal(color) {
   document.getElementById("overlay").style.background = color;
   document.getElementById("overlay").style.opacity = "50%";
 
-  document.getElementById("modalBody").innerHTML = gameSettings//loop through this showing everythin
-  document.getElementById("modalTitle").innerHTML = color
+  //loop through this showing everything
+  
+  let output = `Progress: ${progress} / ${gameSettings["patternLength"]}`;
+  
+  document.getElementById("modalBody").innerHTML = output;
+
+  
+//   for (let keys in gameSettings){
+    
+//   }
+  
+  document.getElementById("modalTitle").innerHTML = headerText
   
 }
+
+  // document.getElementById("livesPlaceholder").innerText =
+  //   gameSettings["lives"] - strikes;
+  // document.getElementById("timerPlaceholder").innerText =
+  //   gameSettings["timePerRound"];
+
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
