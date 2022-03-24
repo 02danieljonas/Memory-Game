@@ -505,8 +505,8 @@ function activateModal(headerText, color) {
   document.getElementById("modalTitle").innerHTML = headerText;
 }
 
-// TODO: "Issue With ScreenUpdate Fix it";
-// TODO: "When a time is given value is reset to starting time when clue is being given";
+TODO: "Issue With ScreenUpdate Fix it";
+TODO: "When a time is given value is reset to starting time when clue is being given";
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
