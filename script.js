@@ -102,8 +102,8 @@ function startGame() {
     pattern = [Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
-    // document.getElementById("livesPlaceholder").innerText =
-    //   gameSettings["lives"]; //updates the lives on the html
+    document.getElementById("livesPlaceholder").innerText =
+      gameSettings["lives"]; //updates the lives on the html
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -112,7 +112,7 @@ function startGame() {
     playClueSequence();
     showMessage("Game Started");
   } else {
-    showMessage("Please Close Settings");
+  //   showMessage("Please Close Settings");
   }
 }
 
@@ -196,12 +196,6 @@ function playClueSequence() {
   print(`Pattern is ${pattern}`);
 
   for (let i = 0; i <= progress; i++) {
-    //pattern equals random stuff
-    /*
-    pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
-      */
-
-    // console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
