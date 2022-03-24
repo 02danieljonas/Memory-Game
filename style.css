@@ -1,11 +1,8 @@
-html{
-background: radial-gradient(circle at 100%, #333, #333 50%, #eee 75%, #333 75%);
-}
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   line-height: 1.5;
- 
+  background-color: slategrey;
   color: white;
 }
 
@@ -39,7 +36,6 @@ button {
 #gameButtonArea button.lit,
 #gameButtonArea button:active {
   opacity: 100%;
-  
 }
 
 #button0 {

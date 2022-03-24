@@ -7,6 +7,7 @@ var progress = 0; //Score of the player
 var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
+// var validGuessTime; //contains the time the player should guess
 var strikes = 0; //how much times the player guessed wrong
 
 var gameSettings = {
@@ -30,6 +31,15 @@ applySettings(false);
 updateFreqMap();
 
 updateScreenValues();
+
+/*
+TODO: Make this all look better
+*/
+
+function print(q) {
+  //if i accidentally put print it wont run an error
+  console.log(q);
+}
 
 function updateScreenValues() {
   document.getElementById("progressPlaceholder").innerText = progress;
@@ -214,13 +224,14 @@ function loseGame() {
   updateScreenValues();
   stopGame();
   // alert("Game Over. You lost! \n Progress: " + progress);
-  activateModal("Better luck next time", "red");
+  activateModal("Better luck next time","red")
+
 }
 
 function winGame() {
   //called by guess, calls stopGame display win
   stopGame();
-  activateModal("Winner!!!!", "green");
+  activateModal("Winner!!!!","green")
   // alert("Game Over. You Won!");
 }
 
@@ -378,8 +389,8 @@ function applySettings(message = true) {
   //     gameSettings["timePerRound"];
   close();
   if (message) {
-    showMessage("Applied Settings");
-  }
+    showMessage("Applied Settings")
+  };
 }
 
 function saveSettings() {
@@ -485,31 +496,34 @@ function activateModal(headerText, color) {
   print("You should add confetti");
   document.getElementById("modal").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-
+  
   document.getElementById("modalHeader").style.background = color;
   document.getElementById("overlay").style.background = color;
   document.getElementById("overlay").style.opacity = "50%";
 
   //loop through this showing everything
-
+  
   let output = `Progress: ${progress} / ${gameSettings["patternLength"]} <br>`;
-
-  output += `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`;
-
-  output += `Button Amount ${gameSettings["buttonAmount"]} <br>`;
-
-  output += `Time: ${gameSettings["timePerRound"]} <br> Time Decay: ${gameSettings["timeDecay"]}% <br>`;
-
+  
+  output+= `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`
+  
+  output+= `Button Amount ${gameSettings["buttonAmount"]} <br>`
+  
+  output+= `Time: ${gameSettings["timePerRound"]} <br> Time Decay: ${gameSettings["timeDecay"]}% <br>`
+  
   document.getElementById("modalBody").innerHTML = output;
 
-  document.getElementById("modalTitle").innerHTML = headerText;
+  
+  document.getElementById("modalTitle").innerHTML = headerText
+  
 }
 
-TODO: "Issue With ScreenUpdate Fix it";
-TODO: "When a time is given value is reset to starting time when clue is being given";
+TODO: "Issue With ScreenUpdate Fix it"
+TODO: "When a time is given value is reset to starting time when clue is being given"
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
   document.getElementById("overlay").style.opacity = "0%";
+
 }
