@@ -1,4 +1,4 @@
-//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval,
+//https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval, Smyvens
 
 
 
@@ -11,12 +11,13 @@ var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
 
+
 var gameSettings = {
   //the configuration object
   patternLength: 8,
   volume: 3,
   lives: 3,
-  buttonAmount: 4,
+  buttonAmount: 5,
   timePerRound: Infinity,
   timeDecay: 0,
 };
@@ -33,9 +34,6 @@ function loadCookie() {
   // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
 
   let cookie = decodeURIComponent(document.cookie) + ";";
-
-  // console.log(`Cookie is "${cookie}"`);
-
   if (cookie == "" || cookie == "0;") {
     console.log("No cookies");
     return;
@@ -53,18 +51,15 @@ function loadCookie() {
       userGameSettings[key] = value;
     }
   }
-  // updateSlider();
   showMessage("Cookies applied");
   console.log(gameSettings);
   applySettings(false);
   console.log(gameSettings);
-  // updateButtons(gameSettings["buttonAmount"]);
 }
 
 
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
-
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
 
@@ -78,24 +73,16 @@ function updateSlider() {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function updateFreqMap() {
+  //called in line and updateButtons, empties freqMap calculates what info is needed through the passed argument buttonAmount and puts it into freqMap
+  //freqMap is populated with values between 260 and 500
+  freqMap = [];
+  let temp = (500 - 260) / (gameSettings["buttonAmount"] - 1);
+  for (let i = 0; i < gameSettings["buttonAmount"]; i++) {
+    freqMap[i] = Math.round(260 + temp * i);
+  }
+  console.log("Frequency Map is ", freqMap);
+}
 
 function updateScreenValues() {
   document.getElementById("progressPlaceholder").innerText = progress;
@@ -107,6 +94,7 @@ function updateScreenValues() {
   document.getElementById("timerPlaceholder").innerText =
     gameSettings["timePerRound"];
 }
+
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
@@ -134,6 +122,51 @@ function whenCanPlay(clueLength) {
     } //<---- do this when the you can play and stop on everything
   }, howLong);
 }
+
+
+
+function showSettingContainer() {
+  //called by HTML settings buttons, if not playing( if settings isn't showns it shows settings if settings is shown it calls cancel) else shoes messages
+  //
+  if (gamePlaying == false) {
+    if (document.getElementById("settingsContainer").classList == "hidden") {
+      document.getElementById("settingsContainer").classList.remove("hidden");
+      document.getElementById("settings").innerText = "Cancel";
+    } else {
+      cancel();
+    }
+  } else {
+    showMessage("Please stop the game to change settings");
+    // console.log("Error");
+  }
+}
+
+function cancel() {
+  //called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
+  //I could change this by hard coding userGameSettings and the slider infos to be the same so all I have to do is clone
+  for (let key in userGameSettings) {
+    if (userGameSettings[key] != gameSettings[key]) {
+      document.getElementById(key).innerHTML =
+        document.getElementById(key + "Slider").value =
+        userGameSettings[key] =
+          gameSettings[key];
+    }
+  }
+  close();
+}
+
+function close() {
+  //called by cancel and applySettings, closes settings container
+  document.getElementById("settingsContainer").classList.add("hidden");
+  document.getElementById("settings").innerText = "Settings";
+}
+
+
+
+
+
+
+
 
 var timeTimer;
 
@@ -304,10 +337,6 @@ document.addEventListener("keydown", (btn) => {
   }
 });
 
-// document.addEventListener("keyup", (btn) => {
-//   stopTone();
-// });
-
 function keyboardGuess(btn) {
   lightButton(btn);
   startTone(btn);
@@ -369,53 +398,6 @@ function guess(btn) {
     clearInterval(timeTimer);
     winGame();
   }
-}
-
-function showSettingContainer() {
-  //called by HTML settings buttons, if not playing( if settings isn't showns it shows settings if settings is shown it calls cancel) else shoes messages
-  //
-  if (gamePlaying == false) {
-    if (document.getElementById("settingsContainer").classList == "hidden") {
-      document.getElementById("settingsContainer").classList.remove("hidden");
-      document.getElementById("settings").innerText = "Cancel";
-    } else {
-      cancel();
-    }
-  } else {
-    showMessage("Please stop the game to change settings");
-    // console.log("Error");
-  }
-}
-
-function cancel() {
-  //called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
-  //I could change this by hard coding userGameSettings and the slider infos to be the same so all I have to do is clone
-  for (let key in userGameSettings) {
-    if (userGameSettings[key] != gameSettings[key]) {
-      document.getElementById(key).innerHTML =
-        document.getElementById(key + "Slider").value =
-        userGameSettings[key] =
-          gameSettings[key];
-    }
-  }
-  close();
-}
-
-function close() {
-  //called by cancel and applySettings, closes settings container
-  document.getElementById("settingsContainer").classList.add("hidden");
-  document.getElementById("settings").innerText = "Settings";
-}
-
-function updateFreqMap() {
-  //called in line and updateButtons, empties freqMap calculates what info is needed through the passed argument buttonAmount and puts it into freqMap
-  //freqMap is populated with values between 260 and 500
-  freqMap = [];
-  let temp = (500 - 260) / (gameSettings["buttonAmount"] - 1);
-  for (let i = 0; i < gameSettings["buttonAmount"]; i++) {
-    freqMap[i] = Math.round(260 + temp * i);
-  }
-  console.log("Frequency Map is ", freqMap);
 }
 
 function updateButtons() {
