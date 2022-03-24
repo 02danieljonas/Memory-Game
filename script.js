@@ -498,8 +498,11 @@ function clearCookies() {
 
 
 function activateModal(){
-  // console.log("Hi")
-  document.getElementById("modal").classList()
-  
-    //.add("active");
+  document.getElementById("modal").classList.add("active")
+  document.getElementById("overlay").classList.add("active")
+}
+
+function deactivateModal(){
+  document.getElementById("modal").classList.remove("active")
+  document.getElementById("overlay").classList.remove("active")
 }

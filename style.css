@@ -146,6 +146,16 @@ button {
   transition: 0s;
 }
 
+/*
+g
+g
+g
+g
+g
+g
+g
+*/
+
 #modal {
   position: fixed;
   top: 50%;
@@ -170,7 +180,7 @@ button {
   align-items: center;
   display: flex;
   border-bottom: 1px solid cyan;
-  background-color: green;
+/*   background-color: green; */
 }
 
 #modalHeader #modalTitle {
@@ -194,7 +204,7 @@ button {
 
 #overlay {
   opacity: 0;
-  background-color: rgba(0, 128, 0, 0.25);
+/*   background-color: rgba(0, 128, 0, 0.25); */
   transition: 200ms ease-in-out;
   position: fixed;
   top: 0;
