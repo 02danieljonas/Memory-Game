@@ -495,3 +495,11 @@ function clearCookies() {
   console.log(document.cookie);
   showMessage("Cookies Cleared");
 }
+
+
+function activateModal(){
+  // console.log("Hi")
+  document.getElementById("modal").classList()
+  
+    //.add("active");
+}
