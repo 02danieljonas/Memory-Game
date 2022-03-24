@@ -1,7 +1,6 @@
 body {
   width: 100vw;
   height: 100vh;
-  
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   line-height: 1.5;
@@ -149,16 +148,6 @@ button {
   opacity: 90%;
   transition: 0s;
 }
-
-/*
-g
-g
-g
-g
-g
-g
-g
-*/
 
 #modal {
   position: fixed;
