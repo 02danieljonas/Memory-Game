@@ -2,17 +2,17 @@
 
 **Memory Game** is a Light & Sound Memory game to apply for CodePath's SITE Program. 
 
-Submitted by: **NAME**
+Submitted by: Daniel Jonas
 
-Time spent: **#** hours spent in total
+Time spent: 46+ hours spent in total
 
-Link to project: (insert your link here, should start with https://glitch.com...)
+Link to project: https://glitch.com/edit/#!/wry-tungsten-smartphone
 
 ## Required Functionality
 
 The following **required** functionality is complete:
 
-* [ ] Game interface has a heading (h1 tag), a line of body text (p tag), and four buttons that match the demo app
+- [x] Game interface has a heading (h1 tag), a line of body text (p tag), and four buttons that match the demo app
 * [ ] "Start" button toggles between "Start" and "Stop" when clicked. 
 * [ ] Game buttons each light up and play a sound when clicked. 
 * [ ] Computer plays back sequence of clues including sound and visual cue for each button
@@ -66,7 +66,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 
 ## License
 
-    Copyright Daniel Jonas
+    Copyright [YOUR NAME]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -79,3 +79,4 @@ If you recorded multiple GIFs for all the implemented features, you can add them
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+    
