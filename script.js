@@ -17,7 +17,7 @@ var gameSettings = {
   patternLength: 8,
   volume: 3,
   lives: 3,
-  buttonAmount: 5,
+  buttonAmount: 4,
   timePerRound: Infinity,
   timeDecay: 0,
 };
