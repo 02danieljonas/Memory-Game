@@ -203,6 +203,7 @@ g
 }
 
 #overlay {
+  cursor: pointer;
   opacity: 0;
 /*   background-color: rgba(0, 128, 0, 0.25); */
   transition: 200ms ease-in-out;

@@ -118,7 +118,7 @@ function startGame() {
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("stopBtn").classList.remove("hidden");
-
+    updateScreenValues();
     playClueSequence();
     showMessage("Game Started");
   } else {
@@ -454,26 +454,17 @@ function loadCookie(/*load = true*/) {
   }
   for (let key in userGameSettings) {
     let index = cookie.indexOf(key);
-    print("index " + index);
-
     let valueStart = index + key.length + 1;
-    print("vS " + valueStart);
-
     let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
-    print("v " + value);
-
     if (!isNaN(value)) {
-      console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
+      // console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
       userGameSettings[key] = value;
     }
   }
-
   updateSlider();
-
   showMessage("Cookies applied");
-
+  console.log(gameSettings);
   applySettings(false);
-
   console.log(gameSettings);
   // updateButtons(gameSettings["buttonAmount"]);
 }
@@ -522,11 +513,13 @@ function activateModal(headerText, color) {
   
   document.getElementById("modalBody").innerHTML = output;
 
-  TODO: "Issue With ScreenUpdate Fix it"
   
   document.getElementById("modalTitle").innerHTML = headerText
   
 }
+
+TODO: "Issue With ScreenUpdate Fix it"
+TODO: "When a time is given value is reset to starting time when clue is being given"
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
