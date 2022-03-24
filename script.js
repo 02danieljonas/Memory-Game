@@ -63,7 +63,9 @@ function whenCanPlay(clueLength) {
   setTimeout(function () {
     canPlay = true;
     console.log("Time to Play");
-    if (gameSettings["timePerRound"] != Infinity) setCountDown(); //<---- do this when the you can play and stop on everything
+    if (gameSettings["timePerRound"] != Infinity) {
+      setCountDown();
+    } //<---- do this when the you can play and stop on everything
   }, howLong);
 }
 
@@ -71,16 +73,32 @@ var timePlaceholderReplaceLaterU;
 
 function setCountDown() {
   if (canPlay) {
-    var cD = (progress + 1) * gameSettings["timePerRound"];
-    timePlaceholderReplaceLaterU = setInterval(countDown, 1000, cD);
+    document.getElementById("timerPlaceholder").innerHTML =
+      (progress + 1) * gameSettings["timePerRound"];
+    timePlaceholderReplaceLaterU = setInterval(function () {
+      print("Working");
+      document.getElementById("timerPlaceholder").innerHTML--;
+      
+      
+      
+      if (document.getElementById("timerPlaceholder").innerHTML == 0) {
+        strikes++;
+        if (strikes >= gameSettings["lives"]) {
+          loseGame();
+        } else {
+          document.getElementById("livesPlaceholder").innerText =
+            gameSettings["lives"] - strikes;
+          playClueSequence();
+        }
+      }
+    }, 1000);
   }
 }
 
-function countDown(cD) {
-  document.getElementById("timerPlaceholder").innerHTML = cD--;
+function countDown() {
+  print("Working");
+  document.getElementById("timerPlaceholder").innerHTML--;
 }
-
-// countDown();
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -241,7 +259,7 @@ function guess(btn) {
   if (!gamePlaying) {
     return;
   } else if (!canPlay) {
-    showMessage("Please Wait Until Simon finishes say");
+    showMessage("Please Wait Until Simon finishes says");
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
