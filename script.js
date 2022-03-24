@@ -30,7 +30,7 @@ applySettings(false);
 
 updateFreqMap();
 
-updateScreenValues()
+updateScreenValues();
 
 /*
 TODO: Make this all look better
@@ -46,7 +46,8 @@ function updateScreenValues() {
   document.getElementById(
     "patternLengthPlaceholder"
   ).innerText = ` / ${gameSettings["patternLength"]}`;
-  document.getElementById("livesPlaceholder").innerText = gameSettings["lives"]-strikes;
+  document.getElementById("livesPlaceholder").innerText =
+    gameSettings["lives"] - strikes;
   document.getElementById("timerPlaceholder").innerText =
     gameSettings["timePerRound"];
 }
@@ -103,24 +104,16 @@ function setCountDown() {
   }
 }
 
-function countDown() {
-  print("Working");
-  document.getElementById("timerPlaceholder").innerHTML--;
-}
-
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
-  document.getElementById(
-    "patternLengthPlaceholder"
-  ).innerText = ` / ${gameSettings["patternLength"]}`;
-
+  updateScreenValues();
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
     pattern = [Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
-    document.getElementById("livesPlaceholder").innerText =
-      gameSettings["lives"]; //updates the lives on the html
+    // document.getElementById("livesPlaceholder").innerText =
+    //   gameSettings["lives"]; //updates the lives on the html
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -227,7 +220,8 @@ function playClueSequence() {
 
 function loseGame() {
   //called by guess, calls stopGame display lost
-  document.getElementById("livesPlaceholder").innerText = 0;
+  // document.getElementById("livesPlaceholder").innerText = 0;
+  updateScreenValues();
   stopGame();
   alert("Game Over. You lost! \n Progress: " + progress);
 }
@@ -281,8 +275,9 @@ function guess(btn) {
       loseGame();
       return;
     } else {
-      document.getElementById("livesPlaceholder").innerText =
-        gameSettings["lives"] - strikes;
+      updateScreenValues();
+      // document.getElementById("livesPlaceholder").innerText =
+      //   gameSettings["lives"] - strikes;
       playClueSequence();
       return;
     }
@@ -292,12 +287,13 @@ function guess(btn) {
     return;
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
-    document.getElementById(
-      "patternLengthPlaceholder"
-    ).innerText = ` / ${gameSettings["patternLength"]}`;
+    // document.getElementById(
+    //   "patternLengthPlaceholder"
+    // ).innerText = ` / ${gameSettings["patternLength"]}`;
+    updateScreenValues();
     clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
-    document.getElementById("progressPlaceholder").innerText = progress;
+    // document.getElementById("progressPlaceholder").innerText = progress;
     if (clueHoldTime > 300) {
       cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
       clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
@@ -306,10 +302,11 @@ function guess(btn) {
     return;
   } else {
     progress++;
-    document.getElementById("progressPlaceholder").innerText = progress;
-    document.getElementById(
-      "patternLengthPlaceholder"
-    ).innerText = ` / ${gameSettings["patternLength"]}`;
+    updateScreenValues();
+    // document.getElementById("progressPlaceholder").innerText = progress;
+    // document.getElementById(
+    //   "patternLengthPlaceholder"
+    // ).innerText = ` / ${gameSettings["patternLength"]}`;
 
     clearInterval(timeTimer);
     winGame();
@@ -379,13 +376,14 @@ function applySettings(message = true) {
 
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
-  document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
-  document.getElementById(
-    "patternLengthPlaceholder"
-  ).innerText = ` / ${gameSettings["patternLength"]}`;
+  updateScreenValues();
+  //   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
+  //   document.getElementById(
+  //     "patternLengthPlaceholder"
+  //   ).innerText = ` / ${gameSettings["patternLength"]}`;
 
-  document.getElementById("timerPlaceholder").innerText =
-    gameSettings["timePerRound"];
+  //   document.getElementById("timerPlaceholder").innerText =
+  //     gameSettings["timePerRound"];
   close();
   if (message) showMessage("Applied Settings");
 }
