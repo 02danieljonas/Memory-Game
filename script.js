@@ -229,7 +229,8 @@ function loseGame() {
 function winGame() {
   //called by guess, calls stopGame display win
   stopGame();
-  alert("Game Over. You Won!");
+  activateModal(undefined,"green")
+  // alert("Game Over. You Won!");
 }
 
 document.addEventListener("keydown", (btn) => {
@@ -506,6 +507,8 @@ function activateModal(color) {
   document.getElementById("overlay").style.opacity = "50%";
 
   document.getElementById("modalBody").innerHTML = gameSettings//loop through this showing everythin
+  document.getElementById("modalTitle").innerHTML = color
+  
 }
 
 function deactivateModal() {
