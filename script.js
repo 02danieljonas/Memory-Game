@@ -8,7 +8,7 @@ var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 // var validGuessTime; //contains the time the player should guess
-var strikes; //how much times the player guessed wrong
+var strikes = 0; //how much times the player guessed wrong
 
 var gameSettings = {
   //the configuration object
@@ -30,7 +30,7 @@ applySettings(false);
 
 updateFreqMap();
 
-document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
+updateScreenValues()
 
 /*
 TODO: Make this all look better
@@ -39,6 +39,16 @@ TODO: Make this all look better
 function print(q) {
   //if i accidentally put print it wont run an error
   console.log(q);
+}
+
+function updateScreenValues() {
+  document.getElementById("progressPlaceholder").innerText = progress;
+  document.getElementById(
+    "patternLengthPlaceholder"
+  ).innerText = ` / ${gameSettings["patternLength"]}`;
+  document.getElementById("livesPlaceholder").innerText = gameSettings["lives"]-strikes;
+  document.getElementById("timerPlaceholder").innerText =
+    gameSettings["timePerRound"];
 }
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -100,6 +110,9 @@ function countDown() {
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
+  document.getElementById(
+    "patternLengthPlaceholder"
+  ).innerText = ` / ${gameSettings["patternLength"]}`;
 
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
@@ -279,6 +292,9 @@ function guess(btn) {
     return;
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
+    document.getElementById(
+      "patternLengthPlaceholder"
+    ).innerText = ` / ${gameSettings["patternLength"]}`;
     clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
     document.getElementById("progressPlaceholder").innerText = progress;
@@ -289,6 +305,12 @@ function guess(btn) {
     playClueSequence();
     return;
   } else {
+    progress++;
+    document.getElementById("progressPlaceholder").innerText = progress;
+    document.getElementById(
+      "patternLengthPlaceholder"
+    ).innerText = ` / ${gameSettings["patternLength"]}`;
+
     clearInterval(timeTimer);
     winGame();
   }
@@ -358,7 +380,9 @@ function applySettings(message = true) {
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
-  document.getElementById("patternLengthPlaceholder").innerText = ` / ${gameSettings["patternLength"]}`;
+  document.getElementById(
+    "patternLengthPlaceholder"
+  ).innerText = ` / ${gameSettings["patternLength"]}`;
 
   document.getElementById("timerPlaceholder").innerText =
     gameSettings["timePerRound"];
