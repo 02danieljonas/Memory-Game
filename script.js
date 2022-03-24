@@ -1,7 +1,5 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval,
 
-
-
 var pattern = []; //array contain the pattern for that round
 var freqMap;
 var clueInProgress = false; //is a clue playing right now
@@ -21,18 +19,6 @@ var gameSettings = {
   timePerRound: Infinity,
   timeDecay: 0,
 };
-
-//if canPlay
-//time countdown on screen, if countdown reached lose one live count again for ever
-//timePerRound
-
-// var rrrrrrrrrr=0;
-
-// function tttttt(s){
-//   console.log(`Timer:${rrrrrrrrrr++} `+s)
-// }
-
-// let h = setInterval(tttttt, 1000);
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
@@ -77,21 +63,24 @@ function whenCanPlay(clueLength) {
   setTimeout(function () {
     canPlay = true;
     console.log("Time to Play");
+    if (gameSettings["timePerRound"] != Infinity) setCountDown(); //<---- do this when the you can play and stop on everything
   }, howLong);
-  if (gameSettings["timePerRound"] != Infinity) setCountDown(); //<---- do this when the you can play and stop on everything
 }
 
 var timePlaceholderReplaceLaterU;
+
 function setCountDown() {
   if (canPlay) {
-    timePlaceholderReplaceLaterU = setInterval(countDown, 1000);
+    var cD = (progress + 1) * gameSettings["timePerRound"];
+    timePlaceholderReplaceLaterU = setInterval(countDown, 1000, cD);
   }
 }
-function countDown() {
-  document.getElementById("timerPlaceholder").innerHTML--;
+
+function countDown(cD) {
+  document.getElementById("timerPlaceholder").innerHTML = cD--;
 }
 
-countDown();
+// countDown();
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -407,8 +396,9 @@ function loadCookie(/*load = true*/) {
   if (cookie == "" || cookie == "0;") {
     console.log("No cookies");
     return;
-  } else if (cookie.length < 90) {
+  } else if (cookie.length < 70) {
     console.log("An error occured when reading cookies");
+    console.log(cookie);
     return;
   }
   for (let key in userGameSettings) {
