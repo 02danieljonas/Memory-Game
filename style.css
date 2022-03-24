@@ -144,3 +144,10 @@ button {
   opacity: 90%;
   transition: 0s;
 }
+
+#modal{
+  position: fixed;
+  background: green;
+  Top: 30px;
+  padding: 30px;
+}
