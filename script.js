@@ -365,17 +365,9 @@ function updateButtons() {
 
 function applySettings(message = true) {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
-
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
   updateScreenValues();
-  //   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
-  //   document.getElementById(
-  //     "patternLengthPlaceholder"
-  //   ).innerText = ` / ${gameSettings["patternLength"]}`;
-
-  //   document.getElementById("timerPlaceholder").innerText =
-  //     gameSettings["timePerRound"];
   close();
   if (message) {
     showMessage("Applied Settings");
