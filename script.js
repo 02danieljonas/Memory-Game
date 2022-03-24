@@ -33,7 +33,6 @@ updateFreqMap();
 document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
 
 /*
-TODO: Connect Time Left
 TODO: Make this all look better
 */
 
@@ -69,18 +68,16 @@ function whenCanPlay(clueLength) {
   }, howLong);
 }
 
-var timePlaceholderReplaceLaterU;
+var timeTimer;
 
 function setCountDown() {
   if (canPlay) {
     document.getElementById("timerPlaceholder").innerHTML =
       (progress + 1) * gameSettings["timePerRound"];
-    timePlaceholderReplaceLaterU = setInterval(function () {
+    timeTimer = setInterval(function () {
       print("Working");
       document.getElementById("timerPlaceholder").innerHTML--;
-      
-      
-      
+
       if (document.getElementById("timerPlaceholder").innerHTML == 0) {
         strikes++;
         if (strikes >= gameSettings["lives"]) {
@@ -90,6 +87,7 @@ function setCountDown() {
             gameSettings["lives"] - strikes;
           playClueSequence();
         }
+        clearInterval(timeTimer);
       }
     }, 1000);
   }
@@ -125,6 +123,8 @@ function startGame() {
 function stopGame() {
   //setts gamePlaying to false, swaps hide from start button to stop buttons
   gamePlaying = false;
+  clearInterval(timeTimer);
+
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   showMessage("Game Stopped");
@@ -263,6 +263,7 @@ function guess(btn) {
     return;
   } else if (!(pattern[guessCounter] == btn)) {
     strikes++;
+    clearInterval(timeTimer);
     if (strikes >= gameSettings["lives"]) {
       loseGame();
       return;
@@ -274,9 +275,11 @@ function guess(btn) {
     }
   } else if (!(guessCounter == progress)) {
     guessCounter++;
+    clearInterval(timeTimer);
     return;
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
+    clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
     document.getElementById("progressPlaceholder").innerText = progress;
     if (clueHoldTime > 300) {
@@ -286,6 +289,7 @@ function guess(btn) {
     playClueSequence();
     return;
   } else {
+    clearInterval(timeTimer);
     winGame();
   }
 }
@@ -354,6 +358,8 @@ function applySettings(message = true) {
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
   document.getElementById("livesPlaceholder").innerText = gameSettings["lives"];
+  document.getElementById("patternLengthPlaceholder").innerText = ` / ${gameSettings["patternLength"]}`;
+
   document.getElementById("timerPlaceholder").innerText =
     gameSettings["timePerRound"];
   close();
