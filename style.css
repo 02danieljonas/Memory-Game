@@ -146,50 +146,65 @@ button {
   transition: 0s;
 }
 
-
-
-#modal{
+#modal {
   position: fixed;
-  Top: 50%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
   border: 1px solid black;
   border-radius: 10px;
   z-index: 99;
   background: black;
-  width:500px;
-  max-width:80%;
+  width: 500px;
+  max-width: 80%;
+  transition: 200ms ease-in-out;
 }
 
-#modalHeader{
+#modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#modalHeader {
   padding: 10px 15px;
   justify-content: space-between;
   align-items: center;
   display: flex;
   border-bottom: 1px solid cyan;
+  background-color: green;
 }
 
-#modalHeader #modalTitle{
+#modalHeader #modalTitle {
   font-size: 1.25rem;
   font-weight: bold;
 }
 
-#modalHeader #modalClose{
-  color:white;
+#modalHeader #modalClose {
+  color: white;
   cursor: pointer;
   border: none;
   outline: none;
   background: none;
   font-size: 1.25rem;
-  font-weight: bold
+  font-weight: bold;
 }
 
-#modalBody{
+#modalBody {
   padding: 10px 15px;
 }
 
-#overlay{
-  position:fixed;
-  top: 0 1vh;
-  left: 0 100
+#overlay {
+  opacity: 0;
+  background-color: rgba(0, 128, 0, 0.25);
+  transition: 200ms ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
