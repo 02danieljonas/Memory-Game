@@ -1,5 +1,7 @@
 //https://www.w3schools.com/js/js_random.asp, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://www.w3schools.com/howto/howto_js_rangeslider.asp, https://www.w3schools.com/cssref/default.asp (used for finding random things), https://stackoverflow.com/questions/4015345/how-do-i-properly-escape-quotes-inside-html-attributes, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in, https://www.w3schools.com/css/css_border.asp,https://www.w3schools.com/jsref/jsref_now.asp, https://www.w3schools.com/cssref/tryit.asp?filename=trycss_position2, https://www.w3schools.com/cssref/pr_class_position.asp, https://www.w3schools.com/js/js_cookies.asp, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://developer.mozilla.org/en-US/docs/Web/API/setInterval,
 
+
+
 var pattern = []; //array contain the pattern for that round
 var freqMap;
 var clueInProgress = false; //is a clue playing right now
@@ -12,7 +14,7 @@ var strikes = 0; //how much times the player guessed wrong
 var gameSettings = {
   //the configuration object
   patternLength: 8,
-  volume: 5,
+  volume: 3,
   lives: 3,
   buttonAmount: 4,
   timePerRound: Infinity,
@@ -22,14 +24,78 @@ var gameSettings = {
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 loadCookie();
-
 updateSlider();
-
 applySettings(false);
-
 updateFreqMap();
-
 updateScreenValues();
+
+function loadCookie() {
+  // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
+
+  let cookie = decodeURIComponent(document.cookie) + ";";
+
+  // console.log(`Cookie is "${cookie}"`);
+
+  if (cookie == "" || cookie == "0;") {
+    console.log("No cookies");
+    return;
+  } else if (cookie.length < 70) {
+    console.log("An error occured when reading cookies");
+    console.log(cookie);
+    return;
+  }
+  for (let key in userGameSettings) {
+    let index = cookie.indexOf(key);
+    let valueStart = index + key.length + 1;
+    let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
+    if (!isNaN(value)) {
+      // console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
+      userGameSettings[key] = value;
+    }
+  }
+  // updateSlider();
+  showMessage("Cookies applied");
+  console.log(gameSettings);
+  applySettings(false);
+  console.log(gameSettings);
+  // updateButtons(gameSettings["buttonAmount"]);
+}
+
+
+function updateSlider() {
+  //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
+
+  for (let key in userGameSettings) {
+    let value = userGameSettings[key];
+
+    let sliderElem = document.getElementById(`${key}Slider`);
+
+    sliderElem.value = value == Infinity ? 31 : value;
+
+    let placeholder = document.getElementById(key);
+
+    placeholder.innerHTML = value;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function updateScreenValues() {
   document.getElementById("progressPlaceholder").innerText = progress;
@@ -76,7 +142,7 @@ function setCountDown() {
     document.getElementById("timerPlaceholder").innerHTML =
       (progress + 1) * gameSettings["timePerRound"];
     timeTimer = setInterval(function () {
-      print("Working");
+      // print("Working");
       document.getElementById("timerPlaceholder").innerHTML--;
 
       if (document.getElementById("timerPlaceholder").innerHTML == 0) {
@@ -193,7 +259,7 @@ function playClueSequence() {
   guessCounter = 0;
   context.resume(); //This code disappeared after I was told to write it
   let delay = nextClueWaitTime;
-  print(`Pattern is ${pattern}`);
+  // print(`Pattern is ${pattern}`);
 
   for (let i = 0; i <= progress; i++) {
     //pattern equals random stuff
@@ -201,7 +267,7 @@ function playClueSequence() {
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
       */
 
-    // console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
+    console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
     delay += cluePauseTime;
@@ -381,21 +447,6 @@ function saveSettings() {
   saveCookie();
 }
 
-function updateSlider() {
-  //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
-
-  for (let key in userGameSettings) {
-    let value = userGameSettings[key];
-
-    let sliderElem = document.getElementById(`${key}Slider`);
-
-    sliderElem.value = value == Infinity ? 31 : value;
-
-    let placeholder = document.getElementById(key);
-
-    placeholder.innerHTML = value;
-  }
-}
 
 function updateSliderPlaceholder(sliderElem, placeholder) {
   //sliderElem is the slider ID and placeholder is the Key
@@ -416,38 +467,6 @@ function showMessage(info) {
   setTimeout(function () {
     document.getElementById("errorMessage").classList.remove("show");
   }, 4000);
-}
-
-function loadCookie(/*load = true*/) {
-  // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
-
-  let cookie = decodeURIComponent(document.cookie) + ";";
-
-  // console.log(`Cookie is "${cookie}"`);
-
-  if (cookie == "" || cookie == "0;") {
-    console.log("No cookies");
-    return;
-  } else if (cookie.length < 70) {
-    console.log("An error occured when reading cookies");
-    console.log(cookie);
-    return;
-  }
-  for (let key in userGameSettings) {
-    let index = cookie.indexOf(key);
-    let valueStart = index + key.length + 1;
-    let value = cookie.slice(valueStart, cookie.indexOf(";", valueStart));
-    if (!isNaN(value)) {
-      // console.log(`Changing ${userGameSettings[key]} to ${value} in ${key}`);
-      userGameSettings[key] = value;
-    }
-  }
-  updateSlider();
-  showMessage("Cookies applied");
-  console.log(gameSettings);
-  applySettings(false);
-  console.log(gameSettings);
-  // updateButtons(gameSettings["buttonAmount"]);
 }
 
 function saveCookie() {
@@ -474,7 +493,7 @@ function clearCookies() {
 }
 
 function activateModal(headerText, color) {
-  print("You should add confetti");
+  // print("You should add confetti");
   document.getElementById("modal").classList.add("active");
   document.getElementById("overlay").classList.add("active");
 

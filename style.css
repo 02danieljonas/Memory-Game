@@ -4,9 +4,7 @@ body {
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   line-height: 1.5;
-  background:slategrey;
-/*   background: radial-gradient(circle, rgba(97,255,10,1) 0%, rgba(0,212,255,1) 0%, rgba(9,121,80,1) 84%); */
-  
+  background: radial-gradient(circle, rgba(97,255,10,1) 0%, rgba(0,212,255,1) 0%, rgba(9,121,80,1) 84%);
   color: white;
 }
 
