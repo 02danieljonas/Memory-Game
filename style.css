@@ -11,6 +11,7 @@ h1 {
 }
 
 button {
+  cursor: pointer;
   padding: 10px;
   border-radius: 10px;
 }
@@ -149,11 +150,46 @@ button {
 
 #modal{
   position: fixed;
-  background: green;
   Top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid black;
-  border-radius:
-  padding: 30px;
+  border-radius: 10px;
+  z-index: 99;
+  background: black;
+  width:500px;
+  max-width:80%;
+}
+
+#modalHeader{
+  padding: 10px 15px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  border-bottom: 1px solid cyan;
+}
+
+#modalHeader #modalTitle{
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+#modalHeader #modalClose{
+  color:white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold
+}
+
+#modalBody{
+  padding: 10px 15px;
+}
+
+#overlay{
+  position:fixed;
+  top: 0 1vh;
+  left: 0 100
 }
