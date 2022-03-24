@@ -496,13 +496,21 @@ function clearCookies() {
   showMessage("Cookies Cleared");
 }
 
+function activateModal(color) {
+  print("You should add confetti");
+  document.getElementById("modal").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+  
+  document.getElementById("modalHeader").style.background = color;
+  document.getElementById("overlay").style.background = color;
+  document.getElementById("overlay").style.opacity = "50%";
 
-function activateModal(){
-  document.getElementById("modal").classList.add("active")
-  document.getElementById("overlay").classList.add("active")
+  document.getElementById("modalBody").innerHTML = gameSettings//loop through this showing everythin
 }
 
-function deactivateModal(){
-  document.getElementById("modal").classList.remove("active")
-  document.getElementById("overlay").classList.remove("active")
+function deactivateModal() {
+  document.getElementById("modal").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("overlay").style.opacity = "0%";
+
 }
