@@ -145,9 +145,15 @@ button {
   transition: 0s;
 }
 
+
+
 #modal{
   position: fixed;
   background: green;
-  Top: 30px;
+  Top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius:
   padding: 30px;
 }
