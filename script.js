@@ -388,7 +388,9 @@ function applySettings(message = true) {
   //   document.getElementById("timerPlaceholder").innerText =
   //     gameSettings["timePerRound"];
   close();
-  if (message) showMessage("Applied Settings");
+  if (message) {
+    showMessage("Applied Settings")
+  };
 }
 
 function saveSettings() {
@@ -510,24 +512,21 @@ function activateModal(headerText, color) {
 
   //loop through this showing everything
   
-  let output = `Progress: ${progress} / ${gameSettings["patternLength"]}`;
+  let output = `Progress: ${progress} / ${gameSettings["patternLength"]} <br>`;
+  
+  output+= `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`
+  
+  output+= `Button Amount ${gameSettings["buttonAmount"]} <br>`
+  
+  output+= `Time: ${gameSettings["timePerRound"]} <br> Time Decay: ${gameSettings["timeDecay"]}% <br>`
   
   document.getElementById("modalBody").innerHTML = output;
 
-  
-//   for (let keys in gameSettings){
-    
-//   }
+  TODO: "Issue With ScreenUpdate Fix it"
   
   document.getElementById("modalTitle").innerHTML = headerText
   
 }
-
-  // document.getElementById("livesPlaceholder").innerText =
-  //   gameSettings["lives"] - strikes;
-  // document.getElementById("timerPlaceholder").innerText =
-  //   gameSettings["timePerRound"];
-
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
