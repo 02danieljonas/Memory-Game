@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="https://cdn.glitch.global/a5731734-0c59-4b2b-a995-77a72ce4e9f0/Pursue.png?v=1648134649988">
+    <link
+      rel="icon"
+      href="https://cdn.glitch.global/a5731734-0c59-4b2b-a995-77a72ce4e9f0/Pursue.png?v=1648134649988"
+    />
 
     <title>Memory Game!</title>
 
@@ -19,7 +22,6 @@
     <h1>Memory Game!</h1>
 
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
-    <p>Keyboard inputs are accepted!</p>
 
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
@@ -37,32 +39,42 @@
         onclick="guess(0)"
         onmousedown="startTone(0)"
         onmouseup="stopTone()"
-      >1</button>
+      >
+        1
+      </button>
       <button
         id="button1"
         onclick="guess(1)"
         onmousedown="startTone(1)"
         onmouseup="stopTone()"
-      >2</button>
+      >
+        2
+      </button>
       <button
         id="button2"
         onclick="guess(2)"
         onmousedown="startTone(2)"
         onmouseup="stopTone()"
-      >3</button>
+      >
+        3
+      </button>
       <button
         id="button3"
         onclick="guess(3)"
         onmousedown="startTone(3)"
         onmouseup="stopTone()"
-      >4</button>
+      >
+        4
+      </button>
       <button
         class="hidden"
         id="button4"
         onclick="guess(4)"
         onmousedown="startTone(4)"
         onmouseup="stopTone()"
-      >5</button>
+      >
+        5
+      </button>
 
       <button
         class="hidden"
@@ -70,35 +82,45 @@
         onclick="guess(5)"
         onmousedown="startTone(5)"
         onmouseup="stopTone()"
-      >6</button>
+      >
+        6
+      </button>
       <button
         class="hidden"
         id="button6"
         onclick="guess(6)"
         onmousedown="startTone(6)"
         onmouseup="stopTone()"
-      >7</button>
+      >
+        7
+      </button>
       <button
         class="hidden"
         id="button7"
         onclick="guess(7)"
         onmousedown="startTone(7)"
         onmouseup="stopTone()"
-      >8</button>
+      >
+        8
+      </button>
       <button
         class="hidden"
         id="button8"
         onclick="guess(8)"
         onmousedown="startTone(8)"
         onmouseup="stopTone()"
-      >9</button>
+      >
+        9
+      </button>
       <button
         class="hidden"
         id="button9"
         onclick="guess(9)"
         onmousedown="startTone(9)"
         onmouseup="stopTone()"
-      >0</button>
+      >
+        0
+      </button>
     </div>
 
     <button id="settings" class="clicked" onclick="showSettingContainer()">
@@ -184,9 +206,8 @@
     </div>
     <div id="errorMessage" class=""></div>
 
-<!--     <button onclick="activateModal('test', 'cyan')">Open Modal</button> -->
+    <!--     <button onclick="activateModal('test', 'cyan')">Open Modal</button> -->
 
-    
     <div class="modal" id="modal">
       <div id="modalHeader">
         <div id="modalTitle"></div>
@@ -195,6 +216,5 @@
       <div id="modalBody">Stats</div>
     </div>
     <div class="" id="overlay" onclick="deactivateModal()"></div>
-    
   </body>
 </html>
