@@ -104,6 +104,7 @@ var clueHoldTime = 1000; //how long each clue is played for
 var cluePauseTime = 333; //how long to pause between clues
 var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 var canPlay = true;
+var timeTimer;
 
 function whenCanPlay(clueLength) {
   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
@@ -116,6 +117,29 @@ function whenCanPlay(clueLength) {
       setCountDown();
     } //<---- do this when the you can play and stop on everything
   }, howLong);
+}
+
+function setCountDown() {
+  if (canPlay) {
+    document.getElementById("timerPlaceholder").innerHTML =
+      (progress + 1) * gameSettings["timePerRound"];
+    timeTimer = setInterval(function () {
+      // print("Working");
+      document.getElementById("timerPlaceholder").innerHTML--;
+
+      if (document.getElementById("timerPlaceholder").innerHTML == 0) {
+        strikes++;
+        if (strikes >= gameSettings["lives"]) {
+          loseGame();
+        } else {
+          document.getElementById("livesPlaceholder").innerText =
+            gameSettings["lives"] - strikes;
+          playClueSequence();
+        }
+        clearInterval(timeTimer);
+      }
+    }, 1000);
+  }
 }
 
 function showSettingContainer() {
@@ -154,30 +178,6 @@ function close() {
   document.getElementById("settings").innerText = "Settings";
 }
 
-var timeTimer;
-
-function setCountDown() {
-  if (canPlay) {
-    document.getElementById("timerPlaceholder").innerHTML =
-      (progress + 1) * gameSettings["timePerRound"];
-    timeTimer = setInterval(function () {
-      // print("Working");
-      document.getElementById("timerPlaceholder").innerHTML--;
-
-      if (document.getElementById("timerPlaceholder").innerHTML == 0) {
-        strikes++;
-        if (strikes >= gameSettings["lives"]) {
-          loseGame();
-        } else {
-          document.getElementById("livesPlaceholder").innerText =
-            gameSettings["lives"] - strikes;
-          playClueSequence();
-        }
-        clearInterval(timeTimer);
-      }
-    }, 1000);
-  }
-}
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -209,6 +209,8 @@ function stopGame() {
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   showMessage("Game Stopped");
+  clearInterval(timeTimer)
+  canPlay = true;
 }
 
 function playTone(btn, len) {
@@ -324,11 +326,12 @@ document.addEventListener("keydown", (btn) => {
 });
 
 function keyboardGuess(btn) {
+  
   lightButton(btn);
   startTone(btn);
 
   setTimeout(stopTone, 100);
-  setTimeout(clearButton(btn), 1000);
+  setTimeout(clearButton(btn), 100);
   console.log("Passing button" + btn);
   guess(btn);
 }
@@ -396,6 +399,8 @@ function updateButtons() {
   }
   updateFreqMap();
 }
+
+//change timer so it cancels
 
 function applySettings(message = true) {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
