@@ -1,20 +1,19 @@
 html {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-    132deg,
-    rgba(112, 128, 144, 1) 51%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  
+  
+background-image: repeating-linear-gradient(135deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
+
+
+/* background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(112,128,144,1) 92%); */
+
 }
 
 body {
-  /*   width: 90vw;
-  height: 90vh; */
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   line-height: 1.5;
-  /*   background: rgb(112,128,144); */
   color: white;
 }
 
