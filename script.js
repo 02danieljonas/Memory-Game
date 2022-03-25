@@ -205,6 +205,9 @@ function stopGame() {
   //setts gamePlaying to false, swaps hide from start button to stop buttons
   gamePlaying = false;
   clearInterval(timeTimer);
+  progress=0;
+  updateScreenValues();
+  
 
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
