@@ -1,11 +1,20 @@
+html {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    390deg,
+    rgba(112, 128, 144, 1) 51%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
 body {
-  width: 90vw;
-  height: 90vh;
+  /*   width: 90vw;
+  height: 90vh; */
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   line-height: 1.5;
-background: rgb(112,128,144);
-background: linear-gradient(190deg, rgba(112,128,144,1) 51%, rgba(0,212,255,1) 100%);
+  /*   background: rgb(112,128,144); */
   color: white;
 }
 
@@ -53,7 +62,6 @@ button {
 #gameButtonArea #button2 {
   background: yellow;
   color: black;
-
 }
 
 #button3 {

@@ -325,14 +325,15 @@ document.addEventListener("keydown", (btn) => {
   }
 });
 
+
+
 function keyboardGuess(btn) {
-  
   lightButton(btn);
   startTone(btn);
 
   setTimeout(stopTone, 100);
-  setTimeout(clearButton(btn), 100);
-  console.log("Passing button" + btn);
+  setTimeout(clearButton, 100, btn);
+  // console.log("Passing button" + btn);
   guess(btn);
 }
 
