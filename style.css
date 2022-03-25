@@ -1,9 +1,11 @@
 html {
   height: 100vh;
   width: 100vw;
+/*   background-color: purple; */
   background:
-    linear-gradient(45deg, blue, transparent), rgb(216, 118, 255),
-    repeating-linear-gradient(45deg, purple, 0%, purple, 5%, transparent 5%, trnasparent 10%); 
+    linear-gradient(45deg, rgb(76, 0, 255), transparent), 
+/*     purple */
+    repeating-linear-gradient(45deg, rgb(183, 0, 255) 0%, rgb(183, 0, 255) 5%, transparent 5%, transparent 10%), rgb(216, 118, 255) repeating-linear-gradient(-45deg, rgba(183, 0, 255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%);
 
   
 
@@ -12,7 +14,8 @@ html {
 
 
 
-
+/* rgb(183, 0, 255) */
+/* rgba(183, 0, 255, 0.5) */
 
 
 
