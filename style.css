@@ -33,7 +33,7 @@ button {
     width: 12vw;
     height: 12vw;
     margin: 1vw;
-    transition: 1s;
+    transition: 1s width, 1s height, 1s margin;
   }
 }
 
@@ -43,44 +43,45 @@ button {
 }
 
 #button0 {
-  background: rgb(0, 128, 0);
-}
-
-#button1 {
-  background: blue;
-}
-
-#button2 {
   background: red;
 }
 
-#gameButtonArea #button3 {
+#button1 {
+  background: orange;
+}
+
+#gameButtonArea #button2 {
   background: yellow;
   color: black;
+
+}
+
+#button3 {
+  background: green;
 }
 
 #button4 {
-  background: purple;
+  background: cyan;
 }
 
 #button5 {
-  background: rgb(100, 70, 36);
+  background: blue;
 }
 
 #button6 {
-  background: black;
+  background: BlueViolet;
 }
 
 #button7 {
-  background: rgb(38, 118, 0);
+  background: purple;
 }
 
 #button8 {
-  background: rgb(253, 2, 135);
+  background: maroon;
 }
 
 #button9 {
-  background: rgb(196, 174, 173);
+  background: black;
 }
 
 .hidden {
@@ -162,7 +163,7 @@ button {
   background: black;
   width: 500px;
   max-width: 80%;
-  transition: 200ms ease-in-out;
+  transition: 200ms ease-in-out tranform;
 }
 
 #modal.active {

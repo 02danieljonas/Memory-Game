@@ -406,6 +406,7 @@ function applySettings(message = true) {
   if (message) {
     showMessage("Applied Settings");
   }
+  updateFreqMap();
 }
 
 function saveSettings() {
