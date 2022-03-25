@@ -4,7 +4,7 @@
 
 Submitted by: Daniel Jonas
 
-Time spent: 46+ hours spent in total
+Time spent: 41+ hours spent in total
 
 Link to project: https://glitch.com/edit/#!/wry-tungsten-smartphone
 
@@ -12,29 +12,43 @@ Link to project: https://glitch.com/edit/#!/wry-tungsten-smartphone
 
 The following **required** functionality is complete:
 
-- [x] Game interface has a heading (h1 tag), a line of body text (p tag), and four buttons that match the demo app
-* [ ] "Start" button toggles between "Start" and "Stop" when clicked. 
-* [ ] Game buttons each light up and play a sound when clicked. 
-* [ ] Computer plays back sequence of clues including sound and visual cue for each button
-* [ ] Play progresses to the next turn (the user gets the next step in the pattern) after a correct guess. 
-* [ ] User wins the game after guessing a complete pattern
-* [ ] User loses the game after an incorrect guess
+* [X] Game interface has a heading (h1 tag), a line of body text (p tag), and four buttons that match the demo app
+* [X] "Start" button toggles between "Start" and "aStop" when clicked. 
+* [X] Game buttons each light up and play a sound when clicked. 
+* [X] Computer plays back sequence of clues including sound and visual cue for each button
+* [X] Play progresses to the next turn (the user gets the next step in the pattern) after a correct guess. 
+* [X] User wins the game after guessing a complete pattern
+* [X] User loses the game after an incorrect guess
 
 The following **optional** features are implemented:
 
-* [ ] Any HTML page elements (including game buttons) has been styled differently than in the tutorial
-* [ ] Buttons use a pitch (frequency) other than the ones in the tutorial
-* [ ] More than 4 functional game buttons
-* [ ] Playback speeds up on each turn
-* [ ] Computer picks a different pattern each time the game is played
-* [ ] Player only loses after 3 mistakes (instead of on the first mistake)
+* [X] Any HTML page elements (including game buttons) has been styled differently than in the tutorial
+* [X] Buttons use a pitch (frequency) other than the ones in the tutorial
+* [X] More than 4 functional game buttons
+* [X] Playback speeds up on each turn
+* [X] Computer picks a different pattern each time the game is played
+* [X] Player only loses after 3 mistakes (instead of on the first mistake)
 * [ ] Game button appearance change goes beyond color (e.g. add an image)
 * [ ] Game button sound is more complex than a single tone (e.g. an audio file, a chord, a sequence of multiple tones)
-* [ ] User has a limited amount of time to enter their guess on each turn
+* [X] User has a limited amount of time to enter their guess on each turn
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app!
+- [X] Sliders to change settings (volume, game length, lives, button amount, seconds per round, time decay)
+- [X] Saved configuration info in cookies
+- [X] Clear cookies
+- [X] Infinity options for lives and game length
+- [X] Number Keys can be used as input
+- [X] Size of game buttons shrink for smaller screens
+- [X] Replaced alert() with a pop up
+- [X] sequenced is repeated if user guesses wrong
+- [X] Number Keys can be used as input
+- [X] connecting all of the above features
+
+
+
+
+
 
 ## Video Walkthrough (GIF)
 
@@ -46,17 +60,17 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
-[YOUR ANSWER HERE]
+I asked my friend Smyvens and my sister to check out my website and asked for ways they thought I could improve it.
+www.w3schools.com, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://developer.mozilla.org/en-US/docs/Web/HTML, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://cssgradient.io/
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
-[YOUR ANSWER HERE]
+Sliders, settings the value, taking in the values, making sure everything matches, making sure things don't break, infinity. The IDE glitch, the little things VSCode does is so awesome, I would have changed to using VSCode and a liveserver, but i only realized how great VSCode is after using glitch. I was thinking of adding a way to indicate which number to press for eaching button
 
 3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
-[YOUR ANSWER HERE]
+
 
 4. If you had a few more hours to work on this project, what would you spend them doing (for example: refactoring certain functions, adding additional features, etc). Be specific. (recommended 100 - 300 words) 
-[YOUR ANSWER HERE]
-
+I would make my code more readable. I would change out cookies for localstorage, make the buttons a class so I allow the user to create more buttons, connect to a dynamoDB to allow highscores, having an easy, medium, hard option.
 
 
 ## Interview Recording URL Link
@@ -66,7 +80,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 
 ## License
 
-    Copyright [YOUR NAME]
+    Copyright Daniel Jonas
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -79,4 +93,3 @@ If you recorded multiple GIFs for all the implemented features, you can add them
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-    

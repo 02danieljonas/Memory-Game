@@ -1,30 +1,16 @@
 html {
   height: 100vh;
   width: 100vw;
-/*   background-color: purple; */
   background:
-    linear-gradient(45deg, rgb(76, 0, 255), transparent), 
-/*     purple */
-    repeating-linear-gradient(45deg, rgb(183, 0, 255) 0%, rgb(183, 0, 255) 5%, transparent 5%, transparent 10%), rgb(216, 118, 255) repeating-linear-gradient(-45deg, rgba(183, 0, 255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%);
-
-  
-
-  /* https://www.gradientmagic.com/collection/popular/gradient/1575045306149*/
+    linear-gradient(45deg, rgb(112, 128, 144), transparent), 
+    repeating-linear-gradient(45deg, rgb(0, 255, 255) 0%, cyan 5%, transparent 5%, transparent 10%),
+    rgb(60, 180, 200)
+    repeating-linear-gradient(-45deg, rgb(0, 255, 255, 0.5) 0%, rgb(0, 255, 255, 0.5) 5%, transparent 5%, transparent 10%);
+  /* 
+  https://www.gradientmagic.com/collection/popular/gradient/1575045306149
+  https://www.youtube.com/watch?v=muE2B0Zylbw
+  */
 }
-
-
-
-/* rgb(183, 0, 255) */
-/* rgba(183, 0, 255, 0.5) */
-
-
-
-
-
-
-
-
-
 
 body {
   font-family: helvetica, arial, sans-serif;
