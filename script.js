@@ -16,7 +16,7 @@ var gameSettings = {
   lives: 3,
   buttonAmount: 4,
   timePerRound: Infinity,
-  timeDecay: 0,
+  timeDecay: 20,
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -32,11 +32,11 @@ function loadCookie() {
 
   let cookie = decodeURIComponent(document.cookie) + ";";
   if (cookie == "" || cookie == "0;") {
-    console.log("No cookies");
+    // console.log("No cookies");
     return;
   } else if (cookie.length < 70) {
-    console.log("An error occured when reading cookies");
-    console.log(cookie);
+    // console.log("An error occured when reading cookies");
+    // console.log(cookie);
     return;
   }
   for (let key in userGameSettings) {
@@ -49,9 +49,9 @@ function loadCookie() {
     }
   }
   showMessage("Cookies applied");
-  console.log(gameSettings);
+  // console.log(gameSettings);
   applySettings(false);
-  console.log(gameSettings);
+  // console.log(gameSettings);
 }
 
 function updateSlider() {
@@ -77,18 +77,23 @@ function updateFreqMap() {
   for (let i = 0; i < gameSettings["buttonAmount"]; i++) {
     freqMap[i] = Math.round(260 + temp * i);
   }
-  console.log("Frequency Map is ", freqMap);
 }
 
 function updateScreenValues() {
   document.getElementById("progressPlaceholder").innerText = progress;
-  document.getElementById(
-    "patternLengthPlaceholder"
-  ).innerText = ` / ${gameSettings["patternLength"]}`;
-  document.getElementById("livesPlaceholder").innerText =
-    gameSettings["lives"] - strikes;
-  document.getElementById("timerPlaceholder").innerText =
-    gameSettings["timePerRound"];
+  document.getElementById("patternLengthPlaceholder").innerText = ` / ${gameSettings["patternLength"]}`;
+
+  let hearts = "";
+  if (gameSettings["lives"] != Infinity){
+    for (let i = 0; i < gameSettings["lives"] - strikes; i++){
+      hearts+= '♥ ';
+    }
+  }
+  else{
+    hearts = Infinity;
+  }
+  document.getElementById("livesPlaceholder").innerText = hearts;
+  document.getElementById("timerPlaceholder").innerText = gameSettings["timePerRound"];
 }
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -106,13 +111,12 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 var canPlay = true;
 var timeTimer;
 
-function whenCanPlay(clueLength) {
-  // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
+function whenCanPlay(clueLength) { // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 333; //for every clue add cPT and cHT to find out how long the clue plays for
   setTimeout(function () {
     canPlay = true;
-    console.log("Time to Play");
+    // console.log("Time to Play");
     if (gameSettings["timePerRound"] != Infinity) {
       setCountDown();
     } //<---- do this when the you can play and stop on everything
@@ -124,9 +128,7 @@ function setCountDown() {
     document.getElementById("timerPlaceholder").innerHTML =
       (progress + 1) * gameSettings["timePerRound"];
     timeTimer = setInterval(function () {
-      // print("Working");
       document.getElementById("timerPlaceholder").innerHTML--;
-
       if (document.getElementById("timerPlaceholder").innerHTML == 0) {
         strikes++;
         if (strikes >= gameSettings["lives"]) {
@@ -154,13 +156,10 @@ function showSettingContainer() {
     }
   } else {
     showMessage("Please stop the game to change settings");
-    // console.log("Error");
   }
 }
 
-function cancel() {
-  //called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
-  //I could change this by hard coding userGameSettings and the slider infos to be the same so all I have to do is clone
+function cancel() {//called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
   for (let key in userGameSettings) {
     if (userGameSettings[key] != gameSettings[key]) {
       document.getElementById(key).innerHTML =
@@ -169,7 +168,7 @@ function cancel() {
           gameSettings[key];
     }
   }
-  close();
+  close()
 }
 
 function close() {
@@ -178,17 +177,13 @@ function close() {
   document.getElementById("settings").innerText = "Settings";
 }
 
-
-function startGame() {
-  //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
+function startGame() {//called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
   updateScreenValues();
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
     pattern = [Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0];
     clueHoldTime = 1000; //how long each clue is played for
     cluePauseTime = 333; //how long to pause between clues
-    // document.getElementById("livesPlaceholder").innerText =
-    //   gameSettings["lives"]; //updates the lives on the html
     progress = 0;
     gamePlaying = true;
     document.getElementById("startBtn").classList.add("hidden");
@@ -207,8 +202,6 @@ function stopGame() {
   clearInterval(timeTimer);
   progress=0;
   updateScreenValues();
-  
-
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   showMessage("Game Stopped");
@@ -226,7 +219,7 @@ function playTone(btn, len) {
   context.resume();
   tonePlaying = true;
   setTimeout(function () {
-    stopTone();
+    stopTone()
   }, len);
 }
 
@@ -333,16 +326,13 @@ document.addEventListener("keydown", (btn) => {
 function keyboardGuess(btn) {
   lightButton(btn);
   startTone(btn);
-
   setTimeout(stopTone, 100);
   setTimeout(clearButton, 100, btn);
-  // console.log("Passing button" + btn);
   guess(btn);
 }
 
 function guess(btn) {
   //called by HTML buttons, if not gamePlaying or guessed before validGuessTime return,  if the guess is wrong, strikes++ and calls loseGame and returns only if strikes is >= lives anything else and it updates the lives on screen calls playClueSequence and return, if the user still has more guesses it returns after guessCounter++, if the user finished guessing progress++ updates the progress on screen, makes cluePauseTime and clueHoldTime less if clueHoldTime > 150 and finially playCluesequence and returns, if noones of the above conditions are meant it call winGame()
-  // console.log("User guessed: " + btn);
   if (!gamePlaying) {
     return;
   } else if (!canPlay) {
@@ -367,9 +357,6 @@ function guess(btn) {
     return;
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
-    // document.getElementById(
-    //   "patternLengthPlaceholder"
-    // ).innerText = ` / ${gameSettings["patternLength"]}`;
     updateScreenValues();
     clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
@@ -383,11 +370,6 @@ function guess(btn) {
   } else {
     progress++;
     updateScreenValues();
-    // document.getElementById("progressPlaceholder").innerText = progress;
-    // document.getElementById(
-    //   "patternLengthPlaceholder"
-    // ).innerText = ` / ${gameSettings["patternLength"]}`;
-
     clearInterval(timeTimer);
     winGame();
   }
@@ -436,6 +418,25 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
   userGameSettings[placeholder] = sliderElemValue;
 }
 
+function showNumbers(s){
+  if(s){
+    document.querySelectorAll(".buttonNumber").forEach((item) => {item.style.display = "revert";});
+  }
+  else{
+    document.querySelectorAll(".buttonNumber").forEach((item) => {item.style.display = "none";});
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 function showMessage(info) {
   document.getElementById("errorMessage").innerHTML = info;
 
@@ -448,24 +449,24 @@ function showMessage(info) {
 
 function saveCookie() {
   //called by saveSettings, takes the values in gameSettings and saves them
-  console.log(document.cookie);
+  // console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
-    console.log(`Saving ${key} as ${value}`);
+    // console.log(`Saving ${key} as ${value}`);
     document.cookie = key + "=" + value + ";" + ";path=/";
   }
-  console.log(document.cookie);
+  // console.log(document.cookie);
 }
 
 function clearCookies() {
   //called by HTML clear button, clears the cookies, outputs 0 into document.cookie
-  console.log(document.cookie);
+  // console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
     document.cookie =
       key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
-  console.log(document.cookie);
+  // console.log(document.cookie);
   showMessage("Cookies Cleared");
 }
 

@@ -29,6 +29,10 @@ button {
   border-radius: 10px;
 }
 
+#gameButtonArea button span{
+  display: none;
+}
+
 #gameButtonArea button {
   width: 200px;
   height: 200px;
@@ -69,8 +73,9 @@ button {
   background: green;
 }
 
-#button4 {
+#gameButtonArea #button4 {
   background: cyan;
+  color: black;
 }
 
 #button5 {
@@ -135,7 +140,7 @@ button {
 
 #startBtn:hover {
   background: cyan;
-  transition: 50s;
+  transition: 500s;
 }
 
 #info {
@@ -154,8 +159,7 @@ button {
   transition: 2s opacity, 4s top;
 }
 
-#errorMessage.show,
-#errorMessage:hover {
+#errorMessage.show, #errorMessage:hover {
   top: 10px;
   opacity: 90%;
   transition: 0s;
