@@ -52,10 +52,10 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough (GIF)
 
-If you recorded multiple GIFs for all the implemented features, you can add them here:
-http://g.recordit.co/5h72q72il9.gif
-http://g.recordit.co/dW4I0OrnwA.gif
-http://g.recordit.co/MuYEBYNuap.gif
+If you recorded multiple GIFs for all the implemented features, you can add them here:<br>
+http://g.recordit.co/5h72q72il9.gif<br>
+http://g.recordit.co/dW4I0OrnwA.gif<br>
+http://g.recordit.co/MuYEBYNuap.gif<br>
 http://g.recordit.co/jrwajphBAt.gif
 
 ## Reflection Questions
