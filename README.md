@@ -53,10 +53,8 @@ The following **additional** features are implemented:
 ## Video Walkthrough (GIF)
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:
-![](gif1-link-here)
-![](gif2-link-here)
-![](gif3-link-here)
-![](gif4-link-here)
+![](http://g.recordit.co/pEpD1PDNHo.gif)
+![](http://g.recordit.co/RIndzK7Qrb.gif)
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
@@ -78,8 +76,6 @@ I would make my code more readable. I would change out cookies for localstorage,
 
 [My 5-minute Interview Recording]
 
-http://g.recordit.co/pEpD1PDNHo.gif<br>
-http://g.recordit.co/RIndzK7Qrb.gif
 
 ## License
 
