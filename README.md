@@ -68,7 +68,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
 Sliders, settings the value, taking in the values, making sure everything matches, making sure things don't break, infinity. The IDE glitch, the little things VSCode does is so awesome, I would have changed to using VSCode and a liveserver, but i only realized how great VSCode is after using glitch. I was thinking of adding a way to indicate which number to press for eaching button, another hard part of making the gifs, every time I go to record it I notice a new mistake and have to go and fix it. The problem I have the most is probably what ever problem happened the most recent, bad memory :(, as I might have to say the readme, it has gotten me to look over all my feature and made me realize ever error that was in the code forcing me to stop recording and fix it, also getting gifs to work in readme was hard
 
-1. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
+3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
 how to keep track of all those features
 like I have 500lines of ccode and I don't think I could keep track of all 
 

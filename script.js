@@ -32,10 +32,10 @@ function loadCookie() {
 
   let cookie = decodeURIComponent(document.cookie) + ";";
   if (cookie == ";" || cookie == "0;") {
-    showMessage("No cookies")
+    showMessage("No cookies");
     return;
   } else if (cookie.length < 70) {
-    showMessage("An error occured with the cookies")
+    showMessage("An error occured with the cookies");
     return;
   }
   for (let key in userGameSettings) {
@@ -76,24 +76,29 @@ function updateFreqMap() {
   }
 }
 
-function updateHeart(){
+function updateHeart() {
   let hearts = "";
-  if (gameSettings["lives"] != Infinity && gameSettings["lives"] != 0){
-    for (let i = 0; i < gameSettings["lives"] - strikes; i++){
-      hearts+= '♥ ';
+  if (gameSettings["lives"] != Infinity && gameSettings["lives"] != 0) {
+    for (let i = 0; i < gameSettings["lives"] - strikes; i++) {
+      hearts += "♥ ";
     }
-  }
-  else{
-    hearts ='♥×'+ gameSettings["lives"];
+  } else {
+    hearts = "♥×" + gameSettings["lives"];
   }
   document.getElementById("livesPlaceholder").innerText = hearts;
 }
 
 function updateScreenValues() {
   document.getElementById("progressPlaceholder").innerText = progress;
-  document.getElementById("patternLengthPlaceholder").innerText = ` / ${gameSettings["patternLength"]}`;
-  updateHeart()
-  document.getElementById("timerPlaceholder").innerText = Math.round((gameSettings["timePerRound"]*(progress+1))*((100-gameSettings["timeDecay"])/100));
+  document.getElementById(
+    "patternLengthPlaceholder"
+  ).innerText = ` / ${gameSettings["patternLength"]}`;
+  updateHeart();
+  document.getElementById("timerPlaceholder").innerText = Math.round(
+    gameSettings["timePerRound"] *
+      (progress + 1) *
+      ((100 - gameSettings["timeDecay"]) / 100)
+  );
 }
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -111,7 +116,8 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 var canPlay = true;
 var timeTimer;
 
-function whenCanPlay(clueLength) { // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
+function whenCanPlay(clueLength) {
+  // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 333;
   setTimeout(function () {
@@ -124,17 +130,21 @@ function whenCanPlay(clueLength) { // called by playClueSequence, sets validGues
 
 function setCountDown() {
   if (canPlay) {
-    document.getElementById("timerPlaceholder").innerHTML = Math.round((gameSettings["timePerRound"]*(progress+1))*((100-gameSettings["timeDecay"])/100));
+    document.getElementById("timerPlaceholder").innerHTML = Math.round(
+      gameSettings["timePerRound"] *
+        (progress + 1) *
+        ((100 - gameSettings["timeDecay"]) / 100)
+    );
     clearInterval(timeTimer);
     timeTimer = setInterval(function () {
-      if (canPlay){
+      if (canPlay) {
         document.getElementById("timerPlaceholder").innerHTML--;
         if (document.getElementById("timerPlaceholder").innerHTML <= 0) {
           strikes++;
           if (strikes >= gameSettings["lives"]) {
             loseGame();
           } else {
-            updateHeart()
+            updateHeart();
             playClueSequence();
           }
           clearInterval(timeTimer);
@@ -150,13 +160,16 @@ function showSettingContainer() {
     if (document.getElementById("settingsContainer").classList == "hidden") {
       document.getElementById("settingsContainer").classList.remove("hidden");
       document.getElementById("settings").innerText = "Cancel";
-    } else {cancel();}
+    } else {
+      cancel();
+    }
   } else {
     showMessage("Please stop the game to change settings");
   }
 }
 
-function cancel() {//called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
+function cancel() {
+  //called by showSettingContainer, goes through userGameSettings to set their porperty and the values to what is in gameSettings, calls close
   for (let key in userGameSettings) {
     if (userGameSettings[key] != gameSettings[key]) {
       document.getElementById(key).innerHTML =
@@ -165,7 +178,7 @@ function cancel() {//called by showSettingContainer, goes through userGameSettin
           gameSettings[key];
     }
   }
-  close()
+  close();
 }
 
 function close() {
@@ -174,7 +187,8 @@ function close() {
   document.getElementById("settings").innerText = "Settings";
 }
 
-function startGame() {//called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
+function startGame() {
+  //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
   updateScreenValues();
   if (document.getElementById("settingsContainer").classList == "hidden") {
     strikes = 0;
@@ -197,12 +211,12 @@ function stopGame() {
   //setts gamePlaying to false, swaps hide from start button to stop buttons
   gamePlaying = false;
   clearInterval(timeTimer);
-  progress=0;
+  progress = 0;
   updateScreenValues();
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   showMessage("Game Stopped");
-  clearInterval(timeTimer)
+  clearInterval(timeTimer);
   canPlay = true;
 }
 
@@ -216,7 +230,7 @@ function playTone(btn, len) {
   context.resume();
   tonePlaying = true;
   setTimeout(function () {
-    stopTone()
+    stopTone();
   }, len);
 }
 
@@ -391,12 +405,15 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
   userGameSettings[placeholder] = sliderElemValue;
 }
 
-function showNumbers(s){
-  if(s){
-    document.querySelectorAll(".buttonNumber").forEach((item) => {item.style.display = "revert";});
-  }
-  else{
-    document.querySelectorAll(".buttonNumber").forEach((item) => {item.style.display = "none";});
+function showNumbers(s) {
+  if (s) {
+    document.querySelectorAll(".buttonNumber").forEach((item) => {
+      item.style.display = "revert";
+    });
+  } else {
+    document.querySelectorAll(".buttonNumber").forEach((item) => {
+      item.style.display = "none";
+    });
   }
 }
 
@@ -436,7 +453,7 @@ function activateModal(headerText, color) {
 
   let output = `Progress: ${progress} / ${gameSettings["patternLength"]} <br>`;
 
-  if (headerText == "Winner!!!!"){
+  if (headerText == "Winner!!!!") {
     output = `Progress: ${gameSettings["patternLength"]} / ${gameSettings["patternLength"]} <br>`;
   }
 

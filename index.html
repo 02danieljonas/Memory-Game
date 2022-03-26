@@ -18,17 +18,20 @@
       Lives: <span id="livesPlaceholder"></span> <br />
       Time Left: <span id="timerPlaceholder"></span><br />
       Round: <span id="progressPlaceholder">0</span
-      ><span id="patternLengthPlaceholder"></span><br>
+      ><span id="patternLengthPlaceholder"></span><br />
     </div>
-    Show Button Numbers <input type="checkbox" value="yes" oninput='showNumbers(this.checked)'> <br>
+    Show Button Numbers
+    <input type="checkbox" value="yes" oninput="showNumbers(this.checked)" />
+    <br />
 
     <div id="gameButtonArea">
       <button
         id="button0"
         onclick="guess(0)"
         onmousedown="startTone(0)"
-        onmouseup="stopTone()">
-      <span class="buttonNumber">1</span>
+        onmouseup="stopTone()"
+      >
+        <span class="buttonNumber">1</span>
       </button>
       <button
         id="button1"
@@ -36,7 +39,7 @@
         onmousedown="startTone(1)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">2</span>
+        <span class="buttonNumber">2</span>
       </button>
       <button
         id="button2"
@@ -44,7 +47,7 @@
         onmousedown="startTone(2)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">3</span>
+        <span class="buttonNumber">3</span>
       </button>
       <button
         id="button3"
@@ -52,7 +55,7 @@
         onmousedown="startTone(3)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">4</span>
+        <span class="buttonNumber">4</span>
       </button>
       <button
         class="hidden"
@@ -61,7 +64,7 @@
         onmousedown="startTone(4)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">5</span>
+        <span class="buttonNumber">5</span>
       </button>
 
       <button
@@ -71,7 +74,7 @@
         onmousedown="startTone(5)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">6</span>
+        <span class="buttonNumber">6</span>
       </button>
       <button
         class="hidden"
@@ -80,7 +83,7 @@
         onmousedown="startTone(6)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">7</span>
+        <span class="buttonNumber">7</span>
       </button>
       <button
         class="hidden"
@@ -89,8 +92,7 @@
         onmousedown="startTone(7)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">8</span>
-    
+        <span class="buttonNumber">8</span>
       </button>
       <button
         class="hidden"
@@ -99,7 +101,7 @@
         onmousedown="startTone(8)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">9</span>
+        <span class="buttonNumber">9</span>
       </button>
       <button
         class="hidden"
@@ -108,7 +110,7 @@
         onmousedown="startTone(9)"
         onmouseup="stopTone()"
       >
-      <span class="buttonNumber">0</span>
+        <span class="buttonNumber">0</span>
       </button>
     </div>
 
@@ -194,8 +196,6 @@
       </button>
     </div>
     <div id="errorMessage" class=""></div>
-
-
 
     <!-- <button onclick="activateModal('test', 'cyan')">Open Modal</button> -->
 

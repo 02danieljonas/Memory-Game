@@ -151,6 +151,10 @@ button {
   top: 35px;
 }
 
+.livesPlaceholder{
+  color: red
+}
+
 #errorMessage {
   position: fixed;
   background: red;
