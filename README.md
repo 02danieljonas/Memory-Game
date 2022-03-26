@@ -78,7 +78,7 @@ I would make my code more readable. I would change out cookies for localstorage,
 
 [My 5-minute Interview Recording]
 
-http://g.recordit.co/pEpD1PDNHo.gif
+http://g.recordit.co/pEpD1PDNHo.gif<br>
 http://g.recordit.co/RIndzK7Qrb.gif
 
 ## License
