@@ -51,6 +51,26 @@ function loadCookie() {
   applySettings(false);
 }
 
+function saveCookie() {
+  //called by saveSettings, takes the values in gameSettings and saves them
+  for (let key in gameSettings) {
+    let value = gameSettings[key];
+    // console.log(`Saving ${key} as ${value}`);
+    document.cookie = key + "=" + value + ";" + ";path=/";
+  }
+}
+
+function clearCookies() {
+  //called by HTML clear button, clears the cookies, outputs 0 into document.cookie
+  for (let key in gameSettings) {
+    let value = gameSettings[key];
+    document.cookie =
+      key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
+  }
+  showMessage("Cookies Cleared");
+}
+
+
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
   for (let key in userGameSettings) {
@@ -211,7 +231,6 @@ function stopGame() {
   //setts gamePlaying to false, swaps hide from start button to stop buttons
   gamePlaying = false;
   clearInterval(timeTimer);
-  progress = 0;
   updateScreenValues();
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
@@ -230,7 +249,7 @@ function playTone(btn, len) {
   context.resume();
   tonePlaying = true;
   setTimeout(function () {
-    stopTone();
+    stopTone(false);
   }, len);
 }
 
@@ -249,8 +268,11 @@ function startTone(btn) {
   }
 }
 
-function stopTone() {
+function stopTone(callFromHTML = true) {
   //gets called by buttons on the screen  and playTone, stops the sound
+  if (callFromHTML && !canPlay) {//
+    return;
+  }
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
 }
@@ -317,11 +339,13 @@ document.addEventListener("keydown", (btn) => {
 });
 
 function keyboardGuess(btn) {
-  lightButton(btn);
-  startTone(btn);
-  setTimeout(stopTone, 100);
-  setTimeout(clearButton, 100, btn);
-  guess(btn);
+  if (canPlay) {
+    lightButton(btn);
+    startTone(btn);
+    setTimeout(stopTone, 100);
+    setTimeout(clearButton, 100, btn);
+    guess(btn);
+  }
 }
 
 function guess(btn) {
@@ -425,24 +449,6 @@ function showMessage(info) {
   }, 4000);
 }
 
-function saveCookie() {
-  //called by saveSettings, takes the values in gameSettings and saves them
-  for (let key in gameSettings) {
-    let value = gameSettings[key];
-    // console.log(`Saving ${key} as ${value}`);
-    document.cookie = key + "=" + value + ";" + ";path=/";
-  }
-}
-
-function clearCookies() {
-  //called by HTML clear button, clears the cookies, outputs 0 into document.cookie
-  for (let key in gameSettings) {
-    let value = gameSettings[key];
-    document.cookie =
-      key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
-  }
-  showMessage("Cookies Cleared");
-}
 
 function activateModal(headerText, color) {
   document.getElementById("modal").classList.add("active");
