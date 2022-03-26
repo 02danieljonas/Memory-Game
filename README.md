@@ -55,11 +55,11 @@ The following **additional** features are implemented:
 If you recorded multiple GIFs for all the implemented features, you can add them here:<br>
 ![](http://g.recordit.co/7z89Pr3vwL.gif)
 ![](http://g.recordit.co/zknIu1Msju.gif)
-
 ![](http://g.recordit.co/lc5oAfUbfb.gif)
 
-![](http://g.recordit.co/mVFbI1hyXM.gif)
-![](http://g.recordit.co/zknIu1Msju.gif)
+![](http://g.recordit.co/C1Drfvohb8.gif)
+
+
 
 
 <!-- ![](http://g.recordit.co/GE9Hjhc8LC.gif)
