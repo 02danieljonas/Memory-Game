@@ -78,8 +78,8 @@ I would make my code more readable. I would change out cookies for localstorage,
 
 [My 5-minute Interview Recording]
 
-![Alt Text](http://g.recordit.co/pEpD1PDNHo.gif)
-![Alt Text](http://g.recordit.co/RIndzK7Qrb.gif)
+http://g.recordit.co/pEpD1PDNHo.gif
+http://g.recordit.co/RIndzK7Qrb.gif
 
 ## License
 
