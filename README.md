@@ -78,7 +78,7 @@ I would make my code more readable. I would change out cookies for localstorage,
 
 ## Interview Recording URL Link
 
-[My 5-minute Interview Recording]
+https://youtu.be/hnduV2GdD2w
 
 
 ## License
