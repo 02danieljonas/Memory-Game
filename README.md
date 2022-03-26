@@ -53,7 +53,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough (GIF)
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:<br>
-http://g.recordit.co/5h72q72il9.gif<br>
+http://g.recordit.co/7z89Pr3vwL.gif<br>
 http://g.recordit.co/dW4I0OrnwA.gif<br>
 http://g.recordit.co/MuYEBYNuap.gif<br>
 http://g.recordit.co/jrwajphBAt.gif
@@ -64,7 +64,7 @@ I asked my friend Smyvens and my sister to check out my website and asked for wa
 www.w3schools.com, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://developer.mozilla.org/en-US/docs/Web/HTML, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://cssgradient.io/
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
-Sliders, settings the value, taking in the values, making sure everything matches, making sure things don't break, infinity. The IDE glitch, the little things VSCode does is so awesome, I would have changed to using VSCode and a liveserver, but i only realized how great VSCode is after using glitch. I was thinking of adding a way to indicate which number to press for eaching button, another hard part of making the gifs, every time I go to record it I notice a new mistake and have to go and fix it.
+Sliders, settings the value, taking in the values, making sure everything matches, making sure things don't break, infinity. The IDE glitch, the little things VSCode does is so awesome, I would have changed to using VSCode and a liveserver, but i only realized how great VSCode is after using glitch. I was thinking of adding a way to indicate which number to press for eaching button, another hard part of making the gifs, every time I go to record it I notice a new mistake and have to go and fix it. The problem I have the most is probably what ever problem happened the most recent, bad memory :(, as I might have to say the readme, it has gotten me to look over all my feature and made me realize ever error that was in the code forcing me to stop recording and fix it, also getting gifs to work in readme was hard
 
 3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
 how to keep track of all those features
