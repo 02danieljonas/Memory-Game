@@ -60,11 +60,11 @@ button {
   opacity: 100%;
 }
 
-#button0 {
+#gameButtonArea #button0 {
   background: red;
 }
 
-#button1 {
+#gameButtonArea #button1 {
   background: orange;
 }
 
@@ -73,7 +73,7 @@ button {
   color: black;
 }
 
-#button3 {
+#gameButtonArea #button3 {
   background: green;
 }
 
@@ -82,23 +82,23 @@ button {
   color: black;
 }
 
-#button5 {
+#gameButtonArea #button5 {
   background: blue;
 }
 
-#button6 {
+#gameButtonArea #button6 {
   background: BlueViolet;
 }
 
-#button7 {
+#gameButtonArea #button7 {
   background: purple;
 }
 
-#button8 {
+#gameButtonArea #button8 {
   background: maroon;
 }
 
-#button9 {
+#gameButtonArea #button9 {
   background: black;
 }
 
@@ -218,7 +218,6 @@ button {
 #overlay {
   cursor: pointer;
   opacity: 0;
-  /*   background-color: rgba(0, 128, 0, 0.25); */
   transition: 200ms ease-in-out;
   position: fixed;
   top: 0;
