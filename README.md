@@ -54,10 +54,12 @@ The following **additional** features are implemented:
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:<br>
 ![](http://g.recordit.co/7z89Pr3vwL.gif)
-http://g.recordit.co/7z89Pr3vwL.gif<br>
-http://g.recordit.co/dW4I0OrnwA.gif<br>
-http://g.recordit.co/MuYEBYNuap.gif<br>
-http://g.recordit.co/jrwajphBAt.gif
+![](http://g.recordit.co/zknIu1Msju.gif)
+
+![](http://g.recordit.co/zknIu1Msju.gif)
+![](http://g.recordit.co/zknIu1Msju.gif)
+![](http://g.recordit.co/zknIu1Msju.gif)
+![](http://g.recordit.co/zknIu1Msju.gif)
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
