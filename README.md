@@ -6,7 +6,7 @@ Submitted by: Daniel Jonas
 
 Time spent: 41+ hours spent in total
 
-Link to project: https://glitch.com/edit/#!/wry-tungsten-smartphone
+Link to project: https://wry-tungsten-smartphone.glitch.me/
 
 ## Required Functionality
 
