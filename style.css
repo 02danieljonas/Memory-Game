@@ -29,6 +29,10 @@ button {
   border-radius: 10px;
 }
 
+#gameButtonArea {
+  max-width: 1154px;
+}
+
 #gameButtonArea button span{
   display: none;
 }
@@ -44,8 +48,8 @@ button {
 
 @media only screen and (max-width: 1200px) {
   #gameButtonArea button {
-    width: 12vw;
-    height: 12vw;
+    width: 13.5vw;
+    height: 13.5vw;
     margin: 1vw;
     transition: 1s width, 1s height, 1s margin;
   }
