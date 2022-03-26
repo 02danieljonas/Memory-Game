@@ -31,12 +31,11 @@ function loadCookie() {
   // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
 
   let cookie = decodeURIComponent(document.cookie) + ";";
-  if (cookie == "" || cookie == "0;") {
-    // console.log("No cookies");
+  if (cookie == ";" || cookie == "0;") {
+    showMessage("No cookies")
     return;
   } else if (cookie.length < 70) {
-    // console.log("An error occured when reading cookies");
-    // console.log(cookie);
+    showMessage("An error occured with the cookies")
     return;
   }
   for (let key in userGameSettings) {
@@ -49,9 +48,7 @@ function loadCookie() {
     }
   }
   showMessage("Cookies applied");
-  // console.log(gameSettings);
   applySettings(false);
-  // console.log(gameSettings);
 }
 
 function updateSlider() {
@@ -79,21 +76,24 @@ function updateFreqMap() {
   }
 }
 
-function updateScreenValues() {
-  document.getElementById("progressPlaceholder").innerText = progress;
-  document.getElementById("patternLengthPlaceholder").innerText = ` / ${gameSettings["patternLength"]}`;
-
+function updateHeart(){
   let hearts = "";
-  if (gameSettings["lives"] != Infinity){
+  if (gameSettings["lives"] != Infinity && gameSettings["lives"] != 0){
     for (let i = 0; i < gameSettings["lives"] - strikes; i++){
       hearts+= '♥ ';
     }
   }
   else{
-    hearts = Infinity;
+    hearts ='♥×'+ gameSettings["lives"];
   }
   document.getElementById("livesPlaceholder").innerText = hearts;
-  document.getElementById("timerPlaceholder").innerText = gameSettings["timePerRound"];
+}
+
+function updateScreenValues() {
+  document.getElementById("progressPlaceholder").innerText = progress;
+  document.getElementById("patternLengthPlaceholder").innerText = ` / ${gameSettings["patternLength"]}`;
+  updateHeart()
+  document.getElementById("timerPlaceholder").innerText = Math.round((gameSettings["timePerRound"]*(progress+1))*((100-gameSettings["timeDecay"])/100));
 }
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -113,32 +113,32 @@ var timeTimer;
 
 function whenCanPlay(clueLength) { // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
   let howLong = nextClueWaitTime; //
-  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 333; //for every clue add cPT and cHT to find out how long the clue plays for
+  howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 333;
   setTimeout(function () {
     canPlay = true;
-    // console.log("Time to Play");
     if (gameSettings["timePerRound"] != Infinity) {
       setCountDown();
-    } //<---- do this when the you can play and stop on everything
+    }
   }, howLong);
 }
 
 function setCountDown() {
   if (canPlay) {
-    document.getElementById("timerPlaceholder").innerHTML =
-      (progress + 1) * gameSettings["timePerRound"];
+    document.getElementById("timerPlaceholder").innerHTML = Math.round((gameSettings["timePerRound"]*(progress+1))*((100-gameSettings["timeDecay"])/100));
+    clearInterval(timeTimer);
     timeTimer = setInterval(function () {
-      document.getElementById("timerPlaceholder").innerHTML--;
-      if (document.getElementById("timerPlaceholder").innerHTML == 0) {
-        strikes++;
-        if (strikes >= gameSettings["lives"]) {
-          loseGame();
-        } else {
-          document.getElementById("livesPlaceholder").innerText =
-            gameSettings["lives"] - strikes;
-          playClueSequence();
+      if (canPlay){
+        document.getElementById("timerPlaceholder").innerHTML--;
+        if (document.getElementById("timerPlaceholder").innerHTML <= 0) {
+          strikes++;
+          if (strikes >= gameSettings["lives"]) {
+            loseGame();
+          } else {
+            updateHeart()
+            playClueSequence();
+          }
+          clearInterval(timeTimer);
         }
-        clearInterval(timeTimer);
       }
     }, 1000);
   }
@@ -146,14 +146,11 @@ function setCountDown() {
 
 function showSettingContainer() {
   //called by HTML settings buttons, if not playing( if settings isn't showns it shows settings if settings is shown it calls cancel) else shoes messages
-  //
   if (gamePlaying == false) {
     if (document.getElementById("settingsContainer").classList == "hidden") {
       document.getElementById("settingsContainer").classList.remove("hidden");
       document.getElementById("settings").innerText = "Cancel";
-    } else {
-      cancel();
-    }
+    } else {cancel();}
   } else {
     showMessage("Please stop the game to change settings");
   }
@@ -225,11 +222,7 @@ function playTone(btn, len) {
 
 function startTone(btn) {
   //gets called by buttons on the screen
-
-  // console.log(tonePlaying);
-  // stopTone();
   if (!tonePlaying && canPlay) {
-    // console.log("User Sound Played");
     context.resume();
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(
@@ -270,20 +263,11 @@ function playSingleClue(btn) {
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   canPlay = false;
-
   whenCanPlay(progress);
-
   guessCounter = 0;
-  context.resume(); //This code disappeared after I was told to write it
+  context.resume();
   let delay = nextClueWaitTime;
-  // print(`Pattern is ${pattern}`);
-
   for (let i = 0; i <= progress; i++) {
-    //pattern equals random stuff
-    /*
-    pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0)
-      */
-
     console.log("Play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
     delay += clueHoldTime;
@@ -293,10 +277,8 @@ function playClueSequence() {
 
 function loseGame() {
   //called by guess, calls stopGame display lost
-  // document.getElementById("livesPlaceholder").innerText = 0;
   updateScreenValues();
   stopGame();
-  // alert("Game Over. You lost! \n Progress: " + progress);
   activateModal("Better luck next time", "red");
 }
 
@@ -304,7 +286,6 @@ function winGame() {
   //called by guess, calls stopGame display win
   stopGame();
   activateModal("Winner!!!!", "green");
-  // alert("Game Over. You Won!");
 }
 
 document.addEventListener("keydown", (btn) => {
@@ -320,8 +301,6 @@ document.addEventListener("keydown", (btn) => {
     }
   }
 });
-
-
 
 function keyboardGuess(btn) {
   lightButton(btn);
@@ -346,21 +325,17 @@ function guess(btn) {
       return;
     } else {
       updateScreenValues();
-      // document.getElementById("livesPlaceholder").innerText =
-      //   gameSettings["lives"] - strikes;
       playClueSequence();
       return;
     }
   } else if (!(guessCounter == progress)) {
     guessCounter++;
-    clearInterval(timeTimer);
     return;
   } else if (!(progress == gameSettings["patternLength"] - 1)) {
     progress++;
     updateScreenValues();
     clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
-    // document.getElementById("progressPlaceholder").innerText = progress;
     if (clueHoldTime > 300) {
       cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
       clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
@@ -385,8 +360,6 @@ function updateButtons() {
   }
   updateFreqMap();
 }
-
-//change timer so it cancels
 
 function applySettings(message = true) {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
@@ -427,21 +400,9 @@ function showNumbers(s){
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 function showMessage(info) {
   document.getElementById("errorMessage").innerHTML = info;
-
   document.getElementById("errorMessage").classList.add("show");
-
   setTimeout(function () {
     document.getElementById("errorMessage").classList.remove("show");
   }, 4000);
@@ -449,53 +410,42 @@ function showMessage(info) {
 
 function saveCookie() {
   //called by saveSettings, takes the values in gameSettings and saves them
-  // console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
     // console.log(`Saving ${key} as ${value}`);
     document.cookie = key + "=" + value + ";" + ";path=/";
   }
-  // console.log(document.cookie);
 }
 
 function clearCookies() {
   //called by HTML clear button, clears the cookies, outputs 0 into document.cookie
-  // console.log(document.cookie);
   for (let key in gameSettings) {
     let value = gameSettings[key];
     document.cookie =
       key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
-  // console.log(document.cookie);
   showMessage("Cookies Cleared");
 }
 
 function activateModal(headerText, color) {
-  // print("You should add confetti");
   document.getElementById("modal").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-
   document.getElementById("modalHeader").style.background = color;
   document.getElementById("overlay").style.background = color;
   document.getElementById("overlay").style.opacity = "50%";
 
-  //loop through this showing everything
-
   let output = `Progress: ${progress} / ${gameSettings["patternLength"]} <br>`;
 
+  if (headerText == "Winner!!!!"){
+    output = `Progress: ${gameSettings["patternLength"]} / ${gameSettings["patternLength"]} <br>`;
+  }
+
   output += `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`;
-
   output += `Button Amount ${gameSettings["buttonAmount"]} <br>`;
-
   output += `Time: ${gameSettings["timePerRound"]} <br> Time Decay: ${gameSettings["timeDecay"]}% <br>`;
-
   document.getElementById("modalBody").innerHTML = output;
-
   document.getElementById("modalTitle").innerHTML = headerText;
 }
-
-// TODO: "Issue With ScreenUpdate Fix it";
-// TODO: "When a time is given value is reset to starting time when clue is being given";
 
 function deactivateModal() {
   document.getElementById("modal").classList.remove("active");

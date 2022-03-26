@@ -64,10 +64,11 @@ I asked my friend Smyvens and my sister to check out my website and asked for wa
 www.w3schools.com, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://developer.mozilla.org/en-US/docs/Web/HTML, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://cssgradient.io/
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
-Sliders, settings the value, taking in the values, making sure everything matches, making sure things don't break, infinity. The IDE glitch, the little things VSCode does is so awesome, I would have changed to using VSCode and a liveserver, but i only realized how great VSCode is after using glitch. I was thinking of adding a way to indicate which number to press for eaching button
+Sliders, settings the value, taking in the values, making sure everything matches, making sure things don't break, infinity. The IDE glitch, the little things VSCode does is so awesome, I would have changed to using VSCode and a liveserver, but i only realized how great VSCode is after using glitch. I was thinking of adding a way to indicate which number to press for eaching button, another hard part of making the gifs, every time I go to record it I notice a new mistake and have to go and fix it.
 
 3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
-
+how to keep track of all those features
+like I have 500lines of ccode and I don't think I could keep track of all 
 
 4. If you had a few more hours to work on this project, what would you spend them doing (for example: refactoring certain functions, adding additional features, etc). Be specific. (recommended 100 - 300 words) 
 I would make my code more readable. I would change out cookies for localstorage, make the buttons a class so I allow the user to create more buttons, connect to a dynamoDB to allow highscores, having an easy, medium, hard option.
@@ -76,7 +77,8 @@ I would make my code more readable. I would change out cookies for localstorage,
 ## Interview Recording URL Link
 
 [My 5-minute Interview Recording](your-link-here)
-
+http://g.recordit.co/RIndzK7Qrb.gif
+http://g.recordit.co/pEpD1PDNHo.gif
 
 ## License
 
