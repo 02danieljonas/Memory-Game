@@ -58,7 +58,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 ![](http://g.recordit.co/lc5oAfUbfb.gif)
 ![](http://g.recordit.co/atkLI7tsia.gif)
 
-![](http://g.recordit.co/atkLI7tsia.gif)
+![](http://g.recordit.co/Fk2aDq0BEU.gif)
 
 
 
