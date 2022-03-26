@@ -76,9 +76,10 @@ I would make my code more readable. I would change out cookies for localstorage,
 
 ## Interview Recording URL Link
 
-[My 5-minute Interview Recording](your-link-here)
-http://g.recordit.co/RIndzK7Qrb.gif
-http://g.recordit.co/pEpD1PDNHo.gif
+[My 5-minute Interview Recording]
+
+<img src="http://g.recordit.co/pEpD1PDNHo.gif">
+<img src="http://g.recordit.co/RIndzK7Qrb.gif">
 
 ## License
 
