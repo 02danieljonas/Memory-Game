@@ -7,7 +7,7 @@ html {
     rgb(112,128,144)
     repeating-linear-gradient(-45deg, rgb(155,166,177, 0.5) 0%, rgb(155,166,177, 0.5) 5%, transparent 5%, transparent 10%);
   /* 
-  https://www.gradientmagic.com/collection/popular/gradient/1575045306149
+  https://www.gradientmagic.com/
   https://www.youtube.com/watch?v=muE2B0Zylbw
   */
 }
@@ -55,8 +55,7 @@ button {
   }
 }
 
-#gameButtonArea button.lit,
-#gameButtonArea button:active {
+#gameButtonArea button.lit, #gameButtonArea button:active {
   opacity: 100%;
 }
 
