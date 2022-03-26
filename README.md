@@ -4,7 +4,7 @@
 
 Submitted by: Daniel Jonas
 
-Time spent: 41+ hours spent in total
+Time spent: 43+ hours spent in total
 
 Link to project: https://wry-tungsten-smartphone.glitch.me/
 
@@ -42,12 +42,7 @@ The following **additional** features are implemented:
 - [X] Size of game buttons shrink for smaller screens
 - [X] Replaced alert() with a pop up
 - [X] sequenced is repeated if user guesses wrong
-- [X] Number Keys can be used as input
 - [X] connecting all of the above features
-
-
-
-
 
 
 ## Video Walkthrough (GIF)
@@ -60,17 +55,9 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 ---
 ![](http://g.recordit.co/Fk2aDq0BEU.gif)
 ![](http://g.recordit.co/sAXUdSlJjY.gif)
-
 ![](http://g.recordit.co/ErHsB5xOYT.gif)
 
 
-
-<!-- ![](http://g.recordit.co/GE9Hjhc8LC.gif)
-![](http://g.recordit.co/YdLFmBYLy4.gif) -->
-
-
-<!-- ![](http://g.recordit.co/zknIu1Msju.gif)
-![](http://g.recordit.co/zknIu1Msju.gif) -->
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
