@@ -21,7 +21,11 @@
       ><span id="patternLengthPlaceholder"></span><br />
     </div>
     Show Button Numbers
-    <input type="checkbox" value="yes" oninput="showNumbers(this.checked)" />
+    <input
+      type="checkbox"
+      value="yes"
+      oninput="showButtonNumbers(this.checked)"
+    />
     <br />
 
     <div id="gameButtonArea">
@@ -197,8 +201,7 @@
     </div>
     <div id="errorMessage" class=""></div>
 
-    <!-- <button onclick="activateModal('test', 'cyan')">Open Modal</button> -->
-
+    <button onclick="activateModal('test', 'cyan')">Open Modal</button>
     <div class="modal" id="modal">
       <div id="modalHeader">
         <div id="modalTitle"></div>
@@ -206,6 +209,6 @@
       </div>
       <div id="modalBody">Stats</div>
     </div>
-    <div class="" id="overlay" onclick="deactivateModal()"></div>
+    <div class="" id="overlay" onclick="closeOverlay()"></div>
   </body>
 </html>

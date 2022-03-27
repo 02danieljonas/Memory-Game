@@ -187,6 +187,10 @@ function showSettingContainer() {
     if (document.getElementById("settingsContainer").classList == "hidden") {
       document.getElementById("settingsContainer").classList.remove("hidden");
       document.getElementById("settings").innerText = "Cancel";
+
+      document.getElementById("overlay").classList.add("active");
+      document.getElementById("overlay").style.opacity = "50%";
+      document.getElementById("overlay").style.background = "black";
     } else {
       cancel();
     }
@@ -212,6 +216,8 @@ function close() {
   //called by cancel and applySettings, closes settings container
   document.getElementById("settingsContainer").classList.add("hidden");
   document.getElementById("settings").innerText = "Settings";
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("overlay").style.opacity = "0%";
 }
 
 function startGame() {
@@ -438,7 +444,7 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
   userGameSettings[placeholder] = sliderElemValue;
 }
 
-function showNumbers(s) {
+function showButtonNumbers(s) {
   if (s) {
     document.querySelectorAll(".buttonNumber").forEach((item) => {
       item.style.display = "revert";
@@ -482,4 +488,9 @@ function deactivateModal() {
   document.getElementById("modal").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
   document.getElementById("overlay").style.opacity = "0%";
+}
+
+function closeOverlay() {
+  deactivateModal();
+  cancel();
 }
