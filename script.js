@@ -231,8 +231,8 @@ function guess(btn) {
     clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
     if (clueHoldTime > 300) {
-      cluePauseTime *= 0.9;
-      clueHoldTime *= 0.9;
+      cluePauseTime *= 0.88;
+      clueHoldTime *= 0.88;
     }
     playClueSequence();
     return;
