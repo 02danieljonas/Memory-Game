@@ -64,13 +64,9 @@ function clearCookies() {//called by HTML clear button, clears the cookies, outp
 function updateSlider() {//should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
   for (let key in userGameSettings) {
     let value = userGameSettings[key];
-
     let sliderElem = document.getElementById(`${key}Slider`);
-
     sliderElem.value = value == Infinity ? 31 : value;
-
     let placeholder = document.getElementById(key);
-
     placeholder.innerHTML = value;
   }
 }
@@ -330,7 +326,7 @@ function keyboardGuess(btn) {
   if (canPlay) {
     lightButton(btn);
     startTone(btn);
-    setTimeout(stopTone, 100);
+    setTimeout(stopTone, 100, false);
     setTimeout(clearButton, 100, btn);
     guess(btn);
   }
