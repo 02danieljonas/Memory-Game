@@ -15,8 +15,8 @@ var gameSettings = {
   volume: 3,
   lives: 3,
   buttonAmount: 4,
-  timePerRound: Infinity,
-  timeDecay: 20,
+  timePerRound: 10,
+  timeModifier: 10,
 };
 
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
@@ -70,7 +70,6 @@ function clearCookies() {
   showMessage("Cookies Cleared");
 }
 
-
 function updateSlider() {
   //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
   for (let key in userGameSettings) {
@@ -114,11 +113,14 @@ function updateScreenValues() {
     "patternLengthPlaceholder"
   ).innerText = ` / ${gameSettings["patternLength"]}`;
   updateHeart();
-  document.getElementById("timerPlaceholder").innerText = Math.round(
+  let timerPlaceholder = Math.round(
     gameSettings["timePerRound"] *
-      (progress + 1) *
-      ((100 - gameSettings["timeDecay"]) / 100)
+      ((100 + (progress + 1) * gameSettings["timeModifier"]) / 100)
   );
+  document.getElementById("timerPlaceholder").innerText =
+    timerPlaceholder > 1 ? timerPlaceholder : 1;
+
+  console.log(document.getElementById("timerPlaceholder").innerHTML);
 }
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -138,6 +140,9 @@ var timeTimer;
 
 function whenCanPlay(clueLength) {
   // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
+  if (!gamePlaying) {
+    return;
+  }
   let howLong = nextClueWaitTime; //
   howLong += (clueLength + 1) * (cluePauseTime + clueHoldTime) - 333;
   setTimeout(function () {
@@ -149,15 +154,17 @@ function whenCanPlay(clueLength) {
 }
 
 function setCountDown() {
-  if (canPlay) {
-    document.getElementById("timerPlaceholder").innerHTML = Math.round(
+  if (canPlay && gamePlaying) {
+    let timerPlaceholder = Math.round(
       gameSettings["timePerRound"] *
-        (progress + 1) *
-        ((100 - gameSettings["timeDecay"]) / 100)
+        ((100 + (progress + 1) * gameSettings["timeModifier"]) / 100)
     );
+    document.getElementById("timerPlaceholder").innerText =
+      timerPlaceholder > 1 ? timerPlaceholder : 1;
+    console.log(document.getElementById("timerPlaceholder").innerHTML);
     clearInterval(timeTimer);
     timeTimer = setInterval(function () {
-      if (canPlay) {
+      if (canPlay && gamePlaying) {
         document.getElementById("timerPlaceholder").innerHTML--;
         if (document.getElementById("timerPlaceholder").innerHTML <= 0) {
           strikes++;
@@ -270,7 +277,8 @@ function startTone(btn) {
 
 function stopTone(callFromHTML = true) {
   //gets called by buttons on the screen  and playTone, stops the sound
-  if (callFromHTML && !canPlay) {//
+  if (callFromHTML && !canPlay) {
+    //
     return;
   }
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
@@ -375,9 +383,10 @@ function guess(btn) {
     clearInterval(timeTimer);
     pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
     if (clueHoldTime > 300) {
-      cluePauseTime *= (100 - gameSettings["timeDecay"]) / 100;
-      clueHoldTime *= (100 - gameSettings["timeDecay"]) / 100;
+      cluePauseTime *= (100 - Math.abs(gameSettings["timeModifier"])) / 100;
+      clueHoldTime *= (100 - Math.abs(gameSettings["timeModifier"])) / 100;
     }
+
     playClueSequence();
     return;
   } else {
@@ -449,7 +458,6 @@ function showMessage(info) {
   }, 4000);
 }
 
-
 function activateModal(headerText, color) {
   document.getElementById("modal").classList.add("active");
   document.getElementById("overlay").classList.add("active");
@@ -465,7 +473,7 @@ function activateModal(headerText, color) {
 
   output += `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`;
   output += `Button Amount ${gameSettings["buttonAmount"]} <br>`;
-  output += `Time: ${gameSettings["timePerRound"]} <br> Time Decay: ${gameSettings["timeDecay"]}% <br>`;
+  output += `Time: ${gameSettings["timePerRound"]} <br> Time Modifier: ${gameSettings["timeModifier"]}% <br>`;
   document.getElementById("modalBody").innerHTML = output;
   document.getElementById("modalTitle").innerHTML = headerText;
 }

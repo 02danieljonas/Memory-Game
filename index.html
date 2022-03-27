@@ -174,14 +174,14 @@
       />
       <br />
 
-      Time Lost Each Round: <span id="timeDecay">20</span>%
+      Time Gained Each Round: <span id="timeModifier">20</span>%
       <input
         type="range"
-        min="0"
+        min="-30"
         max="30"
         value="10"
-        id="timeDecaySlider"
-        oninput='updateSliderPlaceholder(this.id, "timeDecay")'
+        id="timeModifierSlider"
+        oninput='updateSliderPlaceholder(this.id, "timeModifier")'
       />
       <br />
 
