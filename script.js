@@ -1,12 +1,32 @@
 //https://www.chirpinternet.eu/
 var pattern = []; //array contain the pattern for that round
-var freqMap;
+var freqMap = [
+  261.63, 293.66, 329.63, 349.23, 392.0, 440.0, 493.88, 523.25, 587.33, 659.25,
+  698.46, 783.99, 880.0, 987.77, 1046.5, 110.0,
+];
 var clueInProgress = false; //is a clue playing right now
 var progress = 0; //Score of the player
 var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
+var keyInput = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "Q",
+  "W",
+  "E",
+  "R",
+  "T",
+];
 
 var colors = [
   "red",
@@ -25,8 +45,9 @@ var colors = [
   "forestgreen",
   "ghostwhite",
 ];
-var buttonList = [];
-let buttonInternalNumber = 0;
+
+var btnList = [];
+let btnNumberTracker = 0;
 
 var gameSettings = {
   //the configuration object
@@ -37,6 +58,7 @@ var gameSettings = {
   timePerRound: 10,
   timeModifier: 10,
 };
+
 var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
 
 loadCookie();
@@ -44,23 +66,22 @@ updateSlider();
 applySettings(false);
 
 document.addEventListener("keydown", (btn) => {
-  btn = parseInt(btn.key);
-  if (!isNaN(btn)) {
-    if (btn != 0) {
-      btn--;
-    } else {
-      btn = 9;
+  btn = btn.key.toUpperCase();
+  let btnIndex = keyInput.indexOf(btn);
+  if (btnIndex == -1) {
+    return;
+  }
+  console.log(btnIndex);
+
+  if (btnIndex < gameSettings["buttonAmount"]) {
+    if (!canPlay) {
+      return;
     }
-    if (btn < gameSettings["buttonAmount"]) {
-      if (!canPlay) {
-        return;
-      }
-      lightButton(btn);
-      startTone(btn);
-      setTimeout(stopTone, 100, false);
-      setTimeout(clearButton, 100, btn);
-      guess(btn);
-    }
+    lightButton(btnIndex);
+    startTone(btnIndex);
+    setTimeout(stopTone, 100, false);
+    setTimeout(clearButton, 100, btnIndex);
+    guess(btnIndex);
   }
 });
 
@@ -328,64 +349,37 @@ function applySettings(message = true) {
 }
 
 function addElement() {
-  if (buttonInternalNumber > 14) {
+  if (btnNumberTracker > 14) {
     return;
   }
-  btn = document.createElement("button");
-  btn.setAttribute("id", `button${buttonInternalNumber}`);
-  btn.setAttribute("onclick", `guess(${buttonInternalNumber})`);
-  btn.setAttribute("onmousedown", `startTone(${buttonInternalNumber})`);
-  btn.setAttribute("onmouseup", `stopTone()`);
-  btn.style.fontSize = "100%";
-
-  document.getElementById("gameButtonArea").appendChild(btn);
-  btn.style.background = colors[buttonInternalNumber];
-  buttonList.push(btn);
-
-  btnText = document.createElement("span");
-  btnText.setAttribute("class", `buttonNumber`);
-  btnText.style.background = "black";
-  btnText.style.color = "Aqua";
-  btnText.innerHTML = buttonInternalNumber+1;
-
-  btn.appendChild(btnText);
-
-  // buttonInternalNumber>14 ? buttonInternalNumber=0 :
-  buttonInternalNumber++;
+  buttonElement = document.createElement("button");
+  buttonElement.setAttribute("id", `button${btnNumberTracker}`);
+  buttonElement.setAttribute("onclick", `guess(${btnNumberTracker})`);
+  buttonElement.setAttribute("onmousedown", `startTone(${btnNumberTracker})`);
+  buttonElement.setAttribute("onmouseup", `stopTone()`);
+  buttonElement.style.fontSize = "100%";
+  document.getElementById("gameButtonArea").appendChild(buttonElement);
+  buttonElement.style.background = colors[btnNumberTracker];
+  btnList.push(buttonElement);
+  buttonElementText = document.createElement("span");
+  buttonElementText.setAttribute("class", `buttonNumber`);
+  buttonElementText.style.background = "black";
+  buttonElementText.style.color = "Aqua";
+  buttonElementText.innerHTML = keyInput[btnNumberTracker];
+  buttonElement.appendChild(buttonElementText);
+  btnNumberTracker++;
 }
-
-/*
-      <button
-        class="hidden"
-        id="button9"
-        onclick="guess(9)"
-        onmousedown="startTone(9)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">0</span>
-      </button> 
-*/
 
 function updateButtons() {
   //called by applySettings, goes through all the buttons and adds or remove the class hidden depending on if they are bigger or smaller than userGameSettings["buttonAmount"]
-  while (buttonList.length < userGameSettings["buttonAmount"]) {
+  while (btnList.length < userGameSettings["buttonAmount"]) {
     addElement();
   }
-
-  for (let i = userGameSettings["buttonAmount"]; i < buttonList.length; i++) {
-    buttonList[i].setAttribute("class", `hidden`);
+  for (let i = userGameSettings["buttonAmount"]; i < btnList.length; i++) {
+    btnList[i].setAttribute("class", `hidden`);
   }
   for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
-    buttonList[i].removeAttribute("class");
-    //loop and show the need buttons
-    console.log(buttonList);
-  }
-
-  //updates the freqMap
-  freqMap = [];
-  let temp = (500 - 260) / (userGameSettings["buttonAmount"] - 1);
-  for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
-    freqMap[i] = Math.round(260 + temp * i);
+    btnList[i].removeAttribute("class");
   }
 }
 
