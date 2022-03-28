@@ -363,7 +363,9 @@ function addElement() {
   buttonElementText = document.createElement("span");
   buttonElementText.setAttribute("class", `buttonNumber`);
   buttonElementText.style.background = "black";
-  buttonElementText.style.color = "Aqua";
+  buttonElementText.style.color = "white";
+  buttonElementText.style.opacity = "100";
+
   buttonElementText.innerHTML = keyInput[btnNumberTracker];
   buttonElement.appendChild(buttonElementText);
   btnNumberTracker++;
