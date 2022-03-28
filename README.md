@@ -4,7 +4,7 @@
 
 Submitted by: Daniel Jonas
 
-Time spent: 45+ hours
+Time spent: 48+ hours
 
 Link to project: https://wry-tungsten-smartphone.glitch.me/
 

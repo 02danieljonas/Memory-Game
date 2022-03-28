@@ -2,13 +2,20 @@ var pattern = []; //array contain the pattern for that round
 var freqMap = [
   261.63, 293.66, 329.63, 349.23, 392.0, 440.0, 493.88, 523.25, 587.33, 659.25,
   698.46, 783.99, 880.0, 987.77, 1046.5, 110.0,
-];
+]; //piano key frequency
 var clueInProgress = false; //is a clue playing right now
 var progress = 0; //Score of the player
 var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
+
+var clueHoldTime = 1000; //how long each clue is played for
+var cluePauseTime = 333; //how long to pause between clues
+var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
+var canPlay = true; //can the user play
+var timeTimer; //the timer for time
+
 var keyInput = [
   "1",
   "2",
@@ -25,7 +32,7 @@ var keyInput = [
   "E",
   "R",
   "T",
-];
+]; //accepted key inputs, the index is the button that is pressed
 
 var colors = [
   "Maroon",
@@ -43,13 +50,12 @@ var colors = [
   "indigo",
   "Fuchsia",
   "violet",
-];
+]; //buttons colors
 
-var btnList = [];
-let btnNumberTracker = 0;
+var btnList = []; //list to contain all the buttons
+let btnNumberTracker = 0; //keeps track of how much buttons have been made
 
 var gameSettings = {
-  //the configuration object
   patternLength: 8,
   volume: 3,
   lives: 3,
@@ -57,21 +63,15 @@ var gameSettings = {
   timePerRound: 10,
   timeModifier: 10,
 };
-
-var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in for the settings screen and if the user presses apply, it runs the function that applies it
-
-loadCookie();
-updateSlider();
-applySettings(false);
+var userGameSettings = Object.assign({}, gameSettings); //clones gameSettings, UserGS is used in taking Slider info and to allow cancel to work
 
 document.addEventListener("keydown", (btn) => {
+  //takes the btn key and if they are in KeyInputs, there index is used to imitate mouse presses
   btn = btn.key.toUpperCase();
   let btnIndex = keyInput.indexOf(btn);
   if (btnIndex == -1) {
     return;
   }
-  console.log(btnIndex);
-
   if (btnIndex < gameSettings["buttonAmount"]) {
     if (!canPlay) {
       return;
@@ -84,20 +84,17 @@ document.addEventListener("keydown", (btn) => {
   }
 });
 
-var AudioContext = window.AudioContext || window.webkitAudioContext;
+var AudioContext = window.AudioContext || window.webkitAudioContext; //start of magic
 var context = new AudioContext();
 var o = context.createOscillator();
 var g = context.createGain();
 g.connect(context.destination);
-g.gain.setValueAtTime(0, context.currentTime); //magic
+g.gain.setValueAtTime(0, context.currentTime);
 o.connect(g);
-o.start(0);
+o.start(0); //end of magic
 
-var clueHoldTime = 1000; //how long each clue is played for
-var cluePauseTime = 333; //how long to pause between clues
-var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
-var canPlay = true;
-var timeTimer;
+loadCookie();
+applySettings(false);
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -192,9 +189,7 @@ function playSingleClue(btn) {
 function playClueSequence() {
   //called by start and guess, calls timer, makes up the pattern, loops through the pattern making a setTimeout to call playSingleClue until progress,
   canPlay = false;
-
   whenCanPlay();
-
   guessCounter = 0;
   context.resume();
   let delay = nextClueWaitTime;
@@ -207,7 +202,7 @@ function playClueSequence() {
 }
 
 function whenCanPlay() {
-  // called by playClueSequence, sets validGuessTime to the time the player should guess the pattern, TODO: Change to using setTimeout
+  //called by playClueSequence, set canPlay to true and calls setCounDown when the user can start playing
   if (!gamePlaying) {
     return;
   }
@@ -222,6 +217,7 @@ function whenCanPlay() {
 }
 
 function setCountDown() {
+  //starts the timer count down
   if (!(canPlay && gamePlaying)) {
     return;
   }
@@ -247,13 +243,12 @@ function setCountDown() {
 }
 
 function guess(btn) {
-  //called by HTML buttons, if not gamePlaying or guessed before validGuessTime return,  if the guess is wrong, strikes++ and calls loseGame and returns only if strikes is >= lives anything else and it updates the lives on screen calls playClueSequence and return, if the user still has more guesses it returns after guessCounter++, if the user finished guessing progress++ updates the progress on screen, makes cluePauseTime and clueHoldTime less if clueHoldTime > 150 and finially playCluesequence and returns, if noones of the above conditions are meant it call winGame()
   if (!gamePlaying) {
     return;
   } else if (!canPlay) {
     showMessage("Please Wait Until Simon finishes says");
     return;
-  } else if (!(pattern[guessCounter] == btn)) {
+  } else if (pattern[guessCounter] != btn) {
     strikes++;
     clearInterval(timeTimer);
     if (strikes >= gameSettings["lives"]) {
@@ -271,7 +266,7 @@ function guess(btn) {
     progress++;
     updateScreenValues();
     clearInterval(timeTimer);
-    pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0); //To get infinity to work with the least amount of code I write the pattern here
+    pattern.push(Math.floor(Math.random() * gameSettings["buttonAmount"]) + 0);
     if (clueHoldTime > 300) {
       cluePauseTime *= 0.88;
       clueHoldTime *= 0.88;
@@ -384,7 +379,7 @@ function updateButtons() {
   }
 }
 
-function updateScreenValues(updateTime = true) {
+function updateScreenValues() {
   document.getElementById("progressPlaceholder").innerText = progress;
   document.getElementById(
     "patternLengthPlaceholder"
@@ -401,28 +396,16 @@ function updateScreenValues(updateTime = true) {
   }
   document.getElementById("livesPlaceholder").innerText = hearts;
 
-  if (updateTime) {
-    let timerPlaceholder = Math.round(
-      gameSettings["timePerRound"] *
-        ((100 + (progress + 1) * gameSettings["timeModifier"]) / 100)
-    );
-    document.getElementById("timerPlaceholder").innerText =
-      timerPlaceholder > 1 ? timerPlaceholder : 1;
-  }
-  console.log(
-    "Countdown: " + document.getElementById("timerPlaceholder").innerHTML
+  let timerPlaceholder = Math.round(
+    gameSettings["timePerRound"] *
+      ((100 + (progress + 1) * gameSettings["timeModifier"]) / 100)
   );
-}
-
-function saveSettings() {
-  //called by HTML save button
-  applySettings(false);
-  showMessage("Cookies Saved");
-  saveCookie();
+  document.getElementById("timerPlaceholder").innerText =
+    timerPlaceholder > 1 ? timerPlaceholder : 1;
 }
 
 function loadCookie() {
-  // loads cookies and if its not empty or less than 90 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
+  //called in javascript loads cookies and if its not empty or less than 70 in length it changes the values in userGameSettings to cookies and calls applySettings, TODO: updates both slider value and sliderPlacehooder to reflect the current values
   let cookie = decodeURIComponent(document.cookie) + ";";
   if (cookie == ";" || cookie == "0;") {
     showMessage("No cookies");
@@ -441,11 +424,25 @@ function loadCookie() {
     }
   }
   showMessage("Cookies applied");
+  updateSlider();
   applySettings(false);
 }
 
-function saveCookie() {
-  //called by saveSettings, takes the values in gameSettings and saves them
+function updateSlider() {
+  //should be called to clones gameSettings value into sliderPlaceholders, placed outside of loadCookie() for readability(?)
+  for (let key in userGameSettings) {
+    let value = userGameSettings[key];
+    let sliderElem = document.getElementById(`${key}Slider`);
+    sliderElem.value = value == Infinity ? 31 : value;
+    let placeholder = document.getElementById(key);
+    placeholder.innerHTML = value;
+  }
+}
+
+function saveSettings() {
+  //called by HTML save button
+  applySettings(false);
+  showMessage("Cookies Saved");
   for (let key in gameSettings) {
     let value = gameSettings[key];
     // console.log(`Saving ${key} as ${value}`);
@@ -456,26 +453,14 @@ function saveCookie() {
 function clearCookies() {
   //called by HTML clear button, clears the cookies, outputs 0 into document.cookie
   for (let key in gameSettings) {
-    let value = gameSettings[key];
     document.cookie =
       key + "=" + ";" + "expires=Thu, 01 Jan 1970 00:00:00 UTC;" + ";path=/";
   }
   showMessage("Cookies Cleared");
 }
 
-function updateSlider() {
-  //should be called to clones gameSettings value into sliderPlaceholders, meant to be used along side load cookies
-  for (let key in userGameSettings) {
-    let value = userGameSettings[key];
-    let sliderElem = document.getElementById(`${key}Slider`);
-    sliderElem.value = value == Infinity ? 31 : value;
-    let placeholder = document.getElementById(key);
-    placeholder.innerHTML = value;
-  }
-}
-
 function updateSliderPlaceholder(sliderElem, placeholder) {
-  //sliderElem is the slider ID and placeholder is the Key
+  //called by HTML sliders, sliderElem is the slider ID and placeholder ID, makes placeholder matches slider info
   let sliderElemValue = document.getElementById(sliderElem).value;
   sliderElemValue = sliderElemValue == 31 ? Infinity : sliderElemValue;
   let placeholderElem = document.getElementById(placeholder);
@@ -484,6 +469,7 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
 }
 
 function showButtonNumbers(checked) {
+  //called by HTML element show button control checkbox
   if (checked) {
     document.querySelectorAll(".buttonNumber").forEach((item) => {
       item.style.display = "revert";
@@ -496,6 +482,7 @@ function showButtonNumbers(checked) {
 }
 
 function showMessage(info) {
+  //shows info on the screen and starts closing it in 4 secounds
   document.getElementById("errorMessage").innerHTML = info;
   document.getElementById("errorMessage").classList.add("show");
   setTimeout(function () {
@@ -504,29 +491,29 @@ function showMessage(info) {
 }
 
 function activateModal(headerText, color) {
+  //called by winGame and loseGame and shows game info
   document.getElementById("modal").classList.add("active");
   document.getElementById("overlay").classList.add("active");
   document.getElementById("modalHeader").style.background = color;
   document.getElementById("overlay").style.background = color;
   document.getElementById("overlay").style.opacity = "50%";
+
   let output = `Progress: ${progress} / ${gameSettings["patternLength"]} <br>`;
-  if (headerText == "Winner!!!!") {
-    output = `Progress: ${gameSettings["patternLength"]} / ${gameSettings["patternLength"]} <br>`;
-  }
   output += `\n Lives: ${gameSettings["lives"]} Strikes: ${strikes} <br>`;
   output += `Button Amount ${gameSettings["buttonAmount"]} <br>`;
-  output += `Time: ${gameSettings["timePerRound"]} <br> Time Modifier: ${gameSettings["timeModifier"]}% <br>`;
+  output += `Time limit: ${gameSettings["timePerRound"]} <br> Time Modifier: ${gameSettings["timeModifier"]}% <br>`;
   document.getElementById("modalBody").innerHTML = output;
   document.getElementById("modalTitle").innerHTML = headerText;
 }
 
 function deactivateModal() {
+  //callege by HTML element overlay and modalClose
   document.getElementById("modal").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("overlay").style.opacity = "0%";
 }
 
 function closeOverlay() {
+  //callege by HTML element overlay
   deactivateModal();
   cancel();
 }
