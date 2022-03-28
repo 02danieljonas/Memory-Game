@@ -1,3 +1,4 @@
+//https://www.chirpinternet.eu/
 var pattern = []; //array contain the pattern for that round
 var freqMap;
 var clueInProgress = false; //is a clue playing right now
@@ -8,43 +9,32 @@ var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
 
 var colors = ["red", "orange", "yellow", "green", "cyan", "blue", "indigo", "violet", "darkgreen", "darkolivegreen", "darkorchid", "darkseagreen", "deepskyblue", "forestgreen", "ghostwhite"]
+let k = 0
+function addElement(){
 
+  btn = document.createElement("button");
+  document.getElementById("gameButtonArea").appendChild(btn);
+  btn.style.background = colors[k]
+  console.log(colors[k])
+  k++
+  if (k>14){k=0}
+}
 
-// let S = 100
-// let L = 50
-// var colors = [];
-//330
-// for (let H = 0; H<331;H+=22){
-//   if (H == 88){H=55}
-//   colors.push(`hsl(${H}, ${S}%, ${L}%)`)
-// }
-
-// var colorNumber = 0;
-// console.log(colors[colorNumber])
-// console.log(colors)
-
-// function changeColor(id){
-//   document.getElementById(id).style.background = colors[colorNumber];
-//   console.log(colors[colorNumber])
-//   colorNumber++
-//   colorNumber<=17 ? colorNumber++ : colorNumber=0
-// }
 /*
-for (let H = 0; H<331;H+=22){
-  H == 132 ? tempColor = "darkgreen": tempColor = `hsl(${H}, 50%, 100%)`;
-  colors.push(tempColor)
-}
+<button
+id="button1"
+onclick="guess(1)"
+onmousedown="startTone(1)"
+onmouseup="stopTone()"
+>
+<span class="buttonNumber">2</span>
+</button>
+*/
 
-var colorNumber = 0;
-console.log(colors[colorNumber])
-console.log(colors)
-
-function changeColor(id){
-  document.getElementById(id).style.background = colors[colorNumber];
-  console.log(colors[colorNumber])
-  colorNumber++
-  colorNumber<=15 ? colorNumber++ : colorNumber=0
-}
+/*
+const para = document.createElement("p");
+para.innerHTML = "This is a paragraph.";
+document.getElementById("myDIV").appendChild(para);
 */
 
 var gameSettings = {
