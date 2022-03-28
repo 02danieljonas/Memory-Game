@@ -28,21 +28,21 @@ var keyInput = [
 ];
 
 var colors = [
+  "Maroon",
   "red",
   "orange",
   "yellow",
-  "green",
-  "cyan",
-  "blue",
-  "indigo",
-  "violet",
-  "darkgreen",
+  "olive",
   "darkolivegreen",
-  "darkorchid",
-  "darkseagreen",
-  "deepskyblue",
-  "forestgreen",
-  "ghostwhite",
+  "green",
+  "lime",
+  "teal",
+  "aqua",
+  "blue",
+  "navy",
+  "indigo",
+  "Fuchsia",
+  "violet",
 ];
 
 var btnList = [];
@@ -53,7 +53,7 @@ var gameSettings = {
   patternLength: 8,
   volume: 3,
   lives: 3,
-  buttonAmount: 2,
+  buttonAmount: 4,
   timePerRound: 10,
   timeModifier: 10,
 };
