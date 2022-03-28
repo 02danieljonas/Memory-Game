@@ -12,6 +12,8 @@
   <body>
     <h1>Memory Game!</h1>
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
+    <br />
+
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
     <div id="info">
@@ -20,7 +22,7 @@
       Round: <span id="progressPlaceholder">0</span
       ><span id="patternLengthPlaceholder"></span><br />
     </div>
-    Show Button Numbers
+    Show Button Controls
     <input
       type="checkbox"
       value="yes"
@@ -28,100 +30,12 @@
     />
     <br />
 
-    <div id="gameButtonArea">
-      <button
-        id="button0"
-        onclick="guess(0)"
-        onmousedown="startTone(0)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">1</span>
-      </button>
-      <button
-        id="button1"
-        onclick="guess(1)"
-        onmousedown="startTone(1)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">2</span>
-      </button>
-      <button
-        id="button2"
-        onclick="guess(2)"
-        onmousedown="startTone(2)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">3</span>
-      </button>
-      <button
-        id="button3"
-        onclick="guess(3)"
-        onmousedown="startTone(3)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">4</span>
-      </button>
-      <button
-        class="hidden"
-        id="button4"
-        onclick="guess(4)"
-        onmousedown="startTone(4)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">5</span>
-      </button>
-
-      <button
-        class="hidden"
-        id="button5"
-        onclick="guess(5)"
-        onmousedown="startTone(5)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">6</span>
-      </button>
-      <button
-        class="hidden"
-        id="button6"
-        onclick="guess(6)"
-        onmousedown="startTone(6)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">7</span>
-      </button>
-      <button
-        class="hidden"
-        id="button7"
-        onclick="guess(7)"
-        onmousedown="startTone(7)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">8</span>
-      </button>
-      <button
-        class="hidden"
-        id="button8"
-        onclick="guess(8)"
-        onmousedown="startTone(8)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">9</span>
-      </button>
-      <button
-        class="hidden"
-        id="button9"
-        onclick="guess(9)"
-        onmousedown="startTone(9)"
-        onmouseup="stopTone()"
-      >
-        <span class="buttonNumber">0</span>
-      </button>
-    </div>
+    <div id="gameButtonArea"></div>
 
     <button id="settings" class="clicked" onclick="showSettingContainer()">
       Settings
     </button>
-    
+
     <div class="hidden" id="settingsContainer">
       Volume: <span id="volume">5</span>
       <input
@@ -160,7 +74,7 @@
       <input
         type="range"
         min="2"
-        max="10"
+        max="15"
         value="4"
         id="buttonAmountSlider"
         oninput='updateSliderPlaceholder(this.id, "buttonAmount")'
@@ -200,7 +114,7 @@
       </button>
     </div>
     <div id="errorMessage" class=""></div>
-    
+
     <!-- <button onclick="activateModal('test', 'cyan')">Open Modal</button> -->
     <div class="modal" id="modal">
       <div id="modalHeader">
