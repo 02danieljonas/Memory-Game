@@ -12,7 +12,7 @@
   <body>
     <h1>Memory Game!</h1>
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
-    <button id="testButton" onclick="addElement(this.id)">TestTestTestTestTestTestTestTestTestTestTest</button>
+    <button id="testButton" onclick="addElement()">TestTestTestTestTestTestTestTestTestTestTest</button>
     <br>
 
     <button id="startBtn" onclick="startGame()">start</button>
@@ -32,13 +32,13 @@
     <br />
 
     <div id="gameButtonArea">
-      <button
+      <!-- <button
         id="button0"
         onclick="guess(0)"
         onmousedown="startTone(0)"
         onmouseup="stopTone()"
       >
-        <span class="buttonNumber">1</span>
+      <span class="buttonNumber">1</span> 
       </button>
       <button
         id="button1"
@@ -118,7 +118,8 @@
         onmouseup="stopTone()"
       >
         <span class="buttonNumber">0</span>
-      </button>
+      </button> -->
+
     </div>
 
     <button id="settings" class="clicked" onclick="showSettingContainer()">

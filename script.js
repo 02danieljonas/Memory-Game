@@ -8,41 +8,12 @@ var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
 
-var colors = ["red", "orange", "yellow", "green", "cyan", "blue", "indigo", "violet", "darkgreen", "darkolivegreen", "darkorchid", "darkseagreen", "deepskyblue", "forestgreen", "ghostwhite"]
-let k = 0
-function addElement(){
-
-  btn = document.createElement("button");
-  document.getElementById("gameButtonArea").appendChild(btn);
-  btn.style.background = colors[k]
-  console.log(colors[k])
-  k++
-  if (k>14){k=0}
-}
-
-/*
-<button
-id="button1"
-onclick="guess(1)"
-onmousedown="startTone(1)"
-onmouseup="stopTone()"
->
-<span class="buttonNumber">2</span>
-</button>
-*/
-
-/*
-const para = document.createElement("p");
-para.innerHTML = "This is a paragraph.";
-document.getElementById("myDIV").appendChild(para);
-*/
-
 var gameSettings = {
   //the configuration object
   patternLength: 8,
   volume: 3,
   lives: 3,
-  buttonAmount: 4,
+  buttonAmount: 2,
   timePerRound: 10,
   timeModifier: 10,
 };
@@ -336,14 +307,57 @@ function applySettings(message = true) {
   }
 }
 
+
+var colors = ["red", "orange", "yellow", "green", "cyan", "blue", "indigo", "violet", "darkgreen", "darkolivegreen", "darkorchid", "darkseagreen", "deepskyblue", "forestgreen", "ghostwhite"]
+var buttonList=[]
+let buttonInternalNumber = 0
+
+function addElement(){
+  if (buttonInternalNumber>14){
+    return
+  }
+  btn = document.createElement("button");
+  console.log(buttonList)
+  btn.setAttribute('id',`button${buttonInternalNumber}`);
+  btn.setAttribute('onclick',`guess(${buttonInternalNumber})`);
+  btn.setAttribute('onmousedown',`startTone(${buttonInternalNumber})`);
+  btn.setAttribute('onmouseup',`stopTone()`);
+  btn.innerHTML = 0
+  document.getElementById("gameButtonArea").appendChild(btn);
+  btn.style.background = colors[buttonInternalNumber]
+  buttonList.push(btn)
+
+  // buttonInternalNumber>14 ? buttonInternalNumber=0 : 
+  buttonInternalNumber++
+}
+
+/*
+      <button
+        class="hidden"
+        id="button9"
+        onclick="guess(9)"
+        onmousedown="startTone(9)"
+        onmouseup="stopTone()"
+      >
+        <span class="buttonNumber">0</span>
+      </button> 
+*/
+
+addElement()
+addElement()
+addElement()
+addElement()
+addElement()
+
 function updateButtons() {
   //called by applySettings, goes through all the buttons and adds or remove the class hidden depending on if they are bigger or smaller than userGameSettings["buttonAmount"]
-  for (let i = userGameSettings["buttonAmount"]; i < 10; i++) {
-    document.getElementById("button" + i).classList.add("hidden");
-  }
-  for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
-    document.getElementById("button" + i).classList.remove("hidden");
-  }
+
+  // for (let i = userGameSettings["buttonAmount"]; i < 10; i++) {
+  //   document.getElementById("button" + i).classList.add("hidden");
+  // }
+  // for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
+  //   document.getElementById("button" + i).classList.remove("hidden");
+  // }
 
   //updates the freqMap
   freqMap = [];
