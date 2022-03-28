@@ -165,7 +165,6 @@ button {
   align-items: center;
   display: flex;
   border-bottom: 1px solid cyan;
-  /*   background-color: green; */
 }
 
 #modalHeader #modalTitle {

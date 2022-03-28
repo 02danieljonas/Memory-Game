@@ -1,4 +1,3 @@
-//https://www.chirpinternet.eu/
 var pattern = []; //array contain the pattern for that round
 var freqMap = [
   261.63, 293.66, 329.63, 349.23, 392.0, 440.0, 493.88, 523.25, 587.33, 659.25,
