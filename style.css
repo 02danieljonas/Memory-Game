@@ -55,8 +55,8 @@ button {
 
 @media only screen and (max-width: 1200px) {
   #gameButtonArea button {
-    width: 13.5vw;
-    height: 13.5vw;
+    width: 13.9vw;
+    height: 13.9vw;
     margin: 1vw;
     transition: 1s width, 1s height, 1s margin;
   }
@@ -66,53 +66,6 @@ button {
 #gameButtonArea button:active {
   opacity: 100%;
 }
-
-#gameButtonArea button {
-  color: grey
-}
-
-/* #gameButtonArea #button0 {
-  background: red;
-}
-
-#gameButtonArea #button1 {
-  background: orange;
-} */
-
-#gameButtonArea #button2 {
-  /* background: yellow; */
-  color: black;
-
-}
-/* 
-#gameButtonArea #button3 {
-  background: green;
-}
-
-#gameButtonArea #button4 {
-  background: cyan;
-  color: black;
-}
-
-#gameButtonArea #button5 {
-  background: blue;
-}
-
-#gameButtonArea #button6 {
-  background: BlueViolet;
-}
-
-#gameButtonArea #button7 {
-  background: purple;
-}
-
-#gameButtonArea #button8 {
-  background: maroon;
-}
-
-#gameButtonArea #button9 {
-  background: black;
-} */
 
 .hidden {
   display: none;
@@ -143,7 +96,6 @@ button {
 
 #settingsContainer {
   z-index: 10;
-
   position: absolute;
   top: 70px;
   right: 10px;
