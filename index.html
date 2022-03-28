@@ -12,6 +12,9 @@
   <body>
     <h1>Memory Game!</h1>
     <p>Welcome to the game! Repeat the pattern shown on screen!</p>
+    <button id="testButton" onclick="changeColor(this.id)">TestTestTestTestTestTestTestTestTestTestTest</button>
+    <br>
+
     <button id="startBtn" onclick="startGame()">start</button>
     <button class="hidden" id="stopBtn" onclick="stopGame()">stop</button>
     <div id="info">
@@ -121,7 +124,7 @@
     <button id="settings" class="clicked" onclick="showSettingContainer()">
       Settings
     </button>
-    
+
     <div class="hidden" id="settingsContainer">
       Volume: <span id="volume">5</span>
       <input
@@ -200,7 +203,7 @@
       </button>
     </div>
     <div id="errorMessage" class=""></div>
-    
+
     <!-- <button onclick="activateModal('test', 'cyan')">Open Modal</button> -->
     <div class="modal" id="modal">
       <div id="modalHeader">

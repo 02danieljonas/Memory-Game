@@ -6,6 +6,47 @@ var gamePlaying = false; //Has a game started
 var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
+
+var colors = ["red", "orange", "yellow", "green", "cyan", "blue", "indigo", "violet", "darkgreen", "darkolivegreen", "darkorchid", "darkseagreen", "deepskyblue", "forestgreen", "ghostwhite"]
+
+
+// let S = 100
+// let L = 50
+// var colors = [];
+//330
+// for (let H = 0; H<331;H+=22){
+//   if (H == 88){H=55}
+//   colors.push(`hsl(${H}, ${S}%, ${L}%)`)
+// }
+
+// var colorNumber = 0;
+// console.log(colors[colorNumber])
+// console.log(colors)
+
+// function changeColor(id){
+//   document.getElementById(id).style.background = colors[colorNumber];
+//   console.log(colors[colorNumber])
+//   colorNumber++
+//   colorNumber<=17 ? colorNumber++ : colorNumber=0
+// }
+/*
+for (let H = 0; H<331;H+=22){
+  H == 132 ? tempColor = "darkgreen": tempColor = `hsl(${H}, 50%, 100%)`;
+  colors.push(tempColor)
+}
+
+var colorNumber = 0;
+console.log(colors[colorNumber])
+console.log(colors)
+
+function changeColor(id){
+  document.getElementById(id).style.background = colors[colorNumber];
+  console.log(colors[colorNumber])
+  colorNumber++
+  colorNumber<=15 ? colorNumber++ : colorNumber=0
+}
+*/
+
 var gameSettings = {
   //the configuration object
   patternLength: 8,
