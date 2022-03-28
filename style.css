@@ -67,19 +67,24 @@ button {
   opacity: 100%;
 }
 
-#gameButtonArea #button0 {
+#gameButtonArea button {
+  color: grey
+}
+
+/* #gameButtonArea #button0 {
   background: red;
 }
 
 #gameButtonArea #button1 {
   background: orange;
-}
+} */
 
 #gameButtonArea #button2 {
-  background: yellow;
+  /* background: yellow; */
   color: black;
-}
 
+}
+/* 
 #gameButtonArea #button3 {
   background: green;
 }
@@ -107,7 +112,7 @@ button {
 
 #gameButtonArea #button9 {
   background: black;
-}
+} */
 
 .hidden {
   display: none;

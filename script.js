@@ -8,6 +8,11 @@ var tonePlaying = false; //is a tone playing?
 var guessCounter = 0; //
 var strikes = 0; //how much times the player guessed wrong
 
+var colors = ["red", "orange", "yellow", "green", "cyan", "blue", "indigo", "violet", "darkgreen", "darkolivegreen", "darkorchid", "darkseagreen", "deepskyblue", "forestgreen", "ghostwhite"]
+var buttonList=[]
+let buttonInternalNumber = 0
+
+
 var gameSettings = {
   //the configuration object
   patternLength: 8,
@@ -307,17 +312,15 @@ function applySettings(message = true) {
   }
 }
 
+//create the elements every time the user wants to
+//if 
 
-var colors = ["red", "orange", "yellow", "green", "cyan", "blue", "indigo", "violet", "darkgreen", "darkolivegreen", "darkorchid", "darkseagreen", "deepskyblue", "forestgreen", "ghostwhite"]
-var buttonList=[]
-let buttonInternalNumber = 0
 
 function addElement(){
   if (buttonInternalNumber>14){
     return
   }
   btn = document.createElement("button");
-  console.log(buttonList)
   btn.setAttribute('id',`button${buttonInternalNumber}`);
   btn.setAttribute('onclick',`guess(${buttonInternalNumber})`);
   btn.setAttribute('onmousedown',`startTone(${buttonInternalNumber})`);
@@ -326,7 +329,6 @@ function addElement(){
   document.getElementById("gameButtonArea").appendChild(btn);
   btn.style.background = colors[buttonInternalNumber]
   buttonList.push(btn)
-
   // buttonInternalNumber>14 ? buttonInternalNumber=0 : 
   buttonInternalNumber++
 }
@@ -343,21 +345,20 @@ function addElement(){
       </button> 
 */
 
-addElement()
-addElement()
-addElement()
-addElement()
-addElement()
-
 function updateButtons() {
   //called by applySettings, goes through all the buttons and adds or remove the class hidden depending on if they are bigger or smaller than userGameSettings["buttonAmount"]
+  while (buttonList.length < userGameSettings["buttonAmount"]){
+    addElement()
+  }
 
-  // for (let i = userGameSettings["buttonAmount"]; i < 10; i++) {
-  //   document.getElementById("button" + i).classList.add("hidden");
-  // }
-  // for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
-  //   document.getElementById("button" + i).classList.remove("hidden");
-  // }
+  for (let i = userGameSettings["buttonAmount"]; i<buttonList.length; i++){
+    buttonList[i].setAttribute('class',`hidden`);
+  }
+  for (let i = 0; i<userGameSettings["buttonAmount"]; i++){
+    buttonList[i].removeAttribute('class');
+    //loop and show the need buttons
+  console.log(buttonList)
+  }
 
   //updates the freqMap
   freqMap = [];
@@ -392,7 +393,7 @@ function updateScreenValues(updateTime = true) {
     document.getElementById("timerPlaceholder").innerText =
       timerPlaceholder > 1 ? timerPlaceholder : 1;
   }
-  console.log(document.getElementById("timerPlaceholder").innerHTML);
+  console.log("Countdown: "+document.getElementById("timerPlaceholder").innerHTML);
 }
 
 function saveSettings() {
