@@ -52,7 +52,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 ![](http://g.recordit.co/iCYwM7Mr3J.gif)
 ![](http://g.recordit.co/ncCaO2cIlI.gif)
 ![](http://g.recordit.co/rpPHtDe0Bp.gif)
-![](http://g.recordit.co/RbznmzU7w0.gif)
+![](http://g.recordit.co/exA5P66KMB.gif)
 
 
 
