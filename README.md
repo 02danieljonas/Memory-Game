@@ -49,7 +49,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough (GIF)
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:<br>
-![](http://g.recordit.co/7z89Pr3vwL.gif)
+![](http://g.recordit.co/iCYwM7Mr3J.gif)
 ![](http://g.recordit.co/zknIu1Msju.gif)
 ![](http://g.recordit.co/lc5oAfUbfb.gif)
 ![](http://g.recordit.co/atkLI7tsia.gif)
