@@ -346,7 +346,7 @@ function addElement() {
   if (btnNumberTracker > 14) {
     return;
   }
-  buttonElement = document.createElement("button");
+  let buttonElement = document.createElement("button");
   buttonElement.setAttribute("id", `button${btnNumberTracker}`);
   buttonElement.setAttribute("onclick", `guess(${btnNumberTracker})`);
   buttonElement.setAttribute("onmousedown", `startTone(${btnNumberTracker})`);
@@ -355,7 +355,8 @@ function addElement() {
   document.getElementById("gameButtonArea").appendChild(buttonElement);
   buttonElement.style.background = colors[btnNumberTracker];
   btnList.push(buttonElement);
-  buttonElementText = document.createElement("span");
+  
+  let buttonElementText = document.createElement("span");
   buttonElementText.setAttribute("class", `buttonNumber`);
   buttonElementText.style.background = "black";
   buttonElementText.style.color = "white";
