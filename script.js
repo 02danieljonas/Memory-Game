@@ -518,6 +518,7 @@ function deactivateModal() {
   //callege by HTML element overlay and modalClose
   document.getElementById("modal").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
+  document.getElementById("overlay").style.opacity = "0%";
 }
 
 function closeOverlay() {

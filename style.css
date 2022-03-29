@@ -187,6 +187,10 @@ button {
   padding: 10px 15px;
 }
 
+.cursorPoint{
+  cursor: pointer;
+}
+
 #overlay {
   cursor: pointer;
   opacity: 0;
