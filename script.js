@@ -84,14 +84,14 @@ document.addEventListener("keydown", (btn) => {
   }
 });
 
-var AudioContext = window.AudioContext || window.webkitAudioContext; //start of magic
+var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 var o = context.createOscillator();
 var g = context.createGain();
 g.connect(context.destination);
 g.gain.setValueAtTime(0, context.currentTime);
 o.connect(g);
-o.start(0); //end of magic
+o.start(0);
 
 loadCookie();
 applySettings(false);
@@ -337,6 +337,7 @@ function applySettings(message = true) {
   gameSettings = Object.assign({}, userGameSettings);
   updateScreenValues();
   close();
+
   if (message) {
     showMessage("Applied Settings");
   }
@@ -355,7 +356,7 @@ function addElement() {
   document.getElementById("gameButtonArea").appendChild(buttonElement);
   buttonElement.style.background = colors[btnNumberTracker];
   btnList.push(buttonElement);
-  
+
   let buttonElementText = document.createElement("span");
   buttonElementText.setAttribute("class", `buttonNumber`);
   buttonElementText.style.background = "black";
@@ -371,13 +372,14 @@ function updateButtons() {
   //called by applySettings, goes through all the buttons and adds or remove the class hidden depending on if they are bigger or smaller than userGameSettings["buttonAmount"]
   while (btnList.length < userGameSettings["buttonAmount"]) {
     addElement();
+    // console.log(btnList[1].id)
   }
-  for (let i = userGameSettings["buttonAmount"]; i < btnList.length; i++) {
-    btnList[i].setAttribute("class", `hidden`);
-  }
-  for (let i = 0; i < userGameSettings["buttonAmount"]; i++) {
-    btnList[i].removeAttribute("class");
-  }
+
+  btnList.forEach((element, index) => {
+    index < userGameSettings["buttonAmount"]
+      ? element.removeAttribute("class")
+      : element.setAttribute("class", `hidden`);
+  });
 }
 
 function updateScreenValues() {

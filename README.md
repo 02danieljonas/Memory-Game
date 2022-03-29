@@ -34,15 +34,16 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [X] Sliders to change settings (volume, game length, lives, button amount, seconds per round, time decay)
-- [X] Saved configuration info in cookies
+- [X] Sliders to change settings (volume, game length, lives, button amount, seconds per round, time modification)
+- [X] Saved settings info in cookies
 - [X] Clear cookies
-- [X] Infinity options for lives and game length
-- [X] Number Keys can be used as input
+- [X] Infinity options for lives, game length and timer
+- [X] keyboard Keys can be used as input
 - [X] Size of game buttons shrink for smaller screens
 - [X] Replaced alert() with a pop up
 - [X] sequenced is repeated if user guesses wrong
-- [X] connecting all of the above features
+- [X] Plays piano notes instead of random frequencies
+- [X] Displaying info to user (lives, time left, round)
 
 
 ## Video Walkthrough (GIF)
@@ -61,9 +62,9 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
-    My friend Smyvens and sister play tested my game.
+    My friend Smyvens and sister play tested my game. Smyvens also took up this challenge and I took his red heart idea.
    Citation:
-    https://www.w3schools.com, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://developer.mozilla.org/en-US/docs/Web/HTML, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://www.youtube.com/watch?v=muE2B0Zylbw, https://www.gradientmagic.com/
+    https://www.w3schools.com, https://www.codegrepper.com/code-examples/javascript/how+to+append+empty+array+in+javascript, https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs, https://developer.mozilla.org/en-US/docs/Web/HTML, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference, https://stackoverflow.com/questions/15189857/what-is-the-most-efficient-way-to-empty-a-plain-object-in-javascript, https://dev.to/sanchithasr/7-ways-to-convert-a-string-to-number-in-javascript-4l, https://www.samanthaming.com/tidbits/70-3-ways-to-clone-objects/, https://www.youtube.com/watch?v=YUdc2szWz8Q, https://www.thoughtco.com/create-a-shorter-if-statement-in-javascript-2037428#:~:text=variable%20name%20contains.-,A%20Shorter%20IF%20Statement,are%20optional%20for%20single%20statements)., https://www.youtube.com/watch?v=muE2B0Zylbw, https://www.gradientmagic.com/, https://en.wikipedia.org/wiki/Piano_key_frequencies
     For the success screen I used https://www.youtube.com/watch?v=MBaw_6cPmAw because I thought there was a special html/javascript command to have a pop up like alert().
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words)
@@ -78,7 +79,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
     After completing my submission a question I have is how do I keep my code clean? For this project I have over 400+ lines of JavaScript I have no idea how to keep it all formated and placed in a way that could be read well. Another question I have is on website design. I have plans on making a portfolio website but I do not have any ideas on the design of it. I do not know if the best way forward is to look at a template and copy it or just follow a tutorial. I think the best idea is to start from scratch and come up with your own design but what do you do when you can't think of anything original?
 
 4. If you had a few more hours to work on this project, what would you spend them doing (for example: refactoring certain functions, adding additional features, etc). Be specific. (recommended 100 - 300 words) 
-    If I had a few more hours to work on this project I would try to make my code more readable for anyone who looks at it. My friend Smyvens also complained about the length of my Javascript so I would also try to cut that down. I might also change out my use of cookies for local storage. I am also thinking of making the buttons a template, so that it's easier for the user to make much more than 10 buttons without having to copy and paste the same CSS and HTML to make extra buttons. Another feature I could implement is connecting to a DynamoDB table to allow for a Leaderboard for everyone who visits and also a difficulty option (easy, medium, hard). I would also try to solve the glitch where pressing down the game button and moving the mouse away before letting go, makes to sounds play indefinitely if no user input is sent.
+    If I had a few more hours to work on this project I would try to make my code more readable for anyone who looks at it. My friend Smyvens also complained about the length of my Javascript so I would also try to cut that down. I might also change my use of cookies for local storage. Another feature I could implement is connecting to a DynamoDB table to allow for a Leaderboard for everyone who visits and also a difficulty option (easy, medium, hard). I would also try to solve the glitch where pressing down the game button and moving the mouse away before letting go, makes the sound play indefinitely if no sound is played again.
 
 ## Interview Recording URL Link
 

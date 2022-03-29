@@ -65,6 +65,7 @@ button {
 #gameButtonArea button.lit,
 #gameButtonArea button:active {
   opacity: 100%;
+  transform: scale(1.04);
 }
 
 .hidden {
