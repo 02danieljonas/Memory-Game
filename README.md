@@ -49,8 +49,11 @@ The following **additional** features are implemented:
 ## Video Walkthrough (GIF)
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:<br>
+Winning:
 ![](http://g.recordit.co/iCYwM7Mr3J.gif)
+Keyboard Input:
 ![](http://g.recordit.co/ncCaO2cIlI.gif)
+Losing:
 ![](http://g.recordit.co/rpPHtDe0Bp.gif)
 ![](http://g.recordit.co/exA5P66KMB.gif)
 
