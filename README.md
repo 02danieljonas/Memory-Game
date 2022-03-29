@@ -62,7 +62,7 @@ Extra Buttons:
 
 
 ![](http://g.recordit.co/10v9W0WSG6.gif)
----
+Timer:
 ![](http://g.recordit.co/ROTzmLYzFO.gif)
 Settings:
 ![](http://g.recordit.co/NHPdrtxkBf.gif)
