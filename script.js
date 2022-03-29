@@ -382,6 +382,7 @@ function updateButtons() {
     index < userGameSettings["buttonAmount"]
       ? element.removeAttribute("class")
       : element.setAttribute("class", `hidden`);
+      showButtonNumbers()
   });
 }
 
@@ -474,8 +475,9 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
   userGameSettings[placeholder] = sliderElemValue;
 }
 
-function showButtonNumbers(checked) {
+function showButtonNumbers() {
   //called by HTML element show button control checkbox
+  let checked = document.getElementById("showButtonNumbersCheckbox").checked
   if (checked) {
     document.querySelectorAll(".buttonNumber").forEach((item) => {
       item.style.display = "revert";
