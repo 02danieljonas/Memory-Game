@@ -55,6 +55,7 @@ Keyboard Input:
 ![](http://g.recordit.co/ncCaO2cIlI.gif)
 Losing:
 ![](http://g.recordit.co/rpPHtDe0Bp.gif)
+Extra Buttons:
 ![](http://g.recordit.co/exA5P66KMB.gif)
 
 
