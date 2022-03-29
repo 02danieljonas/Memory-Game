@@ -126,6 +126,8 @@ function stopGame() {
   showMessage("Game Stopped");
   clearInterval(timeTimer);
   canPlay = true;
+  strikes=0;
+  updateScreenValues()
 }
 
 function playTone(btn, len) {
@@ -283,14 +285,15 @@ function guess(btn) {
 
 function loseGame() {
   //called by guess, calls stopGame displays lost
-  stopGame();
   activateModal("Better luck next time", "red");
+  stopGame();
+
 }
 
 function winGame() {
   //called by guess, calls stopGame displays win
-  stopGame();
   activateModal("Winner!!!!", "green");
+  stopGame();
 }
 
 function showSettingContainer() {
