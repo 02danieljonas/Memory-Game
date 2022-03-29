@@ -60,6 +60,7 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 ![](http://g.recordit.co/10v9W0WSG6.gif)
 ---
 ![](http://g.recordit.co/ROTzmLYzFO.gif)
+Settings:
 ![](http://g.recordit.co/NHPdrtxkBf.gif)
 Cookies:
 ![](http://g.recordit.co/ft4M43ihoX.gif)
