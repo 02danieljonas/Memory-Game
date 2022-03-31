@@ -94,7 +94,7 @@ o.connect(g);
 o.start(0);
 
 loadCookie();
-applySettings(false);
+applySettings();
 
 function startGame() {
   //called by HTML start button, if settings is hidden, it resets strikes pattern clueHoldTime cluePauseTime HTML element livesPlaceholder progress, sets gamePlaying to true and hides swap button and remove hide from stop button, calls playClueSequence
@@ -334,7 +334,7 @@ function close() {
   document.getElementById("overlay").style.opacity = "0%";
 }
 
-function applySettings(message = true) {
+function applySettings(message = false) {
   //called by HTML apply button, its calls updateButtons, calls findInifnity, clones userGameSettings to gameSettings, updates livesPlaceholder and closes the settings screen
   updateButtons(userGameSettings["buttonAmount"]);
   gameSettings = Object.assign({}, userGameSettings);
@@ -432,7 +432,7 @@ function loadCookie() {
   }
   showMessage("Cookies applied");
   updateSlider();
-  applySettings(false);
+  applySettings();
 }
 
 function updateSlider() {
@@ -448,7 +448,7 @@ function updateSlider() {
 
 function saveSettings() {
   //called by HTML save button
-  applySettings(false);
+  applySettings();
   showMessage("Cookies Saved");
   for (let key in gameSettings) {
     let value = gameSettings[key];
