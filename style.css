@@ -1,6 +1,5 @@
 html {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100%;
   background: linear-gradient(45deg, rgb(78, 90, 101), transparent),
     repeating-linear-gradient(
       45deg,
