@@ -16,25 +16,7 @@ var nextClueWaitTime = 1000; //how long to wait before next list of clues starts
 var canPlay = true; //can the user play
 var timeTimer; //the timer for time
 
-var keyInput = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "0",
-  "Q",
-  "W",
-  "E",
-  "R",
-  "T",
-]; //accepted key inputs, the index is the button that is pressed
-
-var colors = [
+const colors = [
   "Maroon",
   "red",
   "orange",
@@ -51,6 +33,13 @@ var colors = [
   "Fuchsia",
   "violet",
 ]; //buttons colors
+
+const keyInput = []
+for (let p = 0; p<colors.length; p++){
+  keyInput.push( "1234567890QWERTYUIOPASDFGHJKLZXCVBNM".charAt(p))
+}
+//accepted key inputs, the index is the button that is pressed
+//written like this to keep up with the length of colors dynamically, until 36
 
 var btnList = []; //list to contain all the buttons
 let btnNumberTracker = 0; //keeps track of how much buttons have been made
@@ -126,8 +115,8 @@ function stopGame() {
   showMessage("Game Stopped");
   clearInterval(timeTimer);
   canPlay = true;
-  strikes=0;
-  updateScreenValues()
+  strikes = 0;
+  updateScreenValues();
 }
 
 function playTone(btn, len) {
@@ -287,7 +276,6 @@ function loseGame() {
   //called by guess, calls stopGame displays lost
   activateModal("Better luck next time", "red");
   stopGame();
-
 }
 
 function winGame() {
@@ -347,7 +335,7 @@ function applySettings(message = false) {
 }
 
 function addElement() {
-  if (btnNumberTracker > 14) {
+  if (btnNumberTracker > colors.length-1) {
     return;
   }
   let buttonElement = document.createElement("button");
@@ -382,7 +370,7 @@ function updateButtons() {
     index < userGameSettings["buttonAmount"]
       ? element.removeAttribute("class")
       : element.setAttribute("class", `hidden`);
-      showButtonNumbers()
+    showButtonNumbers();
   });
 }
 
@@ -477,7 +465,7 @@ function updateSliderPlaceholder(sliderElem, placeholder) {
 
 function showButtonNumbers() {
   //called by HTML element show button control checkbox
-  let checked = document.getElementById("showButtonNumbersCheckbox").checked
+  let checked = document.getElementById("showButtonNumbersCheckbox").checked;
   if (checked) {
     document.querySelectorAll(".buttonNumber").forEach((item) => {
       item.style.display = "revert";
